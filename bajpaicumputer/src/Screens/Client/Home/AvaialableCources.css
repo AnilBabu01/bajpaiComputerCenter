@@ -1,0 +1,13 @@
+.main_courses_div{
+    padding: 1rem;
+}
+.main_courses_div h1{
+    margin-bottom: 0.5rem;
+}
+
+.flex_div_courses{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}

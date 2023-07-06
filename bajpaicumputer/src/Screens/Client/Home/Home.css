@@ -1,0 +1,22 @@
+.Maincontainer{
+    padding-top: 4.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.home_main{
+    width: 100%;
+}
+.slie_img_div img{
+    height: 30rem;
+}
+
+
+@media screen and (max-width: 780px) {
+    .margin{
+        margin-right: 0%;
+    }
+    .home_main{
+        width: 100%;
+    }
+ }
