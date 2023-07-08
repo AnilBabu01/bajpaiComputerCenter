@@ -1,0 +1,50 @@
+.main_Dashborad_info{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.main_info_card1{
+    background: aquamarine;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 7rem;
+    border-radius: 13px;
+    margin-top: 1rem;
+}
+
+.main_info_card2{
+    background: antiquewhite;;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 7rem;
+    border-radius: 13px;
+    margin-top: 1rem;
+}
+
+.main_info_card3{
+    background: violet;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 7rem;
+    border-radius: 13px;
+    margin-top: 1rem;
+}
+@media screen and (max-width: 780px) {
+    .main_info_card3{
+        width: 98%;
+    }
+    .main_info_card1{
+        width: 98%;
+    }
+    .main_info_card2{
+        width: 98%;
+    }
+}

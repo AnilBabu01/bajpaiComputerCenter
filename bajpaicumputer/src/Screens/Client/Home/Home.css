@@ -3,10 +3,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
 .home_main{
     width: 100%;
-    margin-top: 3rem;
+
 }
 .slie_img_div img{
     height: 30rem;
@@ -19,9 +21,18 @@
     }
     .home_main{
         width: 100%;
+        margin-top: 3rem;
     }
     .slie_img_div img{
         height: 30rem;
-        height: 13rem;
+        height: 10rem;
+    }
+    .Maincontainer{
+        padding-top: 4.5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0rem;
+        padding-right: 0rem;
     }
  }

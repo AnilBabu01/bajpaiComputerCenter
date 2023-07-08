@@ -1,6 +1,8 @@
 import React from "react";
 import Slider from "./Slider";
 import AvaialableCources from "./AvaialableCources";
+import Services from "../Services/Services";
+import OurWork from "../OurWork/OurWork";
 import "./Home.css";
 function Home() {
   return (
@@ -9,6 +11,8 @@ function Home() {
         <div>
           <Slider />
           <AvaialableCources />
+          <Services />
+          <OurWork />
         </div>
       </div>
     </>

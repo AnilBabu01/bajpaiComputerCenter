@@ -9,16 +9,15 @@ import ApplyForm from "../Screens/Client/Apply/ApplyForm";
 import Login from "../Screens/Client/Auth/Login";
 import Gallery from "../Screens/Client/Gallery/Gallery";
 import Applyforcertificate from "../Screens/Client/Applyforcertificate/Applyforcertificate";
+import DownloadCertificate from "../Screens/Client/DownloadCertificate/DownloadCertificate";
 ///admin
 import Sidebar from "../Screens/Admin/Sidebar/Sidebar";
-
-export default function MainRoutes() {
-  const [showadmin, setshowadmin] = useState(false);
-  console.log(showadmin);
+import Dashbord from "../Screens/Admin/Dashbord/Dashbord";
+export default function MainRoutes({ showadmin, setshowadmin }) {
   return (
     <>
       {showadmin ? "" : <Navbar />}
-
+      {showadmin ? <Sidebar /> : ""}
       <Routes>
         <Route path="/" element={<Home setshowadmin={setshowadmin} />} />
         <Route path="/about" element={<About />} />
@@ -27,9 +26,10 @@ export default function MainRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/apply/certificate" element={<Applyforcertificate />} />
+        <Route path="/download/certificate" element={<DownloadCertificate />} />
         <Route
-          path="/admin"
-          element={<Sidebar setshowadmin={setshowadmin} />}
+          path="/dashboard"
+          element={<Dashbord setshowadmin={setshowadmin} />}
         />
 
         {/* <Route path="/login" element={<Login setshowadmin={setshowadmin} />} /> */}

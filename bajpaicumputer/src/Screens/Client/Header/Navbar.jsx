@@ -42,26 +42,6 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/apply/certificate"
-                className={({ isActive }) =>
-                  isActive ? style.active : style.about
-                }
-              >
-                Apply for Certificate
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/apply/certificate"
-                className={({ isActive }) =>
-                  isActive ? style.active : style.about
-                }
-              >
-                Apply for Certificate
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
                 to="/about"
                 className={({ isActive }) =>
                   isActive ? style.active : style.about
@@ -78,6 +58,27 @@ const Navbar = () => {
                 }
               >
                 Contact
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/apply/certificate"
+                className={({ isActive }) =>
+                  isActive ? style.active : style.about
+                }
+              >
+                Apply for Certificate/Diploma
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/download/certificate"
+                className={({ isActive }) =>
+                  isActive ? style.active : style.about
+                }
+              >
+                Download Certificate/Diploma
               </NavLink>
             </li>
 

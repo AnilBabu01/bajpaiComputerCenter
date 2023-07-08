@@ -1,11 +1,119 @@
-import React, { useEffect } from "react";
-
-function Sidebar({ setshowadmin }) {
+import React, { useState, useRef, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import CallMadeIcon from "@mui/icons-material/CallMade";
+import Alert from "@mui/material/Alert";
+import "./Sidebar.css";
+function Sidebar() {
+  const [click, setclick] = useState(false);
+  const ref = useRef(null);
+  const [logout, setlogout] = useState(false);
+  const success = "success";
   useEffect(() => {
-    setshowadmin(true);
+    // setshowadmin(true);
+    // document.addEventListener("click", close);
+    // return () => document.addEventListener("click", close);
   }, []);
 
-  return <div>Sidebar</div>;
+  // const close = (e) => {
+  //   setclick(e && e.target === ref.current);
+  // };
+  const handclick = () => setclick(!click);
+
+  return (
+    <>
+      <nav className="navbar">
+        <div className="nav-logo">
+          <MenuIcon onClick={handclick} ref={ref} />
+        </div>
+
+        <div className="profilediv">
+          <p>Logout</p>
+        </div>
+        <div className={click ? "open1 " : "menu-div"}>
+          <ul className="nav-menu" onClick={handclick}>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active-nav-link" : "nav-link"
+                }
+                to="/dashboard"
+              >
+                <DashboardIcon />
+                <spna className="linkspan"> Dashboard</spna>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active-nav-link" : "nav-link"
+                }
+                to="/placeorder"
+              >
+                <CallMadeIcon />
+                <spna className="linkspan">Add Slider</spna>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active-nav-link" : "nav-link"
+                }
+                to="/placeorder"
+              >
+                <CallMadeIcon />
+                <spna className="linkspan">Add Courses</spna>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active-nav-link" : "nav-link"
+                }
+                to="/addacount"
+              >
+                <PersonAddIcon />
+                <spna className="linkspan">Enquiry</spna>
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active-nav-link" : "nav-link"
+                }
+                to="/placeorder"
+              >
+                <CallMadeIcon />
+                <spna className="linkspan">Registrations</spna>
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active-nav-link" : "nav-link"
+                }
+                to="/placeorder"
+              >
+                <CallMadeIcon />
+                <spna className="linkspan">Certificate</spna>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      {logout ? (
+        <Alert variant="filled" severity={success}>
+          you have logout successfully
+        </Alert>
+      ) : (
+        ""
+      )}
+    </>
+  );
 }
 
 export default Sidebar;

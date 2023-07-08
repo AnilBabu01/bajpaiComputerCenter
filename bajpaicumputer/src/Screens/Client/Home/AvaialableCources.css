@@ -1,8 +1,17 @@
 .main_courses_div{
-    padding: 1rem;
+    padding: 0rem;
 }
 .main_courses_div h1{
     margin-bottom: 0.5rem;
+    color: rgb(28, 130, 173);
+    text-align: center;
+    font-size: 22px;
+}
+
+.main_courses_divp{
+    color: orange;
+    text-align: center;
+    font-size: 16px;
 }
 
 .flex_div_courses{

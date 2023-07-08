@@ -11,7 +11,7 @@ function Applyforcertificate() {
               <input
                 className="multi_input"
                 type="text"
-                placeholder="Fist Name"
+                placeholder="First Name"
               />
 
               <input
