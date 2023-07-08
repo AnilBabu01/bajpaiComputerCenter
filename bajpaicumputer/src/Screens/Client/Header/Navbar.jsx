@@ -4,7 +4,9 @@ import { NavLink } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import logo from "../../../assets/lo.png";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isMobile, setisMobile] = useState(false);
 
   useEffect(() => {}, [isMobile]);
@@ -19,9 +21,9 @@ const Navbar = () => {
         }}
       >
         <nav className={style.navbar}>
-          <div className={style.logo}>
+          <div onClick={() => navigate("/")} className={style.logo}>
             <img src={logo} alt=" Logo" />
-            <p className={style.logotext}>Bajpai Computer Institution</p>
+            <p className={style.logotext}>Bajpai Computer Institutions</p>
           </div>
 
           <ul
@@ -36,6 +38,26 @@ const Navbar = () => {
                 }
               >
                 Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/apply/certificate"
+                className={({ isActive }) =>
+                  isActive ? style.active : style.about
+                }
+              >
+                Apply for Certificate
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/apply/certificate"
+                className={({ isActive }) =>
+                  isActive ? style.active : style.about
+                }
+              >
+                Apply for Certificate
               </NavLink>
             </li>
             <li>
@@ -61,7 +83,7 @@ const Navbar = () => {
 
             <li>
               <NavLink
-                to="/policy"
+                to="/gallery"
                 className={({ isActive }) =>
                   isActive ? style.active : style.about
                 }
@@ -69,16 +91,16 @@ const Navbar = () => {
                 Gallery
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink
-                to="/"
+                to="/login"
                 className={({ isActive }) =>
                   isActive ? style.active : style.about
                 }
               >
                 Login
               </NavLink>
-            </li>
+            </li> */}
           </ul>
           <i
             style={{ marginRight: "20px" }}

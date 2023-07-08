@@ -28,11 +28,10 @@
     height: 1.6rem;
     border-radius: 3px
 }
-/* .course_details button:hover{
-    background: yellow;
-    color: white;
-    border: none;
-    width: 6rem;
-    height: 1.6rem;
-    border-radius: 3px
-} */
+@media screen and (max-width: 780px) {
+    .card_main{
+        width: 100%;
+
+    }
+   
+}

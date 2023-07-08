@@ -6,6 +6,9 @@ import About from "../Screens/Client/About/About";
 import Contact from "../Screens/Client/Contact/Contact";
 import Footer from "../Screens/Client/Footer/Footer";
 import ApplyForm from "../Screens/Client/Apply/ApplyForm";
+import Login from "../Screens/Client/Auth/Login";
+import Gallery from "../Screens/Client/Gallery/Gallery";
+import Applyforcertificate from "../Screens/Client/Applyforcertificate/Applyforcertificate";
 ///admin
 import Sidebar from "../Screens/Admin/Sidebar/Sidebar";
 
@@ -21,6 +24,9 @@ export default function MainRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/apply" element={<ApplyForm />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/apply/certificate" element={<Applyforcertificate />} />
         <Route
           path="/admin"
           element={<Sidebar setshowadmin={setshowadmin} />}

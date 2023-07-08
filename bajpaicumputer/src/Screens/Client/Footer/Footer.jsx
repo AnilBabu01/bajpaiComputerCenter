@@ -56,7 +56,7 @@ const Footer = () => {
             </Typography>
           </div>
           <div>
-            <Typography>Made by Bajpai Corpation</Typography>
+            <Typography>Made by Bajpai Corporation</Typography>
           </div>
         </div>
         <div className="hrdiv">

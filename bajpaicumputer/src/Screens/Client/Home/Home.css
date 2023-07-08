@@ -6,6 +6,7 @@
 }
 .home_main{
     width: 100%;
+    margin-top: 3rem;
 }
 .slie_img_div img{
     height: 30rem;
@@ -18,5 +19,9 @@
     }
     .home_main{
         width: 100%;
+    }
+    .slie_img_div img{
+        height: 30rem;
+        height: 13rem;
     }
  }

@@ -10,7 +10,7 @@ function CourceCard({ img }) {
         <div className="course_details">
           <h3>CCC</h3>
           <p>CCC</p>
-          <button onClick={() => navigate("/apply")}>Apply</button>
+          <button onClick={() => navigate("/apply")}>Now Enquiry</button>
         </div>
       </div>
     </>

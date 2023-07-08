@@ -6,7 +6,19 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+::-webkit-scrollbar{
+  width: 0.7rem;
+}
+::-webkit-scrollbar-track{
+  background-color: black;
+}
+::-webkit-scrollbar-thumb{
+  background-color: white;
+  border: 1px solid rgb(28, 130, 173);
+  border-radius: 10px;
+  background-clip: content-box;
+  height: 5rem;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -35,4 +47,80 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.whatsapp_float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 4px;
+  background-color: #25d366;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 100;
+}
+
+.whatsapp-icon {
+  margin-top: 16px;
+}
+
+
+
+/* for mobile */
+@media screen and (max-width: 767px) {
+  .whatsapp-icon {
+      margin-top: 10px;
+  }
+
+  .whatsapp_float {
+      width: 40px;
+      height: 40px;
+      bottom: 20px;
+      right: 10px;
+      font-size: 22px;
+  }
+}
+
+
+.whatsapp_float1 {
+  position: fixed;
+  width: 9rem;
+  height: 3rem;
+  bottom: 110px;
+  right: 4px;
+  background-color: black;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 100;
+  font-size: 16px;
+  text-decoration:none;
+  padding-top: 0.5rem;
+}
+
+
+
+
+
+/* for mobile */
+@media screen and (max-width: 767px) {
+  .whatsapp-icon1 {
+      margin-top: 10px;
+  }
+
+  .whatsapp_float1 {
+    width: 7rem;
+    height: 2.5rem;
+    bottom: 4.5rem;
+    right: 4px;
+    font-size: 22px;
+    padding-top: 0.2rem;
+  }
+
+
 }

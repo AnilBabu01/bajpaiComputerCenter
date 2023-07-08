@@ -1,11 +1,11 @@
 import React from "react";
-import "./ApplyForm.css";
-function ApplyForm() {
+import "./Applyforcertificate.css";
+function Applyforcertificate() {
   return (
     <>
       <div className="Maincontainer">
         <div className="main_apply_div">
-          <h2>Enquiry Form</h2>
+          <h2>Certificate Form</h2>
           <div>
             <div className="multi_input_main">
               <input
@@ -60,7 +60,26 @@ function ApplyForm() {
               type="text"
               placeholder="Course"
             />
-            <button className="query_btn">Enquiry</button>
+            <div className="multi_input_main ">
+              <input
+                className="multi_input"
+                type="text"
+                value={"500"}
+                placeholder="Fist Name"
+              />
+
+              <input
+                className="multi_input"
+                type="file"
+                placeholder="Last Name"
+              />
+            </div>
+            <input
+              className="multi_input"
+              type="file"
+              placeholder="Last Name"
+            />
+            <button className="query_btn">Pay</button>
           </div>
         </div>
       </div>
@@ -68,4 +87,4 @@ function ApplyForm() {
   );
 }
 
-export default ApplyForm;
+export default Applyforcertificate;

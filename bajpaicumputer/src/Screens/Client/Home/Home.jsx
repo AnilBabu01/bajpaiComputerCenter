@@ -8,7 +8,6 @@ function Home() {
       <div className="Maincontainer">
         <div>
           <Slider />
-
           <AvaialableCources />
         </div>
       </div>
