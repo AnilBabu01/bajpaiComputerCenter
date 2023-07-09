@@ -1,5 +1,5 @@
 const { config } = require("dotenv");
-const Populargame = require("../Models/populargame.model");
+const Populargame = require("../Models/course.model");
 const removefile = require("../Middleware/removefile");
 const respHandler = require("../Handlers");
 config();
