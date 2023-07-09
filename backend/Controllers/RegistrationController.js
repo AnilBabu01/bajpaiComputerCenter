@@ -18,6 +18,14 @@ const Createregistration = async (req, res) => {
       },
     });
     if (isregistration) {
+      removefile(
+        `public/upload/${req.files.passportsizephoto[0].originalname.substring(
+          7
+        )}`
+      );
+      removefile(
+        `public/upload/${req.files.aasharcard[0].originalname.substring(7)}`
+      );
       return respHandler.error(res, {
         status: false,
         msg: "You Have Allready Registered for certificate!!",

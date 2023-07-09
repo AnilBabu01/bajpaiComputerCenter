@@ -14,6 +14,7 @@ const Createcertificate = async (req, res) => {
         },
       });
       if (iscer) {
+        removefile(`public/upload/${req.file.filename.substring(7)}`);
         return respHandler.error(res, {
           status: false,
           msg: "With this roll no certificate allready added!!",
@@ -67,7 +68,7 @@ const Getcertificate = async (req, res) => {
 };
 
 const updatecertificate = async (req, res) => {
-  let { id, coursename, courdescription } = req.body;
+  let { id, rollno, fullname } = req.body;
 
   try {
     let certificate = await Certificate.findOne({
@@ -75,12 +76,14 @@ const updatecertificate = async (req, res) => {
         id: id,
       },
     });
-    if (removefile(`public/upload/${certificate?.courseimg.substring(7)}`)) {
+    if (
+      removefile(`public/upload/${certificate?.certificateimg.substring(7)}`)
+    ) {
       let status = await Course.update(
         {
-          coursename: coursename,
-          courdescription: courdescription,
-          courseimg: `images/${req.file.filename}`,
+          fullname: fullname,
+          rollno: rollno,
+          certificateimg: `images/${req.file.filename}`,
         },
         {
           where: {
@@ -114,11 +117,11 @@ const updatecertificate = async (req, res) => {
 const Deletecertificate = async (req, res) => {
   try {
     let certificate = await Certificate.findOne({ id: req.body.id });
-    if (course) {
-      removefile(`public/upload/${certificate?.courseimg.substring(7)}`);
+    if (certificate) {
+      removefile(`public/upload/${certificate?.certificateimg.substring(7)}`);
       await Certificate.destroy({
         where: {
-          id: course.id,
+          id: certificate.id,
         },
       });
 
