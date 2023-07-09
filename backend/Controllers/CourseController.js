@@ -1,10 +1,10 @@
 const { config } = require("dotenv");
-const Populargame = require("../Models/course.model");
+const Course = require("../Models/course.model");
 const removefile = require("../Middleware/removefile");
 const respHandler = require("../Handlers");
 config();
 
-const Creategame = async (req, res) => {
+const Createcourse = async (req, res) => {
   let { gamename, gameversion, gamedownload, gamebonus, downloadurl } =
     req.body;
   if (
@@ -16,7 +16,7 @@ const Creategame = async (req, res) => {
     downloadurl != "")
   ) {
     try {
-      let game = await Populargame.create({
+      let game = await Course.create({
         gamename: gamename,
         gameversion: gameversion,
         gamedownload: gamedownload,
@@ -47,9 +47,9 @@ const Creategame = async (req, res) => {
   }
 };
 
-const Getgames = async (req, res) => {
+const Getcourses = async (req, res) => {
   try {
-    let games = await Populargame.findAll();
+    let games = await Course.findAll();
     return respHandler.success(res, {
       status: true,
       data: [games],
@@ -64,7 +64,7 @@ const Getgames = async (req, res) => {
   }
 };
 
-const updategame = async (req, res) => {
+const updatecourse = async (req, res) => {
   let {
     id,
     gamename,
@@ -77,7 +77,7 @@ const updategame = async (req, res) => {
 
   try {
     if (req?.file?.path) {
-      let game = await Populargame.findOne({
+      let game = await Course.findOne({
         where: {
           id: id,
         },
@@ -85,7 +85,7 @@ const updategame = async (req, res) => {
       removefile(`public/upload/${game?.gameimg.substring(7)}`);
     }
 
-    let gamestatus = await Populargame.update(
+    let gamestatus = await Course.update(
       {
         gamename: gamename,
         gameversion: gameversion,
@@ -102,7 +102,7 @@ const updategame = async (req, res) => {
     );
 
     if (gamestatus) {
-      let game = await Populargame.findOne({
+      let game = await Course.findOne({
         where: {
           id: id,
         },
@@ -122,9 +122,9 @@ const updategame = async (req, res) => {
   }
 };
 
-const Deletegame = async (req, res) => {
+const Deletecourse = async (req, res) => {
   try {
-    let game = await Populargame.findOne({ id: req.body.id });
+    let game = await Course.findOne({ id: req.body.id });
     if (game) {
       removefile(`public/upload/${game?.gameimg.substring(7)}`);
       await Populargame.destroy({
@@ -155,8 +155,8 @@ const Deletegame = async (req, res) => {
 };
 
 module.exports = {
-  Creategame,
-  updategame,
-  Getgames,
-  Deletegame,
+  Createcourse,
+  Getcourses,
+  updatecourse,
+  Deletecourse,
 };

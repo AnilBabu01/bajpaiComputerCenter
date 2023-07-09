@@ -1,24 +1,24 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../Helper/Connect");
 
-const Course = sequelize.define("course", {
+const Works = sequelize.define("course", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  coursename: {
+  projectname: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  courdescription: {
+  projectscription: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  courseimg: {
+  projectimg: {
     type: DataTypes.STRING,
     allowNull: false,
   },
 });
 
-module.exports = Course;
+module.exports = Works;

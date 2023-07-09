@@ -54,7 +54,7 @@ export default function Addslider({ setshowadmin }) {
             <div>
               <div className="add-div-close-div1">
                 <h2 style={{ textAlign: "center", marginLeft: "24%" }}>
-                  Add a slider image
+                  Add a image
                 </h2>
                 <CloseIcon
                   style={{ marginTop: "2%", marginLeft: "13%" }}

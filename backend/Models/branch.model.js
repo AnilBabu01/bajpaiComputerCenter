@@ -1,24 +1,17 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../Helper/Connect");
 
-const Course = sequelize.define("course", {
+const Branch = sequelize.define("course", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  coursename: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  courdescription: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  courseimg: {
+
+  branchname: {
     type: DataTypes.STRING,
     allowNull: false,
   },
 });
 
-module.exports = Course;
+module.exports = Branch;

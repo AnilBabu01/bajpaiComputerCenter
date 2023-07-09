@@ -8,8 +8,8 @@ const { Validation } = require("../../Middleware/Validate");
 
 router
   .route("/populargame")
-  .post(upload.single("gameimg"), CourseController.Creategame)
-  .put(upload.single("gameimg"), CourseController.updategame)
-  .get(PopularGameController.Getgames)
-  .delete(PopularGameController.Deletegame);
+  .post(upload.single("courseimg"), CourseController.Createcourse)
+  .put(upload.single("courseimgs"), CourseController.updatecourse)
+  .get(CourseController.Getcourses)
+  .delete(CourseController.Deletecourse);
 module.exports = router;
