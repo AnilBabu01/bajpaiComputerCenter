@@ -5,7 +5,7 @@ import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 const formData = new FormData();
 
-function Updatebranch({ setOpen, updatedata }) {
+function UpdateAddfee({ setOpen, updatedata }) {
   const [gamename, setgamename] = useState("");
   const [gameversion, setgameversion] = useState("");
   const [gamedownloads, setgamedownloads] = useState("");
@@ -57,7 +57,7 @@ function Updatebranch({ setOpen, updatedata }) {
         <div className="cash-donation-container-innser">
           <form onSubmit={handlesubmit}>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">Brnach Name</label>
+              <label htmlFor="dharamshalaname">Certificate Fee</label>
               <input
                 style={{
                   width: "100%",
@@ -66,7 +66,7 @@ function Updatebranch({ setOpen, updatedata }) {
                 }}
                 type="textarea"
                 id="dharamshalaname"
-                placeholder="enter the Brnach Name"
+                placeholder="enter the Certificate Fee"
                 className="forminput_add_user10"
                 value={gamename}
                 name="gamename"
@@ -102,4 +102,4 @@ function Updatebranch({ setOpen, updatedata }) {
   );
 }
 
-export default Updatebranch;
+export default UpdateAddfee;

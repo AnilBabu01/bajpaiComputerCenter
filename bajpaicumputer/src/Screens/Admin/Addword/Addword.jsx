@@ -3,22 +3,21 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import CloseIcon from "@mui/icons-material/Close";
-import { serverInstance } from "../../../../API/ServerInstance";
-import Swal from "sweetalert2";
-import Delete from "../../../../assets/Delete.png";
-import eye from "../../../../assets/eye.png";
-import Edit from "../../../../assets/Edit.png";
-import ExportExcel from "../../../../assets/ExportExcel.png";
-import ExportPdf from "../../../../assets/ExportPdf.png";
 import Addform from "./Addform";
-import Updatebranch from "./Updatebranch";
+import UpdateAddword from "./UpdateAddword";
+import View from "./View";
+import { serverInstance } from "../../../API/ServerInstance";
+import Swal from "sweetalert2";
+import Delete from "../../../assets/Delete.png";
+import Edit from "../../../assets/Edit.png";
+import eye from "../../../assets/eye.png";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@mui/material";
-import "./Addbranch.css";
+import "./Addword.css";
 const style2 = {
   position: "absolute",
   top: "50%",
@@ -30,7 +29,7 @@ const style2 = {
   boxShadow: 24,
   borderRadius: "5px",
 };
-export default function Addbranch({ setshowadmin }) {
+export default function Addword({ setshowadmin }) {
   const [isData, setisData] = useState("");
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
@@ -87,7 +86,7 @@ export default function Addbranch({ setshowadmin }) {
 
   useEffect(() => {
     getgame();
-    // setshowadmin(true);
+    setshowadmin(true);
   }, [open, open1, open2]);
 
   return (
@@ -125,7 +124,7 @@ export default function Addbranch({ setshowadmin }) {
             <div>
               <div className="add-div-close-div10">
                 <h2 style={{ textAlign: "center", marginLeft: "24%" }}>
-                  Add Branch
+                  Add a project
                 </h2>
                 <CloseIcon
                   style={{ marginTop: "2%", marginLeft: "13%" }}
@@ -150,38 +149,59 @@ export default function Addbranch({ setshowadmin }) {
             <div>
               <div className="add-div-close-div10">
                 <h2 style={{ textAlign: "center", marginLeft: "24%" }}>
-                  Update Branch
+                  Update Project
                 </h2>
                 <CloseIcon
                   style={{ marginTop: "2%", marginLeft: "13%" }}
                   onClick={() => handleClose1()}
                 />
               </div>
-              <Updatebranch setOpen={setOpen1} updatedata={updatedata} />
+              <UpdateAddword setOpen={setOpen1} updatedata={updatedata} />
+            </div>
+          </Box>
+        </Fade>
+      </Modal>
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open2}
+        onClose={handleClose2}
+        closeAfterTransition
+      >
+        <Fade in={open2}>
+          <Box sx={style2}>
+            <div>
+              <div className="add-div-close-div10">
+                <h2 style={{ textAlign: "center", marginLeft: "24%" }}>
+                  View Project
+                </h2>
+                <CloseIcon
+                  style={{ marginTop: "2%", marginLeft: "13%" }}
+                  onClick={() => handleClose2()}
+                />
+              </div>
+              <View setOpen={setOpen2} updatedata={updatedata} />
             </div>
           </Box>
         </Fade>
       </Modal>
 
       <div className="main_slider">
-        <div className="main_add_btnn_div_enquriy">
-          <h2 style={{ marginLeft: "3rem" }}>Branch list</h2>
-          <div className="Export_data_div10">
-            <button onClick={() => handleOpen()}>Add</button>
-            <div className="Export_data_divimg_icon">
-              <img className="Export_data_divimg" src={ExportExcel} alt="hdf" />
-              <img src={ExportPdf} alt="hdf" />
-            </div>
-          </div>
+        <div className="main_add_btnn_div">
+          <h2 style={{ marginLeft: "3rem" }}>Projects list</h2>
+          <button onClick={() => handleOpen()}>Add</button>
         </div>
 
         <table>
           <tr>
-            <th>Branch Name</th>
+            <th>S.No</th>
+            <th>Project Name</th>
             <th>Action</th>
           </tr>
           <tr>
-            <td>7505</td>
+            <td>S.No</td>
+            <td>Course Name</td>
             <td>
               <img
                 onClick={() => handleOpen1()}
@@ -189,7 +209,36 @@ export default function Addbranch({ setshowadmin }) {
                 src={Edit}
                 alt="aaa"
               />
-
+              <img
+                onClick={() => handleOpen2()}
+                style={{ width: "25px", marginRight: "1rem" }}
+                src={eye}
+                alt="aaa"
+              />
+              <img
+                // onClick={() => handleClickOpen3(row?.id)}
+                style={{ width: "25px" }}
+                src={Delete}
+                alt="aaa"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>S.No</td>
+            <td>Course Name</td>
+            <td>
+              <img
+                onClick={() => handleOpen1()}
+                style={{ width: "25px", marginRight: "1rem" }}
+                src={Edit}
+                alt="aaa"
+              />
+              <img
+                onClick={() => handleOpen2()}
+                style={{ width: "25px", marginRight: "1rem" }}
+                src={eye}
+                alt="aaa"
+              />
               <img
                 // onClick={() => handleClickOpen3(row?.id)}
                 style={{ width: "25px" }}

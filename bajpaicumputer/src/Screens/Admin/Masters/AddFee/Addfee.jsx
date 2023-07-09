@@ -6,19 +6,18 @@ import CloseIcon from "@mui/icons-material/Close";
 import { serverInstance } from "../../../../API/ServerInstance";
 import Swal from "sweetalert2";
 import Delete from "../../../../assets/Delete.png";
-import eye from "../../../../assets/eye.png";
 import Edit from "../../../../assets/Edit.png";
 import ExportExcel from "../../../../assets/ExportExcel.png";
 import ExportPdf from "../../../../assets/ExportPdf.png";
 import Addform from "./Addform";
-import Updatebranch from "./Updatebranch";
+import Updatebranch from "./UpdateAddfee";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@mui/material";
-import "./Addbranch.css";
+import "./Addfee.css";
 const style2 = {
   position: "absolute",
   top: "50%",
@@ -30,7 +29,7 @@ const style2 = {
   boxShadow: 24,
   borderRadius: "5px",
 };
-export default function Addbranch({ setshowadmin }) {
+export default function Addfee({ setshowadmin }) {
   const [isData, setisData] = useState("");
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
@@ -125,7 +124,7 @@ export default function Addbranch({ setshowadmin }) {
             <div>
               <div className="add-div-close-div10">
                 <h2 style={{ textAlign: "center", marginLeft: "24%" }}>
-                  Add Branch
+                  Add Fee
                 </h2>
                 <CloseIcon
                   style={{ marginTop: "2%", marginLeft: "13%" }}
@@ -150,7 +149,7 @@ export default function Addbranch({ setshowadmin }) {
             <div>
               <div className="add-div-close-div10">
                 <h2 style={{ textAlign: "center", marginLeft: "24%" }}>
-                  Update Branch
+                  Update Fee
                 </h2>
                 <CloseIcon
                   style={{ marginTop: "2%", marginLeft: "13%" }}
@@ -165,7 +164,7 @@ export default function Addbranch({ setshowadmin }) {
 
       <div className="main_slider">
         <div className="main_add_btnn_div_enquriy">
-          <h2 style={{ marginLeft: "3rem" }}>Branch list</h2>
+          <h2 style={{ marginLeft: "3rem" }}>Certificate Fee</h2>
           <div className="Export_data_div10">
             <button onClick={() => handleOpen()}>Add</button>
             <div className="Export_data_divimg_icon">
@@ -177,7 +176,7 @@ export default function Addbranch({ setshowadmin }) {
 
         <table>
           <tr>
-            <th>Branch Name</th>
+            <th>Certificate Fee</th>
             <th>Action</th>
           </tr>
           <tr>

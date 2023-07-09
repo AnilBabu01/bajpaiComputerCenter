@@ -113,6 +113,18 @@ function Sidebar() {
                 <spna className="linkspan">Masters</spna>
               </NavLink>
             </li>
+
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active-nav-link" : "nav-link"
+                }
+                to="/admin/Addword"
+              >
+                <CallMadeIcon />
+                <spna className="linkspan">Add Works</spna>
+              </NavLink>
+            </li>
           </ul>
         </div>
       </nav>

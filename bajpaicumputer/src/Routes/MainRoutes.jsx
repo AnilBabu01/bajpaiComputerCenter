@@ -19,6 +19,7 @@ import Enquriy from "../Screens/Admin/Enquriy/Enquriy";
 import Registration from "../Screens/Admin/Registration/Registration";
 import Certificate from "../Screens/Admin/Certificate/Certificate";
 import MasterTap from "../Screens/Admin/Masters/MasterTap";
+import Addword from "../Screens/Admin/Addword/Addword";
 export default function MainRoutes({ showadmin, setshowadmin }) {
   return (
     <>
@@ -62,6 +63,11 @@ export default function MainRoutes({ showadmin, setshowadmin }) {
         <Route
           path="/admin/MasterTap"
           element={<MasterTap setshowadmin={setshowadmin} />}
+        />
+
+        <Route
+          path="/admin/Addword"
+          element={<Addword setshowadmin={setshowadmin} />}
         />
 
         {/* <Route path="/login" element={<Login setshowadmin={setshowadmin} />} /> */}

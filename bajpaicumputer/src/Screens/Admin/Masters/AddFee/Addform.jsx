@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Swal from "sweetalert2";
-import { backendApiUrl, backendUrl } from "../../../../config/config";
+import { backendApiUrl } from "../../../../config/config";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
+
 const formData = new FormData();
 
-function Updatebranch({ setOpen, updatedata }) {
+function Addform({ setOpen }) {
   const [gamename, setgamename] = useState("");
   const [gameversion, setgameversion] = useState("");
   const [gamedownloads, setgamedownloads] = useState("");
@@ -17,21 +18,22 @@ function Updatebranch({ setOpen, updatedata }) {
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
+      ////
       setshowloader(true);
-      formData.set("id", updatedata?.id);
       formData.set("gamename", gamename);
       formData.set("gameversion", gameversion);
       formData.set("gamedownload", gamedownloads);
       formData.set("gamebonus", gamebonus);
       formData.set("downloadurl", gameurl);
-      formData.set("gameimg", img1 ? img1 : updatedata?.gameimg);
+      formData.set("gameimg", img1);
+
       axios.defaults.headers.post[
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
 
-      const res = await axios.put(`${backendApiUrl}newgame`, formData);
+      const res = await axios.post(`${backendApiUrl}newgame`, formData);
 
-      if (res?.data?.status) {
+      if (res?.status) {
         setOpen(false);
         setshowloader(false);
         Swal.fire("Great!", res?.data?.msg, "success");
@@ -41,23 +43,13 @@ function Updatebranch({ setOpen, updatedata }) {
     }
   };
 
-  useEffect(() => {
-    if (updatedata) {
-      setgamename(updatedata?.gamename);
-      setgameversion(updatedata?.gameversion);
-      setgamedownloads(updatedata?.gamedownload);
-      setgameurl(updatedata?.downloadurl);
-      setgamebonus(updatedata?.gamebonus);
-    }
-  }, []);
-
   return (
     <>
       <div className="cash-donation-div">
         <div className="cash-donation-container-innser">
           <form onSubmit={handlesubmit}>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">Brnach Name</label>
+              <label htmlFor="dharamshalaname">Certificate Fee</label>
               <input
                 style={{
                   width: "100%",
@@ -66,7 +58,7 @@ function Updatebranch({ setOpen, updatedata }) {
                 }}
                 type="textarea"
                 id="dharamshalaname"
-                placeholder="enter the Brnach Name"
+                placeholder="Enter the Certificate Fee"
                 className="forminput_add_user10"
                 value={gamename}
                 name="gamename"
@@ -85,7 +77,7 @@ function Updatebranch({ setOpen, updatedata }) {
                     }}
                   />
                 ) : (
-                  "Update"
+                  "Save"
                 )}
               </button>
               <button
@@ -102,4 +94,4 @@ function Updatebranch({ setOpen, updatedata }) {
   );
 }
 
-export default Updatebranch;
+export default Addform;

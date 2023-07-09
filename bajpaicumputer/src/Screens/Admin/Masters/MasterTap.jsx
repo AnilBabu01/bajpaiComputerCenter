@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import ComputerIcon from "@mui/icons-material/Computer";
+import Addbranch from "./Addbranch/Addbranch";
+import Addfee from "./AddFee/Addfee";
 import "./MasterTap.css";
 
 const MasterTap = ({ setshowadmin }) => {
@@ -41,7 +42,7 @@ const MasterTap = ({ setshowadmin }) => {
                 toggleState === 1 ? "content  active-content" : "content"
               }
             >
-              <h1>dfxxdn</h1>
+              <Addfee />
             </div>
 
             <div
@@ -49,7 +50,7 @@ const MasterTap = ({ setshowadmin }) => {
                 toggleState === 2 ? "content  active-content" : "content"
               }
             >
-              <h1>dfdn</h1>
+              <Addbranch />
             </div>
           </div>
         </div>
