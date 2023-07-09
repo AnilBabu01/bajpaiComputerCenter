@@ -63,7 +63,7 @@ const updatework = async (req, res) => {
       },
     });
     if (removefile(`public/upload/${work?.projectimg.substring(7)}`)) {
-      let status = await Course.update(
+      let status = await Work.update(
         {
           projectname: projectname,
           projectscription: projectscription,
@@ -102,10 +102,10 @@ const Deletework = async (req, res) => {
   try {
     let work = await Work.findOne({ id: req.body.id });
     if (work) {
-      removefile(`public/upload/${work?.courseimg.substring(7)}`);
+      removefile(`public/upload/${work?.projectimg.substring(7)}`);
       await Work.destroy({
         where: {
-          id: work.id,
+          id: work?.id,
         },
       });
 
