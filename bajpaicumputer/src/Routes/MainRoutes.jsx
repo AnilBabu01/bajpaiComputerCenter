@@ -15,6 +15,10 @@ import Sidebar from "../Screens/Admin/Sidebar/Sidebar";
 import Dashbord from "../Screens/Admin/Dashbord/Dashbord";
 import Addslider from "../Screens/Admin/Addslider/Addslider";
 import AddCourse from "../Screens/Admin/AddCourse/AddCourse";
+import Enquriy from "../Screens/Admin/Enquriy/Enquriy";
+import Registration from "../Screens/Admin/Registration/Registration";
+import Certificate from "../Screens/Admin/Certificate/Certificate";
+import MasterTap from "../Screens/Admin/Masters/MasterTap";
 export default function MainRoutes({ showadmin, setshowadmin }) {
   return (
     <>
@@ -41,6 +45,23 @@ export default function MainRoutes({ showadmin, setshowadmin }) {
         <Route
           path="/admin/AddCourse"
           element={<AddCourse setshowadmin={setshowadmin} />}
+        />
+        <Route
+          path="/admin/Enquriy"
+          element={<Enquriy setshowadmin={setshowadmin} />}
+        />
+        <Route
+          path="/admin/Registration"
+          element={<Registration setshowadmin={setshowadmin} />}
+        />
+
+        <Route
+          path="/admin/Certificate"
+          element={<Certificate setshowadmin={setshowadmin} />}
+        />
+        <Route
+          path="/admin/MasterTap"
+          element={<MasterTap setshowadmin={setshowadmin} />}
         />
 
         {/* <Route path="/login" element={<Login setshowadmin={setshowadmin} />} /> */}

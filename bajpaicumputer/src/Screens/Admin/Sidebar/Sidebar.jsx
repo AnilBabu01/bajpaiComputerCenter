@@ -72,7 +72,7 @@ function Sidebar() {
                 className={({ isActive }) =>
                   isActive ? "active-nav-link" : "nav-link"
                 }
-                to="/addacount"
+                to="/admin/Enquriy"
               >
                 <PersonAddIcon />
                 <spna className="linkspan">Enquiry</spna>
@@ -84,7 +84,7 @@ function Sidebar() {
                 className={({ isActive }) =>
                   isActive ? "active-nav-link" : "nav-link"
                 }
-                to="/placeorder"
+                to="/admin/Registration"
               >
                 <CallMadeIcon />
                 <spna className="linkspan">Registrations</spna>
@@ -96,10 +96,21 @@ function Sidebar() {
                 className={({ isActive }) =>
                   isActive ? "active-nav-link" : "nav-link"
                 }
-                to="/placeorder"
+                to="/admin/Certificate"
               >
                 <CallMadeIcon />
                 <spna className="linkspan">Certificate</spna>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active-nav-link" : "nav-link"
+                }
+                to="/admin/MasterTap"
+              >
+                <CallMadeIcon />
+                <spna className="linkspan">Masters</spna>
               </NavLink>
             </li>
           </ul>

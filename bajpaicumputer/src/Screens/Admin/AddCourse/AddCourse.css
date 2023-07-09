@@ -2,5 +2,51 @@
     display: flex;
     justify-content: space-around;
     margin-bottom: 1rem;
-    /* width: rem; */
+    width: 25rem;
+    
 }
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 98%;
+    margin: 1%;
+  }
+  
+  td, th {
+    border: 1px solid rgb(28, 130, 173);
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  @media screen and (max-width: 780px) {
+    
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0%;
+    margin-top: 1rem;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  .add-div-close-div10 {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    width: 21rem;
+}
+  }
