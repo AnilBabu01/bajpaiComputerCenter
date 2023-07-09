@@ -50,7 +50,7 @@ function Sidebar() {
                 className={({ isActive }) =>
                   isActive ? "active-nav-link" : "nav-link"
                 }
-                to="/placeorder"
+                to="/admin/Addslider"
               >
                 <CallMadeIcon />
                 <spna className="linkspan">Add Slider</spna>
@@ -61,7 +61,7 @@ function Sidebar() {
                 className={({ isActive }) =>
                   isActive ? "active-nav-link" : "nav-link"
                 }
-                to="/placeorder"
+                to="/admin/AddCourse"
               >
                 <CallMadeIcon />
                 <spna className="linkspan">Add Courses</spna>

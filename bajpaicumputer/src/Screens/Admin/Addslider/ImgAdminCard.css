@@ -1,0 +1,30 @@
+.main_admin_img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 32%;
+  margin-top: 1rem;
+}
+.main_admin_img_img{
+   width: 100%;
+}
+.main_admin_img_img10{
+    width: 25px;
+    margin-top: 1rem;
+}
+
+
+
+@media screen and (max-width: 780px){
+    .main_admin_img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+        padding: 0.5rem;
+      }
+}
+    

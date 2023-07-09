@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #0f0f99;
+  background-color: rgb(28, 130, 173);
   height: 60px;
   display: flex;
   justify-content: center;
@@ -37,10 +37,11 @@
   margin: 20px;
   height: 45px;
    width: 200px;
+     text-decoration: none;
 }
 
 .active-nav-link{
-  background-color: #0f0f99;
+  background-color: rgb(28, 130, 173);
   display: flex;
   margin-bottom: 5px!important;
   align-items: center;
@@ -62,11 +63,11 @@
   display: flex;
 }
 .active-nav-link:hover{
-  background-color: #0f0f99;
+  background-color: rgb(28, 130, 173);
   color: white;
 }
 .nav-link:hover{
-  background-color: #0f0f99;
+  background-color: rgb(28, 130, 173);
   color: white;
 }
 
@@ -142,11 +143,11 @@
   }
 
 .active-nav-link:hover{
-  background-color: #0f0f99;
+  background-color: rgb(28, 130, 173);
   color: white;
 }
 .nav-link:hover{
-  background-color: #0f0f99;
+  background-color: rgb(28, 130, 173);
   color: white;
 }
 }

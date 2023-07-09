@@ -13,6 +13,8 @@ import DownloadCertificate from "../Screens/Client/DownloadCertificate/DownloadC
 ///admin
 import Sidebar from "../Screens/Admin/Sidebar/Sidebar";
 import Dashbord from "../Screens/Admin/Dashbord/Dashbord";
+import Addslider from "../Screens/Admin/Addslider/Addslider";
+import AddCourse from "../Screens/Admin/AddCourse/AddCourse";
 export default function MainRoutes({ showadmin, setshowadmin }) {
   return (
     <>
@@ -30,6 +32,15 @@ export default function MainRoutes({ showadmin, setshowadmin }) {
         <Route
           path="/dashboard"
           element={<Dashbord setshowadmin={setshowadmin} />}
+        />
+        <Route
+          path="/admin/Addslider"
+          element={<Addslider setshowadmin={setshowadmin} />}
+        />
+
+        <Route
+          path="/admin/AddCourse"
+          element={<AddCourse setshowadmin={setshowadmin} />}
         />
 
         {/* <Route path="/login" element={<Login setshowadmin={setshowadmin} />} /> */}
