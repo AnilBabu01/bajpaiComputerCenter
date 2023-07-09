@@ -7,6 +7,8 @@ const db = require("./Helper/Connect");
 const Admin = require("./Routes/Admin");
 const Slider = require("./Routes/Slider");
 const Course = require("./Routes/Course");
+const Enquiry = require("./Routes/Enquiry");
+const Work = require("./Routes/Work");
 // to run migrations run command - --------  npm run migrate ---------------------
 
 app.use(cors());
@@ -24,6 +26,8 @@ app.use("*/images", express.static("public/upload"));
 app.use("/api", Admin);
 app.use("/api", Slider);
 app.use("/api", Course);
+app.use("/api", Enquiry);
+app.use("/api", Work);
 app.use("*", (req, res) => {
   return res.status(404).json({
     status: false,

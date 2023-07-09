@@ -1,24 +1,24 @@
 const { config } = require("dotenv");
-const Course = require("../Models/course.model");
+const Work = require("../Models/work.model");
 const removefile = require("../Middleware/removefile");
 const respHandler = require("../Handlers");
 config();
 
-const Createcourse = async (req, res) => {
-  let { coursename, courdescription } = req.body;
-  if (req.file != "" || courdescription != "" || coursename != "") {
+const Creatework = async (req, res) => {
+  let { projectname, projectscription } = req.body;
+  if (req.file != "" || projectname != "" || projectscription != "") {
     try {
-      let course = await Course.create({
-        coursename: coursename,
-        courdescription: courdescription,
-        courseimg: `images/${req.file.filename}`,
+      let work = await Work.create({
+        projectname: projectname,
+        projectscription: projectscription,
+        projectimg: `images/${req.file.filename}`,
       });
 
-      if (course) {
+      if (work) {
         return respHandler.success(res, {
           status: true,
-          data: [course],
-          msg: "New Game Added Successfully!!",
+          data: [work],
+          msg: "Work Added Successfully!!",
         });
       }
     } catch (err) {
@@ -36,13 +36,13 @@ const Createcourse = async (req, res) => {
   }
 };
 
-const Getcourses = async (req, res) => {
+const Getworks = async (req, res) => {
   try {
-    let course = await Course.findAll();
+    let Works = await Work.findAll();
     return respHandler.success(res, {
       status: true,
-      data: [course],
-      msg: "All New Game Fetch Successfully!!",
+      data: [Works],
+      msg: "All Works Fetch Successfully!!",
     });
   } catch (err) {
     return respHandler.error(res, {
@@ -53,21 +53,21 @@ const Getcourses = async (req, res) => {
   }
 };
 
-const updatecourse = async (req, res) => {
-  let { id, coursename, courdescription } = req.body;
+const updatework = async (req, res) => {
+  let { id, projectname, projectscription } = req.body;
 
   try {
-    let course = await Course.findOne({
+    let work = await Work.findOne({
       where: {
         id: id,
       },
     });
-    if (removefile(`public/upload/${course?.courseimg.substring(7)}`)) {
+    if (removefile(`public/upload/${work?.projectimg.substring(7)}`)) {
       let status = await Course.update(
         {
-          coursename: coursename,
-          courdescription: courdescription,
-          courseimg: `images/${req.file.filename}`,
+          projectname: projectname,
+          projectscription: projectscription,
+          projectimg: `images/${req.file.filename}`,
         },
         {
           where: {
@@ -77,15 +77,15 @@ const updatecourse = async (req, res) => {
       );
 
       if (status) {
-        let course = await Course.findOne({
+        let work = await Work.findOne({
           where: {
             id: id,
           },
         });
         return respHandler.success(res, {
           status: true,
-          data: [course],
-          msg: "Game Updated Successfully!!",
+          data: [work],
+          msg: "Work Updated Successfully!!",
         });
       }
     }
@@ -98,14 +98,14 @@ const updatecourse = async (req, res) => {
   }
 };
 
-const Deletecourse = async (req, res) => {
+const Deletework = async (req, res) => {
   try {
-    let course = await Course.findOne({ id: req.body.id });
-    if (course) {
-      removefile(`public/upload/${course?.courseimg.substring(7)}`);
-      await Course.destroy({
+    let work = await Work.findOne({ id: req.body.id });
+    if (work) {
+      removefile(`public/upload/${work?.courseimg.substring(7)}`);
+      await Work.destroy({
         where: {
-          id: course.id,
+          id: work.id,
         },
       });
 
@@ -131,8 +131,8 @@ const Deletecourse = async (req, res) => {
 };
 
 module.exports = {
-  Createcourse,
-  Getcourses,
-  updatecourse,
-  Deletecourse,
+  Creatework,
+  Getworks,
+  Deletework,
+  updatework,
 };

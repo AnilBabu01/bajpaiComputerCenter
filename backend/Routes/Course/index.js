@@ -7,9 +7,9 @@ const verifyToken = require("../../Middleware/Auth");
 const { Validation } = require("../../Middleware/Validate");
 
 router
-  .route("/populargame")
+  .route("/course")
   .post(upload.single("courseimg"), CourseController.Createcourse)
-  .put(upload.single("courseimgs"), CourseController.updatecourse)
+  .put(upload.single("courseimg"), CourseController.updatecourse)
   .get(CourseController.Getcourses)
   .delete(CourseController.Deletecourse);
 module.exports = router;
