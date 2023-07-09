@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../Helper/Connect");
 
-const Registration = sequelize.define("course", {
+const Registration = sequelize.define("registration", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -29,35 +29,39 @@ const Registration = sequelize.define("course", {
   },
   dateofbirth: {
     type: DataTypes.DATE,
-    allowNull: false,
+    allowNull: true,
   },
   phoneno1: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   phoneno2: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   coursename: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   fee: {
-    type: DataTypes.NUMBER,
-    allowNull: false,
+    type: DataTypes.STRING,
+    allowNull: true,
   },
   aadharcard: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   partportphoto: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   paymentstatus: {
     type: DataTypes.BOOLEAN,
-    defaultValue: false,
+    defaultValue: true,
+  },
+  rollno: {
+    type: DataTypes.STRING,
+    defaultValue: true,
   },
 });
 

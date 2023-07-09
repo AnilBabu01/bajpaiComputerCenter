@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../Helper/Connect");
 
-const Works = sequelize.define("course", {
+const Works = sequelize.define("work", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
