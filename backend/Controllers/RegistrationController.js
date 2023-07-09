@@ -46,7 +46,7 @@ const Createregistration = async (req, res) => {
       rollno,
     } = req.body;
 
-    if (!req.files.passportsizephoto || !req.files.aasharcard) {
+    if (!req.files.passportsizephoto || !req.files.aadharcard) {
       return respHandler.error(res, {
         status: false,
         msg: "Error in file uploading",
@@ -81,7 +81,7 @@ const Createregistration = async (req, res) => {
           paymentstatus: paymentstatus,
           rollno: rollno,
           partportphoto: `images/${req.files.passportsizephoto[0].originalname}`,
-          aadharcard: `images/${req.files.aasharcard[0].originalname}`,
+          aadharcard: `images/${req.files.aadharcard[0].originalname}`,
         });
 
         if (registration) {

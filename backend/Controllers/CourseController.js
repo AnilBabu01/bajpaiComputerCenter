@@ -18,7 +18,7 @@ const Createcourse = async (req, res) => {
         return respHandler.success(res, {
           status: true,
           data: [course],
-          msg: "New Game Added Successfully!!",
+          msg: "Course Added Successfully!!",
         });
       }
     } catch (err) {
@@ -42,7 +42,7 @@ const Getcourses = async (req, res) => {
     return respHandler.success(res, {
       status: true,
       data: [course],
-      msg: "All New Game Fetch Successfully!!",
+      msg: "All Course Fetch Successfully!!",
     });
   } catch (err) {
     return respHandler.error(res, {
@@ -54,7 +54,7 @@ const Getcourses = async (req, res) => {
 };
 
 const updatecourse = async (req, res) => {
-  let { id, coursename, courdescription } = req.body;
+  let { id, coursename, courdescription, courseimg } = req.body;
 
   try {
     let course = await Course.findOne({
@@ -62,32 +62,33 @@ const updatecourse = async (req, res) => {
         id: id,
       },
     });
-    if (removefile(`public/upload/${course?.courseimg.substring(7)}`)) {
-      let status = await Course.update(
-        {
-          coursename: coursename,
-          courdescription: courdescription,
-          courseimg: `images/${req.file.filename}`,
+    if (req?.file) {
+      removefile(`public/upload/${course?.courseimg.substring(7)}`);
+    }
+    let status = await Course.update(
+      {
+        coursename: coursename,
+        courdescription: courdescription,
+        courseimg: req?.file ? `images/${req.file.filename}` : courseimg,
+      },
+      {
+        where: {
+          id: id,
         },
-        {
-          where: {
-            id: id,
-          },
-        }
-      );
-
-      if (status) {
-        let course = await Course.findOne({
-          where: {
-            id: id,
-          },
-        });
-        return respHandler.success(res, {
-          status: true,
-          data: [course],
-          msg: "Game Updated Successfully!!",
-        });
       }
+    );
+
+    if (status) {
+      let course = await Course.findOne({
+        where: {
+          id: id,
+        },
+      });
+      return respHandler.success(res, {
+        status: true,
+        data: [course],
+        msg: "Course Updated Successfully!!",
+      });
     }
   } catch (err) {
     return respHandler.error(res, {
@@ -112,7 +113,7 @@ const Deletecourse = async (req, res) => {
       return respHandler.success(res, {
         status: true,
         data: [],
-        msg: "NewGame Deleted Successfully!!",
+        msg: "Course Deleted Successfully!!",
       });
     } else {
       return respHandler.error(res, {

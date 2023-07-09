@@ -21,7 +21,7 @@ const style2 = {
 };
 export default function Addslider({ setshowadmin }) {
   const [open, setOpen] = React.useState(false);
-
+  const [isdata, setisData] = useState("");
   const handleOpen = async () => {
     setOpen(true);
   };
@@ -29,11 +29,11 @@ export default function Addslider({ setshowadmin }) {
   const handleClose = React.useCallback(() => setOpen(false), []);
 
   const getslider = () => {
-    // serverInstance("uploadslider", "get").then((res) => {
-    //   if (res?.status) {
-    //     setisData(res?.data[0]);
-    //   }
-    // });
+    serverInstance("uploadslider", "get").then((res) => {
+      if (res?.status) {
+        setisData(res?.data[0]);
+      }
+    });
   };
 
   useEffect(() => {
@@ -72,9 +72,12 @@ export default function Addslider({ setshowadmin }) {
           <button onClick={() => handleOpen()}>Add</button>
         </div>
         <div className="main_flex_imgadmin_div">
-          <ImgAdminCard />
-          <ImgAdminCard />
-          <ImgAdminCard />
+          {isdata &&
+            isdata.map((item, index) => {
+              return (
+                <ImgAdminCard key={index} data={item} getslider={getslider} />
+              );
+            })}
         </div>
       </div>
     </>

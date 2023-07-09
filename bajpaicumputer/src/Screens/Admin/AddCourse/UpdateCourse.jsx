@@ -6,11 +6,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 const formData = new FormData();
 
 function UpdateCourse({ setOpen, updatedata }) {
-  const [gamename, setgamename] = useState("");
-  const [gameversion, setgameversion] = useState("");
-  const [gamedownloads, setgamedownloads] = useState("");
-  const [gamebonus, setgamebonus] = useState("");
-  const [gameurl, setgameurl] = useState("");
+  const [course, setcourse] = useState();
+  const [coursedesciption, setcoursedesciption] = useState("");
   const [img1, setimg1] = useState("");
   const [previewprofile1, setpreviewprofile1] = useState("");
   const [showloader, setshowloader] = useState(false);
@@ -19,17 +16,15 @@ function UpdateCourse({ setOpen, updatedata }) {
     try {
       setshowloader(true);
       formData.set("id", updatedata?.id);
-      formData.set("gamename", gamename);
-      formData.set("gameversion", gameversion);
-      formData.set("gamedownload", gamedownloads);
-      formData.set("gamebonus", gamebonus);
-      formData.set("downloadurl", gameurl);
-      formData.set("gameimg", img1 ? img1 : updatedata?.gameimg);
+      formData.set("coursename", course);
+      formData.set("courdescription", coursedesciption);
+      formData.set("courseimg", img1 ? img1 : updatedata?.courseimg);
+
       axios.defaults.headers.post[
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
 
-      const res = await axios.put(`${backendApiUrl}newgame`, formData);
+      const res = await axios.put(`${backendApiUrl}course`, formData);
 
       if (res?.data?.status) {
         setOpen(false);
@@ -38,16 +33,15 @@ function UpdateCourse({ setOpen, updatedata }) {
       }
     } catch (error) {
       Swal.fire("Error!", error, "error");
+      setOpen(false);
+      setshowloader(false);
     }
   };
 
   useEffect(() => {
     if (updatedata) {
-      setgamename(updatedata?.gamename);
-      setgameversion(updatedata?.gameversion);
-      setgamedownloads(updatedata?.gamedownload);
-      setgameurl(updatedata?.downloadurl);
-      setgamebonus(updatedata?.gamebonus);
+      setcourse(updatedata?.coursename);
+      setcoursedesciption(updatedata?.courdescription);
     }
   }, []);
 
@@ -68,9 +62,9 @@ function UpdateCourse({ setOpen, updatedata }) {
                 id="dharamshalaname"
                 // placeholder="enter the game name"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={course}
+                name="course"
+                onChange={(e) => setcourse(e.target.value)}
               />
             </div>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
@@ -85,9 +79,9 @@ function UpdateCourse({ setOpen, updatedata }) {
                 id="dharamshalaname"
                 // placeholder="enter the game name"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={coursedesciption}
+                name="coursedesciption"
+                onChange={(e) => setcoursedesciption(e.target.value)}
               />
             </div>
 
@@ -111,7 +105,7 @@ function UpdateCourse({ setOpen, updatedata }) {
                   <div className="main_img_divvvv">
                     <img
                       style={{ height: "100%", width: "100%" }}
-                      src={`${backendUrl}${updatedata?.gameimg} `}
+                      src={`${backendUrl}${updatedata?.courseimg} `}
                     />
                   </div>
                 </>
@@ -122,7 +116,6 @@ function UpdateCourse({ setOpen, updatedata }) {
                   type="file"
                   onChange={(e) => {
                     setimg1(e.target.files[0]);
-
                     setpreviewprofile1(URL.createObjectURL(e.target.files[0]));
                   }}
                 />

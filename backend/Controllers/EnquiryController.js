@@ -143,7 +143,7 @@ const Deleteenquiry = async (req, res) => {
       return respHandler.success(res, {
         status: true,
         data: [],
-        msg: "NewGame Deleted Successfully!!",
+        msg: "Enquiry Deleted Successfully!!",
       });
     } else {
       return respHandler.error(res, {
