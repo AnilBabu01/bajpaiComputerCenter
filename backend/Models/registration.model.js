@@ -51,7 +51,7 @@ const Registration = sequelize.define("registration", {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  partportphoto: {
+  passportsizephoto: {
     type: DataTypes.STRING,
     allowNull: true,
   },

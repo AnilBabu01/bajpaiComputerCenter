@@ -121,67 +121,28 @@ const Getregistration = async (req, res) => {
   }
 };
 
-const updateregistration = async (req, res) => {
-  let { id, projectname, projectscription } = req.body;
-
-  try {
-    let registration = await Registration.findOne({
-      where: {
-        id: id,
-      },
-    });
-    if (removefile(`public/upload/${registration?.projectimg.substring(7)}`)) {
-      let status = await Registration.update(
-        {
-          projectname: projectname,
-          projectscription: projectscription,
-          projectimg: `images/${req.file.filename}`,
-        },
-        {
-          where: {
-            id: id,
-          },
-        }
-      );
-
-      if (status) {
-        let work = await Work.findOne({
-          where: {
-            id: id,
-          },
-        });
-        return respHandler.success(res, {
-          status: true,
-          data: [work],
-          msg: "Work Updated Successfully!!",
-        });
-      }
-    }
-  } catch (err) {
-    return respHandler.error(res, {
-      status: false,
-      msg: "Something Went Wrong!!",
-      error: [err.message],
-    });
-  }
-};
-
 const Deleteregistration = async (req, res) => {
   try {
     let registration = await Registration.findOne({ id: req.body.id });
     if (registration) {
-      removefile(`public/upload/${registration?.projectimg.substring(7)}`);
-      await Work.destroy({
-        where: {
-          id: work?.id,
-        },
-      });
+      if (
+        removefile(
+          `public/upload/${registration?.partportphoto.substring(7)}`
+        ) &&
+        removefile(`public/upload/${registration?.aadharcard.substring(7)}`)
+      ) {
+        await Registration.destroy({
+          where: {
+            id: registration?.id,
+          },
+        });
 
-      return respHandler.success(res, {
-        status: true,
-        data: [],
-        msg: "NewGame Deleted Successfully!!",
-      });
+        return respHandler.success(res, {
+          status: true,
+          data: [],
+          msg: "Registration Details Deleted Successfully!!",
+        });
+      }
     } else {
       return respHandler.error(res, {
         status: false,
@@ -200,7 +161,6 @@ const Deleteregistration = async (req, res) => {
 
 module.exports = {
   Createregistration,
-  updateregistration,
   Getregistration,
   Deleteregistration,
 };

@@ -15,13 +15,12 @@ router
         maxCount: 1,
       },
       {
-        name: "aasharcard",
+        name: "aadharcard",
         maxCount: 1,
       },
     ]),
     RegistrationController.Createregistration
   )
-  .put(RegistrationController.updateregistration)
   .get(RegistrationController.Getregistration)
   .delete(RegistrationController.Deleteregistration);
 module.exports = router;
