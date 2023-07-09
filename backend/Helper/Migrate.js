@@ -8,6 +8,8 @@ const course = require("../Models/course.model");
 const Enquiry = require("../Models/enquiry.model");
 const fee = require("../Models/fee.model");
 const Works = require("../Models/work.model");
+const Registration = require("../Models/registration.model");
+const Student = require("../Models/student.model");
 sequelize
   .sync({ alter: true })
   .then(() => {

@@ -11,6 +11,8 @@ const Enquiry = require("./Routes/Enquiry");
 const Work = require("./Routes/Work");
 const Fee = require("./Routes/Fee");
 const Branch = require("./Routes/Branch");
+const Registration = require("./Routes/Registration");
+const Student = require("./Routes/student");
 // to run migrations run command - --------  npm run migrate ---------------------
 
 app.use(cors());
@@ -32,6 +34,8 @@ app.use("/api", Enquiry);
 app.use("/api", Work);
 app.use("/api", Fee);
 app.use("/api", Branch);
+app.use("/api", Registration);
+app.use("/api", Student);
 app.use("*", (req, res) => {
   return res.status(404).json({
     status: false,
