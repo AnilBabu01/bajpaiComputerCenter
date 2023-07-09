@@ -7,14 +7,14 @@ const Createbranch = async (req, res) => {
   let { branchname } = req.body;
   if (branchname != "") {
     try {
-      let branchname = await Branch.create({
-        fee: req.body.branchname,
+      let branch = await Branch.create({
+        branchname: req.body.branchname,
       });
 
-      if (branchname) {
+      if (branch) {
         return respHandler.success(res, {
           status: true,
-          data: [],
+          data: [branch],
           msg: "New branch Successfully!!",
         });
       }
@@ -89,10 +89,10 @@ const updatebranch = async (req, res) => {
 const Deletebranch = async (req, res) => {
   try {
     let branch = await Branch.findOne({ id: req.body.id });
-    if (branchname) {
+    if (branch) {
       await Branch.destroy({
         where: {
-          id: fee?.id,
+          id: branch?.id,
         },
       });
 
