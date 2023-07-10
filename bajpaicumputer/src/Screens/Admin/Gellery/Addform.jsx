@@ -16,13 +16,13 @@ function Addform({ setOpen }) {
     e.preventDefault();
     try {
       setshowloader(true);
-      formData.set("sliderimg", img1);
+      formData.set("galleryimg", img1);
 
       axios.defaults.headers.post[
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
 
-      const res = await axios.post(`${backendApiUrl}uploadslider`, formData);
+      const res = await axios.post(`${backendApiUrl}/uploadgallery`, formData);
 
       if (res?.data.status) {
         setOpen(false);

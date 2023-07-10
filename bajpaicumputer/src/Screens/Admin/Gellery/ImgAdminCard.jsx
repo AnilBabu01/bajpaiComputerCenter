@@ -5,7 +5,7 @@ import { serverInstance } from "../../../API/ServerInstance";
 import Swal from "sweetalert2";
 function ImgAdminCard({ data, getslider }) {
   const deletesliderimg = () => {
-    serverInstance("uploadslider", "delete", {
+    serverInstance("uploadgallery", "delete", {
       id: data?.id,
     }).then((res) => {
       if (res?.status) {

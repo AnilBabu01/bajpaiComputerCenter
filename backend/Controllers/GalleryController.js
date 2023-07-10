@@ -1,5 +1,5 @@
 const { config } = require("dotenv");
-const Slider = require("../Models/slider.model");
+const Slider = require("../Models/gallery.model");
 const removefile = require("../Middleware/removefile");
 const respHandler = require("../Handlers");
 config();

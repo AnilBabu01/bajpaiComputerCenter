@@ -29,7 +29,7 @@ export default function Addslider({ setshowadmin }) {
   const handleClose = React.useCallback(() => setOpen(false), []);
 
   const getslider = () => {
-    serverInstance("uploadslider", "get").then((res) => {
+    serverInstance("uploadgallery", "get").then((res) => {
       if (res?.status) {
         setisData(res?.data[0]);
       }
