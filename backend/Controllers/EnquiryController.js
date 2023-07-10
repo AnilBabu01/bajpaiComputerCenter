@@ -16,6 +16,7 @@ const Createenquiry = async (req, res) => {
     phoneno2,
     coursename,
     date,
+    branch,
   } = req.body;
   if (
     firstname != "" ||
@@ -31,6 +32,7 @@ const Createenquiry = async (req, res) => {
     try {
       let enquiry = await Enquiry.create({
         date: date,
+        branch: branch,
         firstname: firstname,
         lastname: lastname,
         gender: gender,

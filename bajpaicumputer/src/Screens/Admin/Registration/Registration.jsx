@@ -16,6 +16,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@mui/material";
+import LoadingSpinner1 from "../../../components/LoadingSpinner1";
 import "./Registration.css";
 const style2 = {
   position: "absolute",
@@ -29,7 +30,10 @@ const style2 = {
   borderRadius: "5px",
 };
 export default function Registration({ setshowadmin }) {
+  const [showloader, setshowloader] = useState(false);
   const [isData, setisData] = useState("");
+  const [date, setdate] = useState("");
+  const [rollno, setrollno] = useState("");
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -83,6 +87,26 @@ export default function Registration({ setshowadmin }) {
     });
   };
 
+  const filter = () => {
+    try {
+      setshowloader(true);
+      serverInstance("searchregiatration", "post", {
+        date: date,
+        rollno: rollno,
+      }).then((res) => {
+        if (res?.status) {
+          setshowloader(false);
+          setisData(res?.data[0]);
+        }
+
+        if (res?.status === false) {
+          setshowloader(false);
+        }
+      });
+    } catch (error) {
+      setshowadmin(false);
+    }
+  };
   useEffect(() => {
     getgame();
     setshowadmin(true);
@@ -143,9 +167,21 @@ export default function Registration({ setshowadmin }) {
             Received Registration for certificate
           </h2>
           <div className="Export_data_div10">
-            <input type="text" placeholder="Search By Registration No" />
-            <input type="date" />
-            <button onClick={() => handleOpen()}>Search</button>
+            <input
+              type="text"
+              placeholder="Search By Roll No"
+              value={rollno}
+              name="rollno"
+              onChange={(e) => setrollno(e.target.value)}
+            />
+            <input
+              type="date"
+              value={date}
+              name="date"
+              onChange={(e) => setdate(e.target.value)}
+            />
+            <button onClick={() => filter()}>Search</button>
+            <button onClick={() => getgame()}>Reset</button>
             <div className="Export_data_divimg_icon">
               <img className="Export_data_divimg" src={ExportExcel} alt="hdf" />
               <img src={ExportPdf} alt="hdf" />
@@ -156,7 +192,7 @@ export default function Registration({ setshowadmin }) {
         <table>
           <tr>
             <th>Name</th>
-            <th>Registration</th>
+            <th>Roll No</th>
             <th>Action</th>
           </tr>
           {isData &&
@@ -164,7 +200,7 @@ export default function Registration({ setshowadmin }) {
               return (
                 <tr key={index}>
                   <td>{item?.firstname}</td>
-                  <td>{item?.phoneno1}</td>
+                  <td>{item?.rollno}</td>
                   <td>
                     <img
                       onClick={() => handleOpen2(item)}
@@ -184,6 +220,7 @@ export default function Registration({ setshowadmin }) {
             })}
         </table>
       </div>
+      {showloader && <LoadingSpinner1 />}
     </>
   );
 }

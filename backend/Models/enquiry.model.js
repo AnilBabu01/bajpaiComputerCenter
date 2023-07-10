@@ -43,6 +43,10 @@ const Enquiry = sequelize.define("enquiry", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  branch: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 });
 
 module.exports = Enquiry;

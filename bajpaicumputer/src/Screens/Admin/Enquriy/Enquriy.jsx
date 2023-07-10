@@ -15,6 +15,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import LoadingSpinner1 from "../../../components/LoadingSpinner1";
 import { Button } from "@mui/material";
 import "./Enquriy.css";
 const style2 = {
@@ -29,24 +30,11 @@ const style2 = {
   borderRadius: "5px",
 };
 export default function Enquriy({ setshowadmin }) {
+  const [showloader, setshowloader] = useState(false);
   const [isData, setisData] = useState("");
-  const [open, setOpen] = useState(false);
-  const [open1, setOpen1] = useState(false);
+  const [date, setdate] = useState("");
   const [open2, setOpen2] = useState(false);
   const [updatedata, setupdatedata] = useState("");
-
-  const handleOpen = async () => {
-    setOpen(true);
-  };
-
-  const handleClose = React.useCallback(() => setOpen(false), []);
-
-  const handleOpen1 = async (data) => {
-    setOpen1(true);
-    setupdatedata(data);
-  };
-
-  const handleClose1 = React.useCallback(() => setOpen1(false), []);
 
   const handleOpen2 = async (data) => {
     setOpen2(true);
@@ -56,11 +44,17 @@ export default function Enquriy({ setshowadmin }) {
   const handleClose2 = React.useCallback(() => setOpen2(false), []);
 
   const getgame = () => {
-    serverInstance("enquriy", "get").then((res) => {
-      if (res?.status) {
-        setisData(res?.data[0]);
-      }
-    });
+    try {
+      setshowloader(true);
+      serverInstance("enquriy", "get").then((res) => {
+        if (res?.status) {
+          setshowloader(false);
+          setisData(res?.data[0]);
+        }
+      });
+    } catch (error) {
+      setshowloader(false);
+    }
   };
 
   const [deleteId, setdeleteId] = useState("");
@@ -83,10 +77,29 @@ export default function Enquriy({ setshowadmin }) {
     });
   };
 
+  const filter = () => {
+    try {
+      setshowloader(true);
+      serverInstance("search", "post", {
+        date: date,
+      }).then((res) => {
+        if (res?.status) {
+          setshowloader(false);
+          setisData(res?.data[0]);
+        }
+        if (res?.status === false) {
+          setshowloader(false);
+        }
+      });
+    } catch (error) {
+      setshowadmin(false);
+    }
+  };
+
   useEffect(() => {
     getgame();
     setshowadmin(true);
-  }, [open, open1, open2]);
+  }, [open2]);
 
   return (
     <>
@@ -141,8 +154,14 @@ export default function Enquriy({ setshowadmin }) {
         <div className="main_add_btnn_div_enquriy">
           <h2 style={{ marginLeft: "3rem" }}>Received Enquiry</h2>
           <div className="Export_data_div">
-            <input type="date" />
-            <button onClick={() => handleOpen()}>Search</button>
+            <input
+              type="date"
+              value={date}
+              name="date"
+              onChange={(e) => setdate(e.target.value)}
+            />
+            <button onClick={() => filter()}>Search</button>
+            <button onClick={() => getgame()}>Reset</button>
             <img className="Export_data_divimg" src={ExportExcel} alt="hdf" />
             <img src={ExportPdf} alt="hdf" />
           </div>
@@ -179,6 +198,7 @@ export default function Enquriy({ setshowadmin }) {
             })}
         </table>
       </div>
+      {showloader && <LoadingSpinner1 />}
     </>
   );
 }

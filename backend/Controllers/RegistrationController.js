@@ -37,6 +37,7 @@ const Createregistration = async (req, res) => {
       paymentstatus,
       rollno,
       date,
+      branch,
     } = req.body;
 
     if (!req.files.passportsizephoto || !req.files.aadharcard) {
@@ -62,6 +63,7 @@ const Createregistration = async (req, res) => {
       try {
         let registration = await Registration.create({
           date: date,
+          branch: branch,
           firstname: firstname,
           lastname: lastname,
           gender: gender,

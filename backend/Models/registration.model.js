@@ -55,17 +55,22 @@ const Registration = sequelize.define("registration", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+
+  rollno: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  branch: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
   paymentstatus: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
   },
-  rollno: {
-    type: DataTypes.STRING,
-    defaultValue: true,
-  },
   transactionid: {
     type: DataTypes.STRING,
-    defaultValue: true,
+    allowNull: true,
   },
 });
 

@@ -42,7 +42,7 @@ function Sidebar() {
                 to="/dashboard"
               >
                 <DashboardIcon />
-                <spna className="linkspan"> Dashboard</spna>
+                <span className="linkspan"> Dashboard</span>
               </NavLink>
             </li>
             <li className="nav-item">
@@ -53,7 +53,7 @@ function Sidebar() {
                 to="/admin/Addslider"
               >
                 <CallMadeIcon />
-                <spna className="linkspan">Add Slider</spna>
+                <span className="linkspan">Add Slider</span>
               </NavLink>
             </li>
             <li className="nav-item">
@@ -64,7 +64,18 @@ function Sidebar() {
                 to="/admin/AddCourse"
               >
                 <CallMadeIcon />
-                <spna className="linkspan">Add Courses</spna>
+                <span className="linkspan">Add Student</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active-nav-link" : "nav-link"
+                }
+                to="/admin/AddCourse"
+              >
+                <CallMadeIcon />
+                <span className="linkspan">Add Courses</span>
               </NavLink>
             </li>
             <li className="nav-item">
@@ -75,7 +86,7 @@ function Sidebar() {
                 to="/admin/Enquriy"
               >
                 <PersonAddIcon />
-                <spna className="linkspan">Enquiry</spna>
+                <span className="linkspan">Enquiry</span>
               </NavLink>
             </li>
 
@@ -87,7 +98,7 @@ function Sidebar() {
                 to="/admin/Registration"
               >
                 <CallMadeIcon />
-                <spna className="linkspan">Registrations</spna>
+                <span className="linkspan">Registrations</span>
               </NavLink>
             </li>
 
@@ -99,7 +110,7 @@ function Sidebar() {
                 to="/admin/Certificate"
               >
                 <CallMadeIcon />
-                <spna className="linkspan">Certificate</spna>
+                <span className="linkspan">Certificate</span>
               </NavLink>
             </li>
             <li className="nav-item">
@@ -110,7 +121,7 @@ function Sidebar() {
                 to="/admin/MasterTap"
               >
                 <CallMadeIcon />
-                <spna className="linkspan">Masters</spna>
+                <span className="linkspan">Masters</span>
               </NavLink>
             </li>
 
@@ -122,7 +133,7 @@ function Sidebar() {
                 to="/admin/Addword"
               >
                 <CallMadeIcon />
-                <spna className="linkspan">Add Works</spna>
+                <span className="linkspan">Add Works</span>
               </NavLink>
             </li>
             <li className="nav-item">
@@ -133,7 +144,7 @@ function Sidebar() {
                 to="/admin/Galleryadmin"
               >
                 <CallMadeIcon />
-                <spna className="linkspan">Add Gallery</spna>
+                <span className="linkspan">Add Gallery</span>
               </NavLink>
             </li>
           </ul>
