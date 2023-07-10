@@ -1,27 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Swal from "sweetalert2";
 import { backendApiUrl, backendUrl } from "../../../config/config";
-import axios from "axios";
-import CircularProgress from "@mui/material/CircularProgress";
-const formData = new FormData();
-
 function View({ setOpen, updatedata }) {
-  const [gamename, setgamename] = useState("");
-  const [gameversion, setgameversion] = useState("");
-  const [gamedownloads, setgamedownloads] = useState("");
-  const [gamebonus, setgamebonus] = useState("");
-  const [gameurl, setgameurl] = useState("");
-  const [img1, setimg1] = useState("");
+  const [projectname, setprojectname] = useState("");
+  const [prodesciption, setprodesciption] = useState("");
+  const [prourl, setprourl] = useState("");
   const [previewprofile1, setpreviewprofile1] = useState("");
-  const [showloader, setshowloader] = useState(false);
-
+  const [img1, setimg1] = useState("");
   useEffect(() => {
     if (updatedata) {
-      setgamename(updatedata?.gamename);
-      setgameversion(updatedata?.gameversion);
-      setgamedownloads(updatedata?.gamedownload);
-      setgameurl(updatedata?.downloadurl);
-      setgamebonus(updatedata?.gamebonus);
+      setprojectname(updatedata?.projectname);
+      setprodesciption(updatedata?.projectscription);
+      setprourl(updatedata?.projecturl);
     }
   }, []);
 
@@ -33,42 +22,48 @@ function View({ setOpen, updatedata }) {
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
               <label htmlFor="dharamshalaname">Project Name</label>
               <input
-                disabled={true}
-                style={{ width: "100%", marginTop: "0.2rem" }}
+                style={{
+                  width: "100%",
+                  marginTop: "0.5rem",
+                  marginBottom: "0.5rem",
+                }}
                 type="textarea"
                 id="dharamshalaname"
+                // placeholder="enter the game name"
                 className="forminput_add_user10"
-                value={gamename}
-                // name="gamename"
-                // onChange={(e) => setgamename(e.target.value)}
+                value={projectname}
               />
             </div>
-
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
               <label htmlFor="dharamshalaname">Project Description</label>
               <input
-                disabled={true}
-                style={{ width: "100%", marginTop: "0.2rem" }}
+                style={{
+                  width: "100%",
+                  marginTop: "0.5rem",
+                  marginBottom: "0.5rem",
+                }}
                 type="textarea"
                 id="dharamshalaname"
+                // placeholder="enter the game name"
                 className="forminput_add_user10"
-                value={gameversion}
-                name="gameversion"
-                onChange={(e) => setgameversion(e.target.value)}
+                value={prodesciption}
+                onChange={(e) => setprodesciption(e.target.value)}
               />
             </div>
 
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
               <label htmlFor="dharamshalaname">Project Url</label>
               <input
-                disabled={true}
-                style={{ width: "100%", marginTop: "0.2rem" }}
+                style={{
+                  width: "100%",
+                  marginTop: "0.5rem",
+                  marginBottom: "0.5rem",
+                }}
                 type="textarea"
                 id="dharamshalaname"
+                // placeholder="enter the game name"
                 className="forminput_add_user10"
-                value={gameversion}
-                name="gameversion"
-                onChange={(e) => setgameversion(e.target.value)}
+                value={prourl}
               />
             </div>
 
@@ -92,7 +87,7 @@ function View({ setOpen, updatedata }) {
                   <div className="main_img_divvvv">
                     <img
                       style={{ height: "100%", width: "100%" }}
-                      src={`${backendUrl}${updatedata?.gameimg} `}
+                      src={`${backendUrl}${updatedata?.projectimg} `}
                     />
                   </div>
                 </>

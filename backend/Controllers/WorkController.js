@@ -60,7 +60,7 @@ const Getworks = async (req, res) => {
 };
 
 const updatework = async (req, res) => {
-  let { id, projectname, projectscription, projecturl } = req.body;
+  let { id, projectname, projectscription, projecturl, workimg } = req.body;
 
   try {
     let work = await Work.findOne({
@@ -74,7 +74,7 @@ const updatework = async (req, res) => {
           projecturl: projecturl,
           projectname: projectname,
           projectscription: projectscription,
-          projectimg: `images/${req.file.filename}`,
+          projectimg: req.file ? `images/${req.file.filename}` : workimg,
         },
         {
           where: {

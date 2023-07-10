@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "../Screens/Client/Header/Navbar";
 import Home from "../Screens/Client/Home/Home";
@@ -20,6 +20,7 @@ import Registration from "../Screens/Admin/Registration/Registration";
 import Certificate from "../Screens/Admin/Certificate/Certificate";
 import MasterTap from "../Screens/Admin/Masters/MasterTap";
 import Addword from "../Screens/Admin/Addword/Addword";
+import Galleryadmin from "../Screens/Admin/Gellery/Gellery";
 export default function MainRoutes({ showadmin, setshowadmin }) {
   return (
     <>
@@ -68,6 +69,11 @@ export default function MainRoutes({ showadmin, setshowadmin }) {
         <Route
           path="/admin/Addword"
           element={<Addword setshowadmin={setshowadmin} />}
+        />
+
+        <Route
+          path="/admin/Galleryadmin"
+          element={<Galleryadmin setshowadmin={setshowadmin} />}
         />
 
         {/* <Route path="/login" element={<Login setshowadmin={setshowadmin} />} /> */}

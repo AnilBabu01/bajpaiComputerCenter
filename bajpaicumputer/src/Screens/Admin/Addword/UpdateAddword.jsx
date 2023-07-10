@@ -6,11 +6,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 const formData = new FormData();
 
 function UpdateAddword({ setOpen, updatedata }) {
-  const [gamename, setgamename] = useState("");
-  const [gameversion, setgameversion] = useState("");
-  const [gamedownloads, setgamedownloads] = useState("");
-  const [gamebonus, setgamebonus] = useState("");
-  const [gameurl, setgameurl] = useState("");
+  const [projectname, setprojectname] = useState("");
+  const [prodesciption, setprodesciption] = useState("");
+  const [prourl, setprourl] = useState("");
   const [img1, setimg1] = useState("");
   const [previewprofile1, setpreviewprofile1] = useState("");
   const [showloader, setshowloader] = useState(false);
@@ -19,17 +17,15 @@ function UpdateAddword({ setOpen, updatedata }) {
     try {
       setshowloader(true);
       formData.set("id", updatedata?.id);
-      formData.set("gamename", gamename);
-      formData.set("gameversion", gameversion);
-      formData.set("gamedownload", gamedownloads);
-      formData.set("gamebonus", gamebonus);
-      formData.set("downloadurl", gameurl);
-      formData.set("gameimg", img1 ? img1 : updatedata?.gameimg);
+      formData.set("workimg", img1 ? img1 : updatedata?.projectimg);
+      formData.set("projectname", projectname);
+      formData.set("projectscription", prodesciption);
+
       axios.defaults.headers.post[
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
 
-      const res = await axios.put(`${backendApiUrl}newgame`, formData);
+      const res = await axios.put(`${backendApiUrl}work`, formData);
 
       if (res?.data?.status) {
         setOpen(false);
@@ -43,11 +39,9 @@ function UpdateAddword({ setOpen, updatedata }) {
 
   useEffect(() => {
     if (updatedata) {
-      setgamename(updatedata?.gamename);
-      setgameversion(updatedata?.gameversion);
-      setgamedownloads(updatedata?.gamedownload);
-      setgameurl(updatedata?.downloadurl);
-      setgamebonus(updatedata?.gamebonus);
+      setprojectname(updatedata?.projectname);
+      setprodesciption(updatedata?.projectscription);
+      setprourl(updatedata?.projecturl);
     }
   }, []);
 
@@ -68,9 +62,9 @@ function UpdateAddword({ setOpen, updatedata }) {
                 id="dharamshalaname"
                 // placeholder="enter the game name"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={projectname}
+                name="projectname"
+                onChange={(e) => setprojectname(e.target.value)}
               />
             </div>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
@@ -85,9 +79,9 @@ function UpdateAddword({ setOpen, updatedata }) {
                 id="dharamshalaname"
                 // placeholder="enter the game name"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={prodesciption}
+                name="prodesciption"
+                onChange={(e) => setprodesciption(e.target.value)}
               />
             </div>
 
@@ -103,9 +97,9 @@ function UpdateAddword({ setOpen, updatedata }) {
                 id="dharamshalaname"
                 // placeholder="enter the game name"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={prourl}
+                name="prourl"
+                onChange={(e) => setprourl(e.target.value)}
               />
             </div>
 
@@ -129,7 +123,7 @@ function UpdateAddword({ setOpen, updatedata }) {
                   <div className="main_img_divvvv">
                     <img
                       style={{ height: "100%", width: "100%" }}
-                      src={`${backendUrl}${updatedata?.gameimg} `}
+                      src={`${backendUrl}${updatedata?.projectimg} `}
                     />
                   </div>
                 </>

@@ -125,6 +125,17 @@ function Sidebar() {
                 <spna className="linkspan">Add Works</spna>
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active-nav-link" : "nav-link"
+                }
+                to="/admin/Galleryadmin"
+              >
+                <CallMadeIcon />
+                <spna className="linkspan">Add Gallery</spna>
+              </NavLink>
+            </li>
           </ul>
         </div>
       </nav>
