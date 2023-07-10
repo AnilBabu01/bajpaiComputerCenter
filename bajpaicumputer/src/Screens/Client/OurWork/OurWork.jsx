@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import WorkCard from "./WorkCard";
-import pro1 from "../../../assets/pro1.jpeg";
-import pro2 from "../../../assets/pro2.jpeg";
-import pro3 from "../../../assets/pro3.jpeg";
+
+import { serverInstance } from "../../../API/ServerInstance";
 import "./OurWork.css";
 function OurWork() {
+  const [isdata, setisdata] = useState("");
+  const getworks = () => {
+    serverInstance("work", "get").then((res) => {
+      if (res?.status) {
+        setisdata(res?.data[0]);
+      }
+    });
+  };
+  useEffect(() => {
+    getworks();
+  }, []);
   return (
     <div className="main_courses_div">
       <h1>OUR WORK</h1>
       <div className="flex_div_courses">
-        <WorkCard title={"earningappsolutions"} img={pro1} />
-        <WorkCard title={"FiewWin Clone"} img={pro2} />
-        <WorkCard title={"mtgrooups"} img={pro3} />
+        {isdata &&
+          isdata?.map((item, index) => {
+            return <WorkCard key={index} data={item} />;
+          })}
       </div>
     </div>
   );

@@ -1,13 +1,16 @@
 import React from "react";
-function WorkCard({ img, title }) {
+import { backendUrl } from "../../../config/config";
+function WorkCard({ data }) {
   return (
     <>
       <div className="card_main1">
-        <img src={img} alt="djd" />
+        <img src={`${backendUrl}${data?.projectimg} `} alt="djd" />
         <div className="course_details1">
-          <h3>{title}</h3>
-          {/* <p>CCC</p> */}
-          <button>Live View</button>
+          <h3>{data?.projectname}</h3>
+          <p>{data?.projectscription}</p>
+          <a href={data?.projecturl} target="blank">
+            Live View
+          </a>
         </div>
       </div>
     </>

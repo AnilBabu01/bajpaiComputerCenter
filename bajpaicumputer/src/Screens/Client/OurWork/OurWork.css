@@ -31,6 +31,19 @@
     margin-top: 0.5rem;
     
 }
+
+.course_details1 a{
+    background: rgb(28, 130, 173);
+    color: white;
+    border: none;
+    width: 6rem;
+    height: 1.6rem;
+    border-radius: 3px;
+    margin-top: 0.5rem;
+    text-decoration: none;
+    text-align: center;
+    
+}
 @media screen and (max-width: 780px) {
     .card_main1{
         width: 100%;

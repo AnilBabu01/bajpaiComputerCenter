@@ -1,16 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { backendUrl } from "../../../config/config";
 import "./CourceCard.css";
-function CourceCard({ img, course, des }) {
+function CourceCard({ data }) {
   const navigate = useNavigate();
   return (
     <>
       <div className="card_main">
-        <img src={img} alt="djd" />
+        <img src={`${backendUrl}${data?.courseimg} `} alt="djd" />
         <div className="course_details">
-          <h3>{course}</h3>
-          <p>{des}</p>
-          <button onClick={() => navigate("/apply")}>Now Enquiry</button>
+          <h3>{data?.coursename}</h3>
+          <p>{data?.courdescription}</p>
+          {/* <button onClick={() => navigate("/apply")}>Now Enquiry</button> */}
         </div>
       </div>
     </>

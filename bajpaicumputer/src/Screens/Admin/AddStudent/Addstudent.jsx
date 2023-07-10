@@ -133,7 +133,7 @@ export default function Addstudent({ setshowadmin }) {
   useEffect(() => {
     getbranch();
     getgame();
-    // setshowadmin(true);
+    setshowadmin(true);
   }, [open, open1, open2]);
 
   return (
