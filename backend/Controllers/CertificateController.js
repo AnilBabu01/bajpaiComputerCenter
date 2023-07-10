@@ -68,7 +68,7 @@ const Getcertificate = async (req, res) => {
 };
 
 const updatecertificate = async (req, res) => {
-  let { id, rollno, fullname } = req.body;
+  let { id, rollno, fullname, certificateimg } = req.body;
 
   try {
     let certificate = await Certificate.findOne({
@@ -83,7 +83,9 @@ const updatecertificate = async (req, res) => {
         {
           fullname: fullname,
           rollno: rollno,
-          certificateimg: `images/${req.file.filename}`,
+          certificateimg: req.file
+            ? `images/${req.file.filename}`
+            : certificateimg,
         },
         {
           where: {

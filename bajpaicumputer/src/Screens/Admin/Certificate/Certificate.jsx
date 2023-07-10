@@ -59,11 +59,11 @@ export default function Certificate({ setshowadmin }) {
   const handleClose2 = React.useCallback(() => setOpen2(false), []);
 
   const getgame = () => {
-    // serverInstance("newgame", "get").then((res) => {
-    //   if (res?.status) {
-    //     setisData(res?.data[0]);
-    //   }
-    // });
+    serverInstance("certificate", "get").then((res) => {
+      if (res?.status) {
+        setisData(res?.data[0]);
+      }
+    });
   };
 
   const [deleteId, setdeleteId] = useState("");
@@ -176,7 +176,7 @@ export default function Certificate({ setshowadmin }) {
             <div>
               <div className="add-div-close-div10">
                 <h2 style={{ textAlign: "center", marginLeft: "24%" }}>
-                  Registration Details
+                  Certificate Details
                 </h2>
                 <CloseIcon
                   style={{ marginTop: "2%", marginLeft: "13%" }}
@@ -210,54 +210,36 @@ export default function Certificate({ setshowadmin }) {
             <th>Roll No</th>
             <th>Action</th>
           </tr>
-          <tr>
-            <td>Anil</td>
-            <td>7505</td>
-            <td>
-              <img
-                onClick={() => handleOpen1()}
-                style={{ width: "25px", marginRight: "1rem" }}
-                src={Edit}
-                alt="aaa"
-              />
-              <img
-                onClick={() => handleOpen2()}
-                style={{ width: "25px", marginRight: "1rem" }}
-                src={eye}
-                alt="aaa"
-              />
-              <img
-                // onClick={() => handleClickOpen3(row?.id)}
-                style={{ width: "25px" }}
-                src={Delete}
-                alt="aaa"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Anil</td>
-            <td>7505</td>
-            <td>
-              <img
-                onClick={() => handleOpen1()}
-                style={{ width: "25px", marginRight: "1rem" }}
-                src={Edit}
-                alt="aaa"
-              />
-              <img
-                onClick={() => handleOpen2()}
-                style={{ width: "25px", marginRight: "1rem" }}
-                src={eye}
-                alt="aaa"
-              />
-              <img
-                // onClick={() => handleClickOpen3(row?.id)}
-                style={{ width: "25px" }}
-                src={Delete}
-                alt="aaa"
-              />
-            </td>
-          </tr>
+
+          {isData &&
+            isData.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td>{item?.fullname}</td>
+                  <td>{item?.rollno}</td>
+                  <td>
+                    <img
+                      onClick={() => handleOpen1(item)}
+                      style={{ width: "25px", marginRight: "1rem" }}
+                      src={Edit}
+                      alt="aaa"
+                    />
+                    <img
+                      onClick={() => handleOpen2(item)}
+                      style={{ width: "25px", marginRight: "1rem" }}
+                      src={eye}
+                      alt="aaa"
+                    />
+                    <img
+                      onClick={() => handleClickOpen3(item?.id)}
+                      style={{ width: "25px" }}
+                      src={Delete}
+                      alt="aaa"
+                    />
+                  </td>
+                </tr>
+              );
+            })}
         </table>
       </div>
     </>

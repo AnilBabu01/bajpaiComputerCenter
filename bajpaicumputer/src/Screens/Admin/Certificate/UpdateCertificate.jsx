@@ -6,11 +6,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 const formData = new FormData();
 
 function UpdateCertificate({ setOpen, updatedata }) {
+  const [fullname, setfullname] = useState("");
+  const [rollno, setrollno] = useState("");
   const [gamename, setgamename] = useState("");
-  const [gameversion, setgameversion] = useState("");
-  const [gamedownloads, setgamedownloads] = useState("");
-  const [gamebonus, setgamebonus] = useState("");
-  const [gameurl, setgameurl] = useState("");
   const [img1, setimg1] = useState("");
   const [previewprofile1, setpreviewprofile1] = useState("");
   const [showloader, setshowloader] = useState(false);
@@ -18,18 +16,16 @@ function UpdateCertificate({ setOpen, updatedata }) {
     e.preventDefault();
     try {
       setshowloader(true);
-      formData.set("id", updatedata?.id);
-      formData.set("gamename", gamename);
-      formData.set("gameversion", gameversion);
-      formData.set("gamedownload", gamedownloads);
-      formData.set("gamebonus", gamebonus);
-      formData.set("downloadurl", gameurl);
-      formData.set("gameimg", img1 ? img1 : updatedata?.gameimg);
+
+      formData.set("fullname", fullname);
+      formData.set("rollno", rollno);
+      formData.set("cerimg", img1);
+      formData.set("certificateimg", img1 ? img1 : updatedata?.certificateimg);
       axios.defaults.headers.post[
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
 
-      const res = await axios.put(`${backendApiUrl}newgame`, formData);
+      const res = await axios.put(`${backendApiUrl}certificate`, formData);
 
       if (res?.data?.status) {
         setOpen(false);
@@ -43,11 +39,8 @@ function UpdateCertificate({ setOpen, updatedata }) {
 
   useEffect(() => {
     if (updatedata) {
-      setgamename(updatedata?.gamename);
-      setgameversion(updatedata?.gameversion);
-      setgamedownloads(updatedata?.gamedownload);
-      setgameurl(updatedata?.downloadurl);
-      setgamebonus(updatedata?.gamebonus);
+      setfullname(updatedata?.fullname);
+      setrollno(updatedata?.rollno);
     }
   }, []);
 
@@ -57,7 +50,7 @@ function UpdateCertificate({ setOpen, updatedata }) {
         <div className="cash-donation-container-innser">
           <form onSubmit={handlesubmit}>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">Course Name</label>
+              <label htmlFor="dharamshalaname">Full Name</label>
               <input
                 style={{
                   width: "100%",
@@ -68,13 +61,13 @@ function UpdateCertificate({ setOpen, updatedata }) {
                 id="dharamshalaname"
                 // placeholder="enter the game name"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={fullname}
+                name="fullname"
+                onChange={(e) => setfullname(e.target.value)}
               />
             </div>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">Course Description</label>
+              <label htmlFor="dharamshalaname">Roll NO</label>
               <input
                 style={{
                   width: "100%",
@@ -85,9 +78,9 @@ function UpdateCertificate({ setOpen, updatedata }) {
                 id="dharamshalaname"
                 // placeholder="enter the game name"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={rollno}
+                name="rollno"
+                onChange={(e) => setrollno(e.target.value)}
               />
             </div>
 
@@ -111,7 +104,7 @@ function UpdateCertificate({ setOpen, updatedata }) {
                   <div className="main_img_divvvv">
                     <img
                       style={{ height: "100%", width: "100%" }}
-                      src={`${backendUrl}${updatedata?.gameimg} `}
+                      src={`${backendUrl}${updatedata?.certificateimg} `}
                     />
                   </div>
                 </>

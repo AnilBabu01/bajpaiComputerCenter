@@ -8,11 +8,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 const formData = new FormData();
 
 function Addform({ setOpen }) {
-  const [gamename, setgamename] = useState("");
-  const [gameversion, setgameversion] = useState("");
-  const [gamedownloads, setgamedownloads] = useState("");
-  const [gamebonus, setgamebonus] = useState("");
-  const [gameurl, setgameurl] = useState("");
+  const [fullname, setfullname] = useState("");
+  const [rollno, setrollno] = useState("");
   const [img1, setimg1] = useState("");
   const [previewprofile1, setpreviewprofile1] = useState("");
   const [showloader, setshowloader] = useState(false);
@@ -21,18 +18,15 @@ function Addform({ setOpen }) {
     try {
       ////
       setshowloader(true);
-      formData.set("gamename", gamename);
-      formData.set("gameversion", gameversion);
-      formData.set("gamedownload", gamedownloads);
-      formData.set("gamebonus", gamebonus);
-      formData.set("downloadurl", gameurl);
-      formData.set("gameimg", img1);
+      formData.set("fullname", fullname);
+      formData.set("rollno", rollno);
+      formData.set("cerimg", img1);
 
       axios.defaults.headers.post[
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
 
-      const res = await axios.post(`${backendApiUrl}newgame`, formData);
+      const res = await axios.post(`${backendApiUrl}certificate`, formData);
 
       if (res?.status) {
         setOpen(false);
@@ -50,7 +44,7 @@ function Addform({ setOpen }) {
         <div className="cash-donation-container-innser">
           <form onSubmit={handlesubmit}>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">Course Name</label>
+              <label htmlFor="dharamshalaname">Full Name</label>
               <input
                 style={{
                   width: "100%",
@@ -59,15 +53,15 @@ function Addform({ setOpen }) {
                 }}
                 type="textarea"
                 id="dharamshalaname"
-                placeholder="enter the Course Name"
+                placeholder="enter the Full Name"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={fullname}
+                name="fullname"
+                onChange={(e) => setfullname(e.target.value)}
               />
             </div>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">Course Description</label>
+              <label htmlFor="dharamshalaname">Roll No</label>
               <input
                 style={{
                   width: "100%",
@@ -76,11 +70,11 @@ function Addform({ setOpen }) {
                 }}
                 type="textarea"
                 id="dharamshalaname"
-                placeholder="enter the Course Description"
+                placeholder="enter the Roll No"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={rollno}
+                name="rollno"
+                onChange={(e) => setrollno(e.target.value)}
               />
             </div>
 

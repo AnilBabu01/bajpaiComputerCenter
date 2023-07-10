@@ -89,3 +89,13 @@
 }
 
 }
+.add_srollerbaar{
+    overflow-y: auto;
+    height: 32rem;
+    padding-right: 1rem;
+}
+
+
+@media screen and (max-width: 780px){
+
+}

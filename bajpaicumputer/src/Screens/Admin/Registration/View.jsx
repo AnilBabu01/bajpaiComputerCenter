@@ -1,143 +1,168 @@
 import React, { useState, useEffect } from "react";
-import Swal from "sweetalert2";
-import { backendApiUrl, backendUrl } from "../../../config/config";
-import axios from "axios";
-import CircularProgress from "@mui/material/CircularProgress";
-const formData = new FormData();
 
 function View({ setOpen, updatedata }) {
-  const [gamename, setgamename] = useState("");
-  const [gameversion, setgameversion] = useState("");
-  const [gamedownloads, setgamedownloads] = useState("");
-  const [gamebonus, setgamebonus] = useState("");
-  const [gameurl, setgameurl] = useState("");
-  const [img1, setimg1] = useState("");
-  const [previewprofile1, setpreviewprofile1] = useState("");
-  const [showloader, setshowloader] = useState(false);
-  const handlesubmit = async (e) => {
-    e.preventDefault();
-    try {
-      setshowloader(true);
-      formData.set("id", updatedata?.id);
-      formData.set("gamename", gamename);
-      formData.set("gameversion", gameversion);
-      formData.set("gamedownload", gamedownloads);
-      formData.set("gamebonus", gamebonus);
-      formData.set("downloadurl", gameurl);
-      formData.set("gameimg", img1 ? img1 : updatedata?.gameimg);
-      axios.defaults.headers.post[
-        "Authorization"
-      ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
-
-      const res = await axios.put(`${backendApiUrl}populargame`, formData);
-
-      if (res?.data?.status) {
-        setOpen(false);
-        setshowloader(false);
-        Swal.fire("Great!", res?.data?.msg, "success");
-      }
-    } catch (error) {
-      Swal.fire("Error!", error, "error");
-    }
-  };
+  const [studentname, setstudentname] = useState("");
+  const [registrationdate, setregistrationdate] = useState("");
+  const [dateofbirth, setdateofbirth] = useState("");
+  const [Gender, setGender] = useState("");
+  const [phoneno1, setphoneno1] = useState("");
+  const [phoneno2, setphoneno2] = useState("");
+  const [fee, setfee] = useState("");
+  const [paymentstatus, setpaymentstatus] = useState("");
+  const [transcationid, settranscationid] = useState("");
+  const [course, setcourse] = useState("");
+  const [rollno, setrollno] = useState("");
 
   useEffect(() => {
     if (updatedata) {
-      setgamename(updatedata?.gamename);
-      setgameversion(updatedata?.gameversion);
-      setgamedownloads(updatedata?.gamedownload);
-      setgameurl(updatedata?.downloadurl);
-      setgamebonus(updatedata?.gamebonus);
+      setregistrationdate(updatedata?.date);
+      setstudentname(updatedata?.firstname);
+      setdateofbirth(updatedata?.dateofbirth);
+      setGender(updatedata?.gender);
+      setphoneno1(updatedata?.phoneno1);
+      setphoneno2(updatedata?.phoneno2);
+      setcourse(updatedata?.coursename);
+      setpaymentstatus(updatedata?.paymentstatus);
+      setrollno(updatedata?.rollno);
+      setfee(updatedata?.fee);
+      settranscationid(updatedata?.transactionid);
     }
   }, []);
 
   return (
     <>
-      <div className="cash-donation-div">
-        <div className="cash-donation-container-innser">
-          <form onSubmit={handlesubmit}>
-            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">Student Name</label>
-              <input
-                disabled={true}
-                style={{ width: "100%", marginTop: "0.2rem" }}
-                type="textarea"
-                id="dharamshalaname"
-                className="forminput_add_user10"
-                value={gamename}
-                // name="gamename"
-                // onChange={(e) => setgamename(e.target.value)}
-              />
-            </div>
-            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">Date of birth</label>
-              <input
-                disabled={true}
-                style={{ width: "100%", marginTop: "0.2rem" }}
-                type="textarea"
-                id="dharamshalaname"
-                className="forminput_add_user10"
-                value={gamename}
-                // name="gamename"
-                // onChange={(e) => setgamename(e.target.value)}
-              />
-            </div>
-            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">Gender</label>
-              <input
-                disabled={true}
-                style={{ width: "100%", marginTop: "0.2rem" }}
-                type="textarea"
-                id="dharamshalaname"
-                className="forminput_add_user10"
-                value={gamename}
-                // name="gamename"
-                // onChange={(e) => setgamename(e.target.value)}
-              />
-            </div>
+      <div className="add_srollerbaar">
+        <div className="cash-donation-div">
+          <div className="cash-donation-container-innser">
+            <form>
+              <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+                <label htmlFor="dharamshalaname">Registration Date</label>
+                <input
+                  disabled={true}
+                  style={{ width: "100%", marginTop: "0.2rem" }}
+                  type="textarea"
+                  id="dharamshalaname"
+                  className="forminput_add_user10"
+                  value={registrationdate}
+                />
+              </div>
+              <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+                <label htmlFor="dharamshalaname">Student Name</label>
+                <input
+                  disabled={true}
+                  style={{ width: "100%", marginTop: "0.2rem" }}
+                  type="textarea"
+                  id="dharamshalaname"
+                  className="forminput_add_user10"
+                  value={studentname}
+                />
+              </div>
+              <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+                <label htmlFor="dharamshalaname">Date of birth</label>
+                <input
+                  disabled={true}
+                  style={{ width: "100%", marginTop: "0.2rem" }}
+                  type="textarea"
+                  id="dharamshalaname"
+                  className="forminput_add_user10"
+                  value={dateofbirth}
+                />
+              </div>
+              <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+                <label htmlFor="dharamshalaname">Gender</label>
+                <input
+                  disabled={true}
+                  style={{ width: "100%", marginTop: "0.2rem" }}
+                  type="textarea"
+                  id="dharamshalaname"
+                  className="forminput_add_user10"
+                  value={Gender}
+                />
+              </div>
+              <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+                <label htmlFor="dharamshalaname">Roll No</label>
+                <input
+                  disabled={true}
+                  style={{ width: "100%", marginTop: "0.2rem" }}
+                  type="textarea"
+                  id="dharamshalaname"
+                  className="forminput_add_user10"
+                  value={rollno}
+                />
+              </div>
 
-            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">Phone No 1</label>
-              <input
-                disabled={true}
-                style={{ width: "100%", marginTop: "0.2rem" }}
-                type="textarea"
-                id="dharamshalaname"
-                className="forminput_add_user10"
-                value={gameversion}
-                name="gameversion"
-                onChange={(e) => setgameversion(e.target.value)}
-              />
-            </div>
+              <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+                <label htmlFor="dharamshalaname">Phone No 1</label>
+                <input
+                  disabled={true}
+                  style={{ width: "100%", marginTop: "0.2rem" }}
+                  type="textarea"
+                  id="dharamshalaname"
+                  className="forminput_add_user10"
+                  value={phoneno1}
+                />
+              </div>
 
-            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">Phone No 2</label>
-              <input
-                disabled={true}
-                style={{ width: "100%", marginTop: "0.2rem" }}
-                type="textarea"
-                id="dharamshalaname"
-                className="forminput_add_user10"
-                value={gameversion}
-                name="gameversion"
-                onChange={(e) => setgameversion(e.target.value)}
-              />
-            </div>
+              <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+                <label htmlFor="dharamshalaname">Phone No 2</label>
+                <input
+                  disabled={true}
+                  style={{ width: "100%", marginTop: "0.2rem" }}
+                  type="textarea"
+                  id="dharamshalaname"
+                  className="forminput_add_user10"
+                  value={phoneno2}
+                />
+              </div>
+              <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+                <label htmlFor="dharamshalaname">Fee</label>
+                <input
+                  disabled={true}
+                  style={{ width: "100%", marginTop: "0.2rem" }}
+                  type="textarea"
+                  id="dharamshalaname"
+                  className="forminput_add_user10"
+                  value={fee}
+                />
+              </div>
 
-            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">Course</label>
-              <input
-                disabled={true}
-                style={{ width: "100%", marginTop: "0.2rem" }}
-                type="textarea"
-                id="dharamshalaname"
-                className="forminput_add_user10"
-                value={gameversion}
-                name="gameversion"
-                onChange={(e) => setgameversion(e.target.value)}
-              />
-            </div>
-          </form>
+              <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+                <label htmlFor="dharamshalaname">Course</label>
+                <input
+                  disabled={true}
+                  style={{ width: "100%", marginTop: "0.2rem" }}
+                  type="textarea"
+                  id="dharamshalaname"
+                  className="forminput_add_user10"
+                  value={course}
+                />
+              </div>
+              <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+                <label htmlFor="dharamshalaname">Payment Status</label>
+                <input
+                  disabled={true}
+                  style={{ width: "100%", marginTop: "0.2rem" }}
+                  type="textarea"
+                  id="dharamshalaname"
+                  className="forminput_add_user10"
+                  value={
+                    paymentstatus === 1 ? "Payment Successfull" : "Payment Fail"
+                  }
+                />
+              </div>
+              <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+                <label htmlFor="dharamshalaname">Transaction Id</label>
+                <input
+                  disabled={true}
+                  style={{ width: "100%", marginTop: "0.2rem" }}
+                  type="textarea"
+                  id="dharamshalaname"
+                  className="forminput_add_user10"
+                  value={transcationid}
+                />
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </>

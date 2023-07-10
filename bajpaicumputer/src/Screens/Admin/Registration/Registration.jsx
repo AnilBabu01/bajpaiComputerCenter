@@ -73,7 +73,7 @@ export default function Registration({ setshowadmin }) {
   const handleClose5 = () => setOpen3(false);
   const handleClose4 = () => {
     setOpen3(false);
-    serverInstance("newgame", "delete", {
+    serverInstance("registration", "delete", {
       id: deleteId,
     }).then((res) => {
       if (res?.status) {
@@ -167,13 +167,13 @@ export default function Registration({ setshowadmin }) {
                   <td>{item?.phoneno1}</td>
                   <td>
                     <img
-                      onClick={() => handleOpen2()}
+                      onClick={() => handleOpen2(item)}
                       style={{ width: "25px", marginRight: "1rem" }}
                       src={eye}
                       alt="aaa"
                     />
                     <img
-                      // onClick={() => handleClickOpen3(row?.id)}
+                      onClick={() => handleClickOpen3(item?.id)}
                       style={{ width: "25px" }}
                       src={Delete}
                       alt="aaa"

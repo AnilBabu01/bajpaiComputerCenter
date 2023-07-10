@@ -18,14 +18,6 @@ const Createregistration = async (req, res) => {
       },
     });
     if (isregistration) {
-      removefile(
-        `public/upload/${req.files.passportsizephoto[0].originalname.substring(
-          7
-        )}`
-      );
-      removefile(
-        `public/upload/${req.files.aasharcard[0].originalname.substring(7)}`
-      );
       return respHandler.error(res, {
         status: false,
         msg: "You Have Allready Registered for certificate!!",
@@ -80,7 +72,7 @@ const Createregistration = async (req, res) => {
           fee: fee,
           paymentstatus: paymentstatus,
           rollno: rollno,
-          partportphoto: `images/${req.files.passportsizephoto[0].originalname}`,
+          passportsizephoto: `images/${req.files.passportsizephoto[0].originalname}`,
           aadharcard: `images/${req.files.aadharcard[0].originalname}`,
         });
 
@@ -135,7 +127,7 @@ const Deleteregistration = async (req, res) => {
     if (registration) {
       if (
         removefile(
-          `public/upload/${registration?.partportphoto.substring(7)}`
+          `public/upload/${registration?.passportsizephoto.substring(7)}`
         ) &&
         removefile(`public/upload/${registration?.aadharcard.substring(7)}`)
       ) {

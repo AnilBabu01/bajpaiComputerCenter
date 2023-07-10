@@ -63,6 +63,10 @@ const Registration = sequelize.define("registration", {
     type: DataTypes.STRING,
     defaultValue: true,
   },
+  transactionid: {
+    type: DataTypes.STRING,
+    defaultValue: true,
+  },
 });
 
 module.exports = Registration;
