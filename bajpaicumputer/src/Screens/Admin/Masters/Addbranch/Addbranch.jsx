@@ -58,11 +58,11 @@ export default function Addbranch({ setshowadmin }) {
   const handleClose2 = React.useCallback(() => setOpen2(false), []);
 
   const getgame = () => {
-    // serverInstance("newgame", "get").then((res) => {
-    //   if (res?.status) {
-    //     setisData(res?.data[0]);
-    //   }
-    // });
+    serverInstance("branch", "get").then((res) => {
+      if (res?.status) {
+        setisData(res?.data[0]);
+      }
+    });
   };
 
   const [deleteId, setdeleteId] = useState("");
@@ -75,7 +75,7 @@ export default function Addbranch({ setshowadmin }) {
   const handleClose5 = () => setOpen3(false);
   const handleClose4 = () => {
     setOpen3(false);
-    serverInstance("newgame", "delete", {
+    serverInstance("branch", "delete", {
       id: deleteId,
     }).then((res) => {
       if (res?.status) {
@@ -180,24 +180,29 @@ export default function Addbranch({ setshowadmin }) {
             <th>Branch Name</th>
             <th>Action</th>
           </tr>
-          <tr>
-            <td>7505</td>
-            <td>
-              <img
-                onClick={() => handleOpen1()}
-                style={{ width: "25px", marginRight: "1rem" }}
-                src={Edit}
-                alt="aaa"
-              />
+          {isData &&
+            isData.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td>{item?.branchname}</td>
+                  <td>
+                    <img
+                      onClick={() => handleOpen1(item)}
+                      style={{ width: "25px", marginRight: "1rem" }}
+                      src={Edit}
+                      alt="aaa"
+                    />
 
-              <img
-                // onClick={() => handleClickOpen3(row?.id)}
-                style={{ width: "25px" }}
-                src={Delete}
-                alt="aaa"
-              />
-            </td>
-          </tr>
+                    <img
+                      onClick={() => handleClickOpen3(item?.id)}
+                      style={{ width: "25px" }}
+                      src={Delete}
+                      alt="aaa"
+                    />
+                  </td>
+                </tr>
+              );
+            })}
         </table>
       </div>
     </>

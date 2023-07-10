@@ -68,24 +68,22 @@ const Getcertificate = async (req, res) => {
 };
 
 const updatecertificate = async (req, res) => {
-  let { id, rollno, fullname, certificateimg } = req.body;
+  let { id, rollno, fullname, cerimg } = req.body;
 
   try {
     let certificate = await Certificate.findOne({
       where: {
-        id: id,
+        id: req.body.id,
       },
     });
     if (
       removefile(`public/upload/${certificate?.certificateimg.substring(7)}`)
     ) {
-      let status = await Course.update(
+      let status = await Certificate.update(
         {
           fullname: fullname,
           rollno: rollno,
-          certificateimg: req.file
-            ? `images/${req.file.filename}`
-            : certificateimg,
+          certificateimg: req.file ? `images/${req.file.filename}` : cerimg,
         },
         {
           where: {

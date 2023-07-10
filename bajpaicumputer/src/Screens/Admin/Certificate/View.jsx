@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { backendApiUrl, backendUrl } from "../../../config/config";
 function View({ setOpen, updatedata }) {
   const [fullname, setfullname] = useState("");
-
   const [rollno, setrollno] = useState("");
-
   const [previewprofile1, setpreviewprofile1] = useState("");
   useEffect(() => {
     if (updatedata) {

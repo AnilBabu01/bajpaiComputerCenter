@@ -7,31 +7,21 @@ import CircularProgress from "@mui/material/CircularProgress";
 const formData = new FormData();
 
 function Addform({ setOpen }) {
-  const [gamename, setgamename] = useState("");
-  const [gameversion, setgameversion] = useState("");
-  const [gamedownloads, setgamedownloads] = useState("");
-  const [gamebonus, setgamebonus] = useState("");
-  const [gameurl, setgameurl] = useState("");
-  const [img1, setimg1] = useState("");
-  const [previewprofile1, setpreviewprofile1] = useState("");
+  const [branch, setbranch] = useState("");
   const [showloader, setshowloader] = useState(false);
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
       ////
       setshowloader(true);
-      formData.set("gamename", gamename);
-      formData.set("gameversion", gameversion);
-      formData.set("gamedownload", gamedownloads);
-      formData.set("gamebonus", gamebonus);
-      formData.set("downloadurl", gameurl);
-      formData.set("gameimg", img1);
 
       axios.defaults.headers.post[
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
 
-      const res = await axios.post(`${backendApiUrl}newgame`, formData);
+      const res = await axios.post(`${backendApiUrl}branch`, {
+        branchname: branch,
+      });
 
       if (res?.status) {
         setOpen(false);
@@ -60,9 +50,9 @@ function Addform({ setOpen }) {
                 id="dharamshalaname"
                 placeholder="Enter the Brnach Name"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={branch}
+                name="branch"
+                onChange={(e) => setbranch(e.target.value)}
               />
             </div>
 

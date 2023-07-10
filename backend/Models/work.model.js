@@ -19,6 +19,10 @@ const Works = sequelize.define("work", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  projecturl: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 });
 
 module.exports = Works;

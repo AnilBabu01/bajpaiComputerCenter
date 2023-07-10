@@ -8,7 +8,6 @@ const formData = new FormData();
 function UpdateCertificate({ setOpen, updatedata }) {
   const [fullname, setfullname] = useState("");
   const [rollno, setrollno] = useState("");
-  const [gamename, setgamename] = useState("");
   const [img1, setimg1] = useState("");
   const [previewprofile1, setpreviewprofile1] = useState("");
   const [showloader, setshowloader] = useState(false);
@@ -16,11 +15,10 @@ function UpdateCertificate({ setOpen, updatedata }) {
     e.preventDefault();
     try {
       setshowloader(true);
-
+      formData.set("id", updatedata?.id);
       formData.set("fullname", fullname);
       formData.set("rollno", rollno);
-      formData.set("cerimg", img1);
-      formData.set("certificateimg", img1 ? img1 : updatedata?.certificateimg);
+      formData.set("cerimg", img1 ? img1 : updatedata?.certificateimg);
       axios.defaults.headers.post[
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;

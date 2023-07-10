@@ -14,32 +14,6 @@ function View({ setOpen, updatedata }) {
   const [img1, setimg1] = useState("");
   const [previewprofile1, setpreviewprofile1] = useState("");
   const [showloader, setshowloader] = useState(false);
-  const handlesubmit = async (e) => {
-    e.preventDefault();
-    try {
-      setshowloader(true);
-      formData.set("id", updatedata?.id);
-      formData.set("gamename", gamename);
-      formData.set("gameversion", gameversion);
-      formData.set("gamedownload", gamedownloads);
-      formData.set("gamebonus", gamebonus);
-      formData.set("downloadurl", gameurl);
-      formData.set("gameimg", img1 ? img1 : updatedata?.gameimg);
-      axios.defaults.headers.post[
-        "Authorization"
-      ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
-
-      const res = await axios.put(`${backendApiUrl}populargame`, formData);
-
-      if (res?.data?.status) {
-        setOpen(false);
-        setshowloader(false);
-        Swal.fire("Great!", res?.data?.msg, "success");
-      }
-    } catch (error) {
-      Swal.fire("Error!", error, "error");
-    }
-  };
 
   useEffect(() => {
     if (updatedata) {
@@ -55,7 +29,7 @@ function View({ setOpen, updatedata }) {
     <>
       <div className="cash-donation-div">
         <div className="cash-donation-container-innser">
-          <form onSubmit={handlesubmit}>
+          <form>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
               <label htmlFor="dharamshalaname">Project Name</label>
               <input

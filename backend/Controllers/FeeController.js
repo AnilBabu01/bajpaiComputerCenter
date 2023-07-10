@@ -15,7 +15,7 @@ const Createfee = async (req, res) => {
         return respHandler.success(res, {
           status: true,
           data: [fee],
-          msg: "New Enquiry Successfully!!",
+          msg: "New Fee Successfully!!",
         });
       }
     } catch (err) {
@@ -60,7 +60,7 @@ const updateefee = async (req, res) => {
       },
       {
         where: {
-          id: id,
+          id: req.body.id,
         },
       }
     );
@@ -68,7 +68,7 @@ const updateefee = async (req, res) => {
     if (status) {
       let fee = await Fee.findOne({
         where: {
-          id: id,
+          id: req.body.id,
         },
       });
       return respHandler.success(res, {

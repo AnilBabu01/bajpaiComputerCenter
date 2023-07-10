@@ -1,35 +1,25 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import { backendApiUrl, backendUrl } from "../../../../config/config";
+import { backendApiUrl } from "../../../../config/config";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
-const formData = new FormData();
 
 function Updatebranch({ setOpen, updatedata }) {
-  const [gamename, setgamename] = useState("");
-  const [gameversion, setgameversion] = useState("");
-  const [gamedownloads, setgamedownloads] = useState("");
-  const [gamebonus, setgamebonus] = useState("");
-  const [gameurl, setgameurl] = useState("");
-  const [img1, setimg1] = useState("");
-  const [previewprofile1, setpreviewprofile1] = useState("");
+  const [branch, setbranch] = useState("");
   const [showloader, setshowloader] = useState(false);
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
       setshowloader(true);
-      formData.set("id", updatedata?.id);
-      formData.set("gamename", gamename);
-      formData.set("gameversion", gameversion);
-      formData.set("gamedownload", gamedownloads);
-      formData.set("gamebonus", gamebonus);
-      formData.set("downloadurl", gameurl);
-      formData.set("gameimg", img1 ? img1 : updatedata?.gameimg);
+
       axios.defaults.headers.post[
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
 
-      const res = await axios.put(`${backendApiUrl}newgame`, formData);
+      const res = await axios.put(`${backendApiUrl}branch`, {
+        id: updatedata?.id,
+        branchname: branch,
+      });
 
       if (res?.data?.status) {
         setOpen(false);
@@ -43,11 +33,7 @@ function Updatebranch({ setOpen, updatedata }) {
 
   useEffect(() => {
     if (updatedata) {
-      setgamename(updatedata?.gamename);
-      setgameversion(updatedata?.gameversion);
-      setgamedownloads(updatedata?.gamedownload);
-      setgameurl(updatedata?.downloadurl);
-      setgamebonus(updatedata?.gamebonus);
+      setbranch(updatedata?.branchname);
     }
   }, []);
 
@@ -68,9 +54,9 @@ function Updatebranch({ setOpen, updatedata }) {
                 id="dharamshalaname"
                 placeholder="enter the Brnach Name"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={branch}
+                name="branch"
+                onChange={(e) => setbranch(e.target.value)}
               />
             </div>
 

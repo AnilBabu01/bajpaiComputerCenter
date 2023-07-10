@@ -8,11 +8,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 const formData = new FormData();
 
 function Addform({ setOpen }) {
-  const [gamename, setgamename] = useState("");
-  const [gameversion, setgameversion] = useState("");
-  const [gamedownloads, setgamedownloads] = useState("");
-  const [gamebonus, setgamebonus] = useState("");
-  const [gameurl, setgameurl] = useState("");
+  const [projectname, setprojectname] = useState("");
+  const [projectdescription, setprojectdescription] = useState("");
+  const [projecturl, setprojecturl] = useState("");
   const [img1, setimg1] = useState("");
   const [previewprofile1, setpreviewprofile1] = useState("");
   const [showloader, setshowloader] = useState(false);
@@ -21,18 +19,15 @@ function Addform({ setOpen }) {
     try {
       ////
       setshowloader(true);
-      formData.set("gamename", gamename);
-      formData.set("gameversion", gameversion);
-      formData.set("gamedownload", gamedownloads);
-      formData.set("gamebonus", gamebonus);
-      formData.set("downloadurl", gameurl);
-      formData.set("gameimg", img1);
-
+      formData.set("projectname", projectname);
+      formData.set("projectscription", projectdescription);
+      formData.set("workimg", img1);
+      formData.set("projecturl", projecturl);
       axios.defaults.headers.post[
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
 
-      const res = await axios.post(`${backendApiUrl}newgame`, formData);
+      const res = await axios.post(`${backendApiUrl}work`, formData);
 
       if (res?.status) {
         setOpen(false);
@@ -61,9 +56,9 @@ function Addform({ setOpen }) {
                 id="dharamshalaname"
                 placeholder="enter the Course Name"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={projectname}
+                name="projectname"
+                onChange={(e) => setprojectname(e.target.value)}
               />
             </div>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
@@ -78,9 +73,9 @@ function Addform({ setOpen }) {
                 id="dharamshalaname"
                 placeholder="enter the Course Description"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={projectdescription}
+                name="projectdescription"
+                onChange={(e) => setprojectdescription(e.target.value)}
               />
             </div>
 
@@ -96,9 +91,9 @@ function Addform({ setOpen }) {
                 id="dharamshalaname"
                 placeholder="enter the Project Url"
                 className="forminput_add_user10"
-                value={gamename}
-                name="gamename"
-                onChange={(e) => setgamename(e.target.value)}
+                value={projecturl}
+                name="projecturl"
+                onChange={(e) => setprojecturl(e.target.value)}
               />
             </div>
 

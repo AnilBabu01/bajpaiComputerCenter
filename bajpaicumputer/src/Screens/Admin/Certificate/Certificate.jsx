@@ -76,7 +76,7 @@ export default function Certificate({ setshowadmin }) {
   const handleClose5 = () => setOpen3(false);
   const handleClose4 = () => {
     setOpen3(false);
-    serverInstance("newgame", "delete", {
+    serverInstance("certificate", "delete", {
       id: deleteId,
     }).then((res) => {
       if (res?.status) {

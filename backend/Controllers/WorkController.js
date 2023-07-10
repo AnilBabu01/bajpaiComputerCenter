@@ -5,10 +5,16 @@ const respHandler = require("../Handlers");
 config();
 
 const Creatework = async (req, res) => {
-  let { projectname, projectscription } = req.body;
-  if (req.file != "" || projectname != "" || projectscription != "") {
+  let { projectname, projectscription, projecturl } = req.body;
+  if (
+    req.file != "" ||
+    projectname != "" ||
+    projectscription != "" ||
+    projecturl != ""
+  ) {
     try {
       let work = await Work.create({
+        projecturl: projecturl,
         projectname: projectname,
         projectscription: projectscription,
         projectimg: `images/${req.file.filename}`,
@@ -54,7 +60,7 @@ const Getworks = async (req, res) => {
 };
 
 const updatework = async (req, res) => {
-  let { id, projectname, projectscription } = req.body;
+  let { id, projectname, projectscription, projecturl } = req.body;
 
   try {
     let work = await Work.findOne({
@@ -65,6 +71,7 @@ const updatework = async (req, res) => {
     if (removefile(`public/upload/${work?.projectimg.substring(7)}`)) {
       let status = await Work.update(
         {
+          projecturl: projecturl,
           projectname: projectname,
           projectscription: projectscription,
           projectimg: `images/${req.file.filename}`,

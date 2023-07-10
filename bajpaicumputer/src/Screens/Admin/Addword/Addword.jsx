@@ -57,11 +57,11 @@ export default function Addword({ setshowadmin }) {
   const handleClose2 = React.useCallback(() => setOpen2(false), []);
 
   const getgame = () => {
-    // serverInstance("newgame", "get").then((res) => {
-    //   if (res?.status) {
-    //     setisData(res?.data[0]);
-    //   }
-    // });
+    serverInstance("work", "get").then((res) => {
+      if (res?.status) {
+        setisData(res?.data[0]);
+      }
+    });
   };
 
   const [deleteId, setdeleteId] = useState("");
@@ -199,54 +199,35 @@ export default function Addword({ setshowadmin }) {
             <th>Project Name</th>
             <th>Action</th>
           </tr>
-          <tr>
-            <td>S.No</td>
-            <td>Course Name</td>
-            <td>
-              <img
-                onClick={() => handleOpen1()}
-                style={{ width: "25px", marginRight: "1rem" }}
-                src={Edit}
-                alt="aaa"
-              />
-              <img
-                onClick={() => handleOpen2()}
-                style={{ width: "25px", marginRight: "1rem" }}
-                src={eye}
-                alt="aaa"
-              />
-              <img
-                // onClick={() => handleClickOpen3(row?.id)}
-                style={{ width: "25px" }}
-                src={Delete}
-                alt="aaa"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>S.No</td>
-            <td>Course Name</td>
-            <td>
-              <img
-                onClick={() => handleOpen1()}
-                style={{ width: "25px", marginRight: "1rem" }}
-                src={Edit}
-                alt="aaa"
-              />
-              <img
-                onClick={() => handleOpen2()}
-                style={{ width: "25px", marginRight: "1rem" }}
-                src={eye}
-                alt="aaa"
-              />
-              <img
-                // onClick={() => handleClickOpen3(row?.id)}
-                style={{ width: "25px" }}
-                src={Delete}
-                alt="aaa"
-              />
-            </td>
-          </tr>
+          {isData &&
+            isData.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item?.projectname}</td>
+                  <td>
+                    <img
+                      onClick={() => handleOpen1(item)}
+                      style={{ width: "25px", marginRight: "1rem" }}
+                      src={Edit}
+                      alt="aaa"
+                    />
+                    <img
+                      onClick={() => handleOpen2(item)}
+                      style={{ width: "25px", marginRight: "1rem" }}
+                      src={eye}
+                      alt="aaa"
+                    />
+                    <img
+                      onClick={() => handleClickOpen3(item?.id)}
+                      style={{ width: "25px" }}
+                      src={Delete}
+                      alt="aaa"
+                    />
+                  </td>
+                </tr>
+              );
+            })}
         </table>
       </div>
     </>
