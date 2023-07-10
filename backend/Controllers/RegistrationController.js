@@ -36,6 +36,7 @@ const Createregistration = async (req, res) => {
       fee,
       paymentstatus,
       rollno,
+      date,
     } = req.body;
 
     if (!req.files.passportsizephoto || !req.files.aadharcard) {
@@ -60,7 +61,7 @@ const Createregistration = async (req, res) => {
     ) {
       try {
         let registration = await Registration.create({
-          date: new Date(),
+          date: date,
           firstname: firstname,
           lastname: lastname,
           gender: gender,
@@ -159,8 +160,48 @@ const Deleteregistration = async (req, res) => {
   }
 };
 
+const SearchRegistration = async (req, res) => {
+  try {
+    const { date, rollno } = req.body;
+    let whereClause = {};
+    let searchdate = new Date(date);
+    if (date) {
+      whereClause.date = searchdate;
+    }
+
+    if (rollno) {
+      whereClause.rollno = rollno;
+    }
+
+    let registration = await Registration.findAll({
+      where: whereClause,
+    });
+
+    console.log(registration);
+    if (registration.length != 0) {
+      return respHandler.success(res, {
+        status: true,
+        data: [registration],
+        msg: "Search Successfully!!",
+      });
+    } else {
+      return respHandler.error(res, {
+        status: false,
+        msg: "Not Found!!",
+      });
+    }
+  } catch (err) {
+    return respHandler.error(res, {
+      status: false,
+      msg: "Something Went Wrong!!",
+      error: [err.message],
+    });
+  }
+};
+
 module.exports = {
   Createregistration,
   Getregistration,
   Deleteregistration,
+  SearchRegistration,
 };

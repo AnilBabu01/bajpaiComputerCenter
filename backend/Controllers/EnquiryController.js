@@ -2,6 +2,7 @@ const { config } = require("dotenv");
 const Enquiry = require("../Models/enquiry.model");
 const removefile = require("../Middleware/removefile");
 const respHandler = require("../Handlers");
+const { date } = require("joi");
 config();
 
 const Createenquiry = async (req, res) => {
@@ -14,6 +15,7 @@ const Createenquiry = async (req, res) => {
     phoneno1,
     phoneno2,
     coursename,
+    date,
   } = req.body;
   if (
     firstname != "" ||
@@ -23,11 +25,12 @@ const Createenquiry = async (req, res) => {
     dateofbirth != "" ||
     phoneno1 != "" ||
     phoneno2 != "" ||
-    coursename != ""
+    coursename != "" ||
+    date != ""
   ) {
     try {
       let enquiry = await Enquiry.create({
-        date: new Date(),
+        date: date,
         firstname: firstname,
         lastname: lastname,
         gender: gender,
@@ -161,9 +164,45 @@ const Deleteenquiry = async (req, res) => {
   }
 };
 
+const Searchenquiry = async (req, res) => {
+  try {
+    const { date } = req.body;
+    let whereClause = {};
+    let searchdate = new Date(date);
+    if (date) {
+      whereClause.date = searchdate;
+    }
+    console.log(date);
+    let enquiry = await Enquiry.findAll({
+      where: whereClause,
+    });
+
+    console.log(enquiry);
+    if (enquiry.length != 0) {
+      return respHandler.success(res, {
+        status: true,
+        data: [enquiry],
+        msg: "Search Successfully!!",
+      });
+    } else {
+      return respHandler.error(res, {
+        status: false,
+        msg: "Not Found!!",
+      });
+    }
+  } catch (err) {
+    return respHandler.error(res, {
+      status: false,
+      msg: "Something Went Wrong!!",
+      error: [err.message],
+    });
+  }
+};
+
 module.exports = {
   Createenquiry,
   updateenquiry,
   Getenquiry,
   Deleteenquiry,
+  Searchenquiry,
 };

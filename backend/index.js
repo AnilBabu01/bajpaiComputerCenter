@@ -15,6 +15,8 @@ const Registration = require("./Routes/Registration");
 const Student = require("./Routes/student");
 const Certificate = require("./Routes/Certificate");
 const Gallery = require("./Routes/Gallery");
+const EnquiryFilter = require("./Routes/Enquiry/datefilter");
+const SearchRegistration = require("./Routes/Registration/datafilter");
 // to run migrations run command - --------  npm run migrate ---------------------
 
 app.use(cors());
@@ -40,6 +42,8 @@ app.use("/api", Registration);
 app.use("/api", Student);
 app.use("/api", Certificate);
 app.use("/api", Gallery);
+app.use("/api", EnquiryFilter);
+app.use("/api", SearchRegistration);
 app.use("*", (req, res) => {
   return res.status(404).json({
     status: false,

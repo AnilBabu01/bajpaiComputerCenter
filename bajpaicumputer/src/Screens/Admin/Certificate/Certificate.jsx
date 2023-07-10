@@ -193,9 +193,9 @@ export default function Certificate({ setshowadmin }) {
         <div className="main_add_btnn_div_enquriy">
           <h2 style={{ marginLeft: "3rem" }}>Certificate details</h2>
           <div className="Export_data_div10">
-            <input type="text" placeholder="Search By roll No" />
+            {/* <input type="text" placeholder="Search By roll No" />
             <input type="date" />
-            <button onClick={() => handleOpen()}>Search</button>
+            <button onClick={() => handleOpen()}>Search</button> */}
             <button onClick={() => handleOpen()}>Add</button>
             <div className="Export_data_divimg_icon">
               <img className="Export_data_divimg" src={ExportExcel} alt="hdf" />

@@ -18,7 +18,11 @@ function ImgAdminCard({ data, getslider }) {
   return (
     <>
       <div className="main_admin_img">
-        <img src={`${backendUrl}${data?.imgurl} `} alt="dd" />
+        <img
+          className="main_admin_img_img"
+          src={`${backendUrl}${data?.imgurl} `}
+          alt="dd"
+        />
         <img
           onClick={() => deletesliderimg()}
           className="main_admin_img_img10"
