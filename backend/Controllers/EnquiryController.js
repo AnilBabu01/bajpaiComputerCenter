@@ -93,6 +93,7 @@ const updateenquiry = async (req, res) => {
     phoneno1,
     phoneno2,
     coursename,
+    branch,
   } = req.body;
 
   try {
@@ -106,6 +107,7 @@ const updateenquiry = async (req, res) => {
         phoneno1: phoneno1,
         phoneno2: phoneno2,
         coursename: coursename,
+        branch: branch,
       },
       {
         where: {
@@ -168,13 +170,15 @@ const Deleteenquiry = async (req, res) => {
 
 const Searchenquiry = async (req, res) => {
   try {
-    const { date } = req.body;
+    const { date, branch } = req.body;
     let whereClause = {};
     let searchdate = new Date(date);
     if (date) {
       whereClause.date = searchdate;
     }
-    console.log(date);
+    if (branch) {
+      whereClause.branch = branch;
+    }
     let enquiry = await Enquiry.findAll({
       where: whereClause,
     });

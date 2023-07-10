@@ -4,7 +4,16 @@ const respHandler = require("../Handlers");
 config();
 
 const Createstudent = async (req, res) => {
-  let { fullname, gender, address, phoneno1, rollno, coursename } = req.body;
+  let {
+    fullname,
+    gender,
+    address,
+    phoneno1,
+    rollno,
+    coursename,
+    branch,
+    fathersname,
+  } = req.body;
 
   let student = await Student.findOne({
     where: {
@@ -23,7 +32,9 @@ const Createstudent = async (req, res) => {
     phoneno1 != "" ||
     coursename != "" ||
     fullname != "" ||
-    rollno != ""
+    rollno != "" ||
+    fathersname != "" ||
+    branch != ""
   ) {
     try {
       let student = await Student.create({
@@ -33,6 +44,8 @@ const Createstudent = async (req, res) => {
         phoneno1: phoneno1,
         rollno: rollno,
         coursename: coursename,
+        fathersname: fathersname,
+        branch: branch,
       });
 
       if (student) {
@@ -75,8 +88,17 @@ const Getstudents = async (req, res) => {
 };
 
 const updatestudent = async (req, res) => {
-  let { id, fullname, gender, address, phoneno1, rollno, coursename } =
-    req.body;
+  let {
+    id,
+    fullname,
+    gender,
+    address,
+    phoneno1,
+    rollno,
+    coursename,
+    branch,
+    fathersname,
+  } = req.body;
 
   try {
     let status = await Student.update(
@@ -87,7 +109,10 @@ const updatestudent = async (req, res) => {
         phoneno1: phoneno1,
         rollno: rollno,
         coursename: coursename,
+        branch: branch,
+        fathersname: fathersname,
       },
+
       {
         where: {
           id: id,
@@ -147,9 +172,49 @@ const Deletestudent = async (req, res) => {
   }
 };
 
+const SearchStudent = async (req, res) => {
+  try {
+    const { date, rollno, branch } = req.body;
+    let whereClause = {};
+    let searchdate = new Date(date);
+    if (date) {
+      whereClause.date = searchdate;
+    }
+
+    if (rollno) {
+      whereClause.rollno = rollno;
+    }
+    if (branch) {
+      whereClause.branch = branch;
+    }
+    let students = await Student.findAll({
+      where: whereClause,
+    });
+
+    if (students.length != 0) {
+      return respHandler.success(res, {
+        status: true,
+        data: [students],
+        msg: "Search Successfully!!",
+      });
+    } else {
+      return respHandler.error(res, {
+        status: false,
+        msg: "Not Found!!",
+      });
+    }
+  } catch (err) {
+    return respHandler.error(res, {
+      status: false,
+      msg: "Something Went Wrong!!",
+      error: [err.message],
+    });
+  }
+};
 module.exports = {
   Createstudent,
   updatestudent,
   Getstudents,
   Deletestudent,
+  SearchStudent,
 };

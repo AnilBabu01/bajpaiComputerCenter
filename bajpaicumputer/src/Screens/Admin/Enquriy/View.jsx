@@ -106,6 +106,17 @@ function View({ setOpen, updatedata }) {
                 value={course}
               />
             </div>
+            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+              <label htmlFor="dharamshalaname">Branch Name</label>
+              <input
+                disabled={true}
+                style={{ width: "100%", marginTop: "0.2rem" }}
+                type="textarea"
+                id="dharamshalaname"
+                className="forminput_add_user10"
+                value={updatedata?.branch}
+              />
+            </div>
           </form>
         </div>
       </div>

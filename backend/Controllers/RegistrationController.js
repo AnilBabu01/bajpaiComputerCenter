@@ -164,7 +164,7 @@ const Deleteregistration = async (req, res) => {
 
 const SearchRegistration = async (req, res) => {
   try {
-    const { date, rollno } = req.body;
+    const { date, rollno, branch } = req.body;
     let whereClause = {};
     let searchdate = new Date(date);
     if (date) {
@@ -174,7 +174,9 @@ const SearchRegistration = async (req, res) => {
     if (rollno) {
       whereClause.rollno = rollno;
     }
-
+    if (branch) {
+      whereClause.branch = branch;
+    }
     let registration = await Registration.findAll({
       where: whereClause,
     });

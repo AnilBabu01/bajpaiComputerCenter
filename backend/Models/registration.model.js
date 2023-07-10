@@ -61,7 +61,7 @@ const Registration = sequelize.define("registration", {
     allowNull: true,
   },
   branch: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: true,
   },
   paymentstatus: {

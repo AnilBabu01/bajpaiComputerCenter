@@ -3,21 +3,24 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import CloseIcon from "@mui/icons-material/Close";
-import View from "./View";
 import { serverInstance } from "../../../API/ServerInstance";
 import Swal from "sweetalert2";
 import Delete from "../../../assets/Delete.png";
 import eye from "../../../assets/eye.png";
+import Edit from "../../../assets/Edit.png";
 import ExportExcel from "../../../assets/ExportExcel.png";
 import ExportPdf from "../../../assets/ExportPdf.png";
+import Addform from "./Addform";
+import Updatebranch from "./Updatestudent";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import LoadingSpinner1 from "../../../components/LoadingSpinner1";
 import { Button } from "@mui/material";
-import "./Enquriy.css";
+import View from "./View";
+import LoadingSpinner1 from "../../../components/LoadingSpinner1";
+
 const style2 = {
   position: "absolute",
   top: "50%",
@@ -29,14 +32,30 @@ const style2 = {
   boxShadow: 24,
   borderRadius: "5px",
 };
-export default function Enquriy({ setshowadmin }) {
-  const [showloader, setshowloader] = useState(false);
+export default function Addstudent({ setshowadmin }) {
   const [isData, setisData] = useState("");
-  const [date, setdate] = useState("");
+  const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [updatedata, setupdatedata] = useState("");
   const [branchname, setbranchname] = useState("");
   const [branch, setbranch] = useState("");
+  const [showloader, setshowloader] = useState(false);
+  const [date, setdate] = useState("");
+  const [rollno, setrollno] = useState("");
+  const handleOpen = async () => {
+    setOpen(true);
+  };
+
+  const handleClose = React.useCallback(() => setOpen(false), []);
+
+  const handleOpen1 = async (data) => {
+    setOpen1(true);
+    setupdatedata(data);
+  };
+
+  const handleClose1 = React.useCallback(() => setOpen1(false), []);
+
   const handleOpen2 = async (data) => {
     setOpen2(true);
     setupdatedata(data);
@@ -46,27 +65,11 @@ export default function Enquriy({ setshowadmin }) {
 
   const getgame = () => {
     try {
-      setdate("");
-      setbranch("");
       setshowloader(true);
-      serverInstance("enquriy", "get").then((res) => {
+      serverInstance("student", "get").then((res) => {
         if (res?.status) {
-          setshowloader(false);
           setisData(res?.data[0]);
-        }
-      });
-    } catch (error) {
-      setshowloader(false);
-    }
-  };
-
-  const getbranch = () => {
-    try {
-      setshowloader(true);
-      serverInstance("branch", "get").then((res) => {
-        if (res?.status) {
           setshowloader(false);
-          setbranchname(res?.data[0]);
         }
       });
     } catch (error) {
@@ -84,7 +87,7 @@ export default function Enquriy({ setshowadmin }) {
   const handleClose5 = () => setOpen3(false);
   const handleClose4 = () => {
     setOpen3(false);
-    serverInstance("enquriy", "delete", {
+    serverInstance("student", "delete", {
       id: deleteId,
     }).then((res) => {
       if (res?.status) {
@@ -93,18 +96,19 @@ export default function Enquriy({ setshowadmin }) {
       }
     });
   };
-
   const filter = () => {
     try {
       setshowloader(true);
-      serverInstance("search", "post", {
+      serverInstance("/searchstudent", "post", {
         date: date,
+        rollno: rollno,
         branch: branch,
       }).then((res) => {
         if (res?.status) {
           setshowloader(false);
           setisData(res?.data[0]);
         }
+
         if (res?.status === false) {
           setshowloader(false);
         }
@@ -113,12 +117,24 @@ export default function Enquriy({ setshowadmin }) {
       setshowadmin(false);
     }
   };
-
+  const getbranch = () => {
+    try {
+      setshowloader(true);
+      serverInstance("branch", "get").then((res) => {
+        if (res?.status) {
+          setshowloader(false);
+          setbranchname(res?.data[0]);
+        }
+      });
+    } catch (error) {
+      setshowloader(false);
+    }
+  };
   useEffect(() => {
     getbranch();
     getgame();
-    setshowadmin(true);
-  }, [open2]);
+    // setshowadmin(true);
+  }, [open, open1, open2]);
 
   return (
     <>
@@ -143,7 +159,30 @@ export default function Enquriy({ setshowadmin }) {
           </Button>
         </DialogActions>
       </Dialog>
-
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+      >
+        <Fade in={open}>
+          <Box sx={style2}>
+            <div>
+              <div className="add-div-close-div10">
+                <h2 style={{ textAlign: "center", marginLeft: "24%" }}>
+                  Add Student
+                </h2>
+                <CloseIcon
+                  style={{ marginTop: "2%", marginLeft: "13%" }}
+                  onClick={() => handleClose()}
+                />
+              </div>
+              <Addform setOpen={setOpen} />
+            </div>
+          </Box>
+        </Fade>
+      </Modal>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -156,7 +195,7 @@ export default function Enquriy({ setshowadmin }) {
             <div>
               <div className="add-div-close-div10">
                 <h2 style={{ textAlign: "center", marginLeft: "24%" }}>
-                  Enquriy Details
+                  Certificate Details
                 </h2>
                 <CloseIcon
                   style={{ marginTop: "2%", marginLeft: "13%" }}
@@ -169,14 +208,37 @@ export default function Enquriy({ setshowadmin }) {
         </Fade>
       </Modal>
 
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open1}
+        onClose={handleClose1}
+        closeAfterTransition
+      >
+        <Fade in={open1}>
+          <Box sx={style2}>
+            <div>
+              <div className="add-div-close-div10">
+                <h2 style={{ textAlign: "center", marginLeft: "24%" }}>
+                  Update Student
+                </h2>
+                <CloseIcon
+                  style={{ marginTop: "2%", marginLeft: "13%" }}
+                  onClick={() => handleClose1()}
+                />
+              </div>
+              <Updatebranch setOpen={setOpen1} updatedata={updatedata} />
+            </div>
+          </Box>
+        </Fade>
+      </Modal>
+
       <div className="main_slider">
         <div className="main_add_btnn_div_enquriy">
-          <h2 style={{ marginLeft: "3rem" }}>
-            Received Registration for certificate
-          </h2>
+          <h2 style={{ marginLeft: "3rem" }}>Registrations</h2>
           <div className="Export_data_div10">
             <select onChange={(e) => setbranch(e.target.value)}>
-              <option>Select branch</option>
+              <option>branch</option>
               {branchname &&
                 branchname?.map((item, index) => {
                   return (
@@ -186,6 +248,13 @@ export default function Enquriy({ setshowadmin }) {
                   );
                 })}
             </select>
+            <input
+              type="text"
+              placeholder="Search By Roll No"
+              value={rollno}
+              name="rollno"
+              onChange={(e) => setrollno(e.target.value)}
+            />
             <input
               type="date"
               value={date}
@@ -200,25 +269,34 @@ export default function Enquriy({ setshowadmin }) {
             </div>
           </div>
         </div>
+
         <table>
           <tr>
-            <th>Name</th>
-            <th>Phone No</th>
+            <th>Student name</th>
+            <th>Roll No</th>
             <th>Action</th>
           </tr>
           {isData &&
             isData.map((item, index) => {
               return (
                 <tr key={index}>
-                  <td>{item?.firstname}</td>
-                  <td>{item?.phoneno1}</td>
+                  <td>{item?.fullname}</td>
+                  <td>{item?.rollno}</td>
                   <td>
+                    <img
+                      onClick={() => handleOpen1(item)}
+                      style={{ width: "25px", marginRight: "1rem" }}
+                      src={Edit}
+                      alt="aaa"
+                    />
+
                     <img
                       onClick={() => handleOpen2(item)}
                       style={{ width: "25px", marginRight: "1rem" }}
                       src={eye}
                       alt="aaa"
                     />
+
                     <img
                       onClick={() => handleClickOpen3(item?.id)}
                       style={{ width: "25px" }}

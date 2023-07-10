@@ -138,6 +138,17 @@ function View({ setOpen, updatedata }) {
                 />
               </div>
               <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+                <label htmlFor="dharamshalaname">Branch Name</label>
+                <input
+                  disabled={true}
+                  style={{ width: "100%", marginTop: "0.2rem" }}
+                  type="textarea"
+                  id="dharamshalaname"
+                  className="forminput_add_user10"
+                  value={updatedata?.branch}
+                />
+              </div>
+              <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
                 <label htmlFor="dharamshalaname">Payment Status</label>
                 <input
                   disabled={true}

@@ -31,6 +31,14 @@ const Student = sequelize.define("student", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  fathersname: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  branch: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 });
 
 module.exports = Student;

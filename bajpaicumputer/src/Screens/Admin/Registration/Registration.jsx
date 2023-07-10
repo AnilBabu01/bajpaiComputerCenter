@@ -38,19 +38,8 @@ export default function Registration({ setshowadmin }) {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [updatedata, setupdatedata] = useState("");
-
-  const handleOpen = async () => {
-    setOpen(true);
-  };
-
-  const handleClose = React.useCallback(() => setOpen(false), []);
-
-  const handleOpen1 = async (data) => {
-    setOpen1(true);
-    setupdatedata(data);
-  };
-
-  const handleClose1 = React.useCallback(() => setOpen1(false), []);
+  const [branchname, setbranchname] = useState("");
+  const [branch, setbranch] = useState("");
 
   const handleOpen2 = async (data) => {
     setOpen2(true);
@@ -86,13 +75,26 @@ export default function Registration({ setshowadmin }) {
       }
     });
   };
-
+  const getbranch = () => {
+    try {
+      setshowloader(true);
+      serverInstance("branch", "get").then((res) => {
+        if (res?.status) {
+          setshowloader(false);
+          setbranchname(res?.data[0]);
+        }
+      });
+    } catch (error) {
+      setshowloader(false);
+    }
+  };
   const filter = () => {
     try {
       setshowloader(true);
       serverInstance("searchregiatration", "post", {
         date: date,
         rollno: rollno,
+        branch: branch,
       }).then((res) => {
         if (res?.status) {
           setshowloader(false);
@@ -108,6 +110,7 @@ export default function Registration({ setshowadmin }) {
     }
   };
   useEffect(() => {
+    getbranch();
     getgame();
     setshowadmin(true);
   }, [open, open1, open2]);
@@ -163,10 +166,19 @@ export default function Registration({ setshowadmin }) {
 
       <div className="main_slider">
         <div className="main_add_btnn_div_enquriy">
-          <h2 style={{ marginLeft: "3rem" }}>
-            Received Registration for certificate
-          </h2>
+          <h2 style={{ marginLeft: "3rem" }}>Registrations</h2>
           <div className="Export_data_div10">
+            <select onChange={(e) => setbranch(e.target.value)}>
+              <option>branch</option>
+              {branchname &&
+                branchname?.map((item, index) => {
+                  return (
+                    <option key={index} value={item?.branchname}>
+                      {item?.branchname}
+                    </option>
+                  );
+                })}
+            </select>
             <input
               type="text"
               placeholder="Search By Roll No"

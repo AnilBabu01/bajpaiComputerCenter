@@ -61,7 +61,7 @@ function Sidebar() {
                 className={({ isActive }) =>
                   isActive ? "active-nav-link" : "nav-link"
                 }
-                to="/admin/AddCourse"
+                to="/admin/Addstudent"
               >
                 <CallMadeIcon />
                 <span className="linkspan">Add Student</span>

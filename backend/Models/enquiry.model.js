@@ -44,8 +44,8 @@ const Enquiry = sequelize.define("enquiry", {
     allowNull: false,
   },
   branch: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
+    type: DataTypes.STRING,
+    allowNull: true,
   },
 });
 
