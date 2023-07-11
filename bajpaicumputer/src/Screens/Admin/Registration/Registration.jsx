@@ -169,7 +169,7 @@ export default function Registration({ setshowadmin }) {
           <h2 style={{ marginLeft: "3rem" }}>Registrations</h2>
           <div className="Export_data_div10">
             <select onChange={(e) => setbranch(e.target.value)}>
-              <option>branch</option>
+              <option value={""}>All branch</option>
               {branchname &&
                 branchname?.map((item, index) => {
                   return (

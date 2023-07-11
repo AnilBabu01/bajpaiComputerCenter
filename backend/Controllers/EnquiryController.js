@@ -11,7 +11,6 @@ const Createenquiry = async (req, res) => {
     lastname,
     gender,
     address,
-    dateofbirth,
     phoneno1,
     phoneno2,
     coursename,
@@ -23,7 +22,6 @@ const Createenquiry = async (req, res) => {
     lastname != "" ||
     gender != "" ||
     address != "" ||
-    dateofbirth != "" ||
     phoneno1 != "" ||
     phoneno2 != "" ||
     coursename != "" ||
@@ -37,7 +35,6 @@ const Createenquiry = async (req, res) => {
         lastname: lastname,
         gender: gender,
         address: address,
-        dateofbirth: dateofbirth,
         phoneno1: phoneno1,
         phoneno2: phoneno2,
         coursename: coursename,
@@ -47,7 +44,7 @@ const Createenquiry = async (req, res) => {
         return respHandler.success(res, {
           status: true,
           data: [enquiry],
-          msg: "New Enquiry Successfully!!",
+          msg: " Enquiry Submitted Successfully!!",
         });
       }
     } catch (err) {
@@ -89,7 +86,6 @@ const updateenquiry = async (req, res) => {
     lastname,
     gender,
     address,
-    dateofbirth,
     phoneno1,
     phoneno2,
     coursename,
@@ -103,7 +99,6 @@ const updateenquiry = async (req, res) => {
         lastname: lastname,
         gender: gender,
         address: address,
-        dateofbirth: dateofbirth,
         phoneno1: phoneno1,
         phoneno2: phoneno2,
         coursename: coursename,

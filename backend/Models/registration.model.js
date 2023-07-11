@@ -60,6 +60,10 @@ const Registration = sequelize.define("registration", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  fathersname: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   branch: {
     type: DataTypes.STRING,
     allowNull: true,

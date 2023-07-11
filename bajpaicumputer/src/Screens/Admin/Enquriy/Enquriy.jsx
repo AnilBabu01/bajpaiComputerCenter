@@ -17,6 +17,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import LoadingSpinner1 from "../../../components/LoadingSpinner1";
 import { Button } from "@mui/material";
+import Moment from "moment-js";
 import "./Enquriy.css";
 const style2 = {
   position: "absolute",
@@ -98,7 +99,7 @@ export default function Enquriy({ setshowadmin }) {
     try {
       setshowloader(true);
       serverInstance("search", "post", {
-        date: "2023-04-11",
+        date: date ? Moment(date).format("yyyy-MM-dd") : "",
         branch: branch,
       }).then((res) => {
         if (res?.status) {
@@ -171,12 +172,10 @@ export default function Enquriy({ setshowadmin }) {
 
       <div className="main_slider">
         <div className="main_add_btnn_div_enquriy">
-          <h2 style={{ marginLeft: "3rem" }}>
-            Received Registration for certificate
-          </h2>
+          <h2 style={{ marginLeft: "3rem" }}>Enquriy Details</h2>
           <div className="Export_data_div10">
             <select onChange={(e) => setbranch(e.target.value)}>
-              <option>Select branch</option>
+              <option value={""}>All branch</option>
               {branchname &&
                 branchname?.map((item, index) => {
                   return (

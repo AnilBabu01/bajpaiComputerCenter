@@ -4,6 +4,9 @@ import { backendApiUrl } from "../../../config/config";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import { serverInstance } from "../../../API/ServerInstance";
+import Moment from "moment-js";
+// import moment from "moment";
+// moment(item?.time, 'HH:mm:ss').format('hh:mm:ss')
 
 const genders = [
   { id: 1, type: "Female" },
@@ -11,7 +14,6 @@ const genders = [
 ];
 function Addform({ setOpen }) {
   const [firstname, setfirstname] = useState("");
-  const [lastname, setlastname] = useState("");
   const [branchname, setbranchname] = useState("");
   const [branch, setbranch] = useState("");
   const [courses, setcourses] = useState("");
@@ -32,14 +34,13 @@ function Addform({ setOpen }) {
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
 
       const res = await axios.post(`${backendApiUrl}enquriy`, {
-        date: "2023-07-11",
+        date: Moment(Date()).format("yyyy-MM-dd"),
         firstname: firstname,
-        lastname: lastname,
+        lastname: "",
         gender: gender,
         address: address,
-        dateofbirth: "2023-04-01T00:00:00.000Z",
         phoneno1: phoneno,
-        phoneno2: "9152833144",
+        phoneno2: "",
         coursename: coursename,
         branch: branch,
       });
@@ -59,11 +60,7 @@ function Addform({ setOpen }) {
     } catch (error) {
       setOpen(false);
       setshowloader(false);
-      Swal.fire(
-        "Error!",
-        "With this roll no student allready added!!",
-        "error"
-      );
+      Swal.fire("Error!", "Something Went wrong!!", "error");
     }
   };
 
@@ -106,7 +103,7 @@ function Addform({ setOpen }) {
         <div className="cash-donation-container-innser">
           <form onSubmit={handlesubmit}>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">First Name</label>
+              <label htmlFor="dharamshalaname">Full Name</label>
               <input
                 type="text"
                 id="dharamshalaname"
@@ -117,7 +114,7 @@ function Addform({ setOpen }) {
                 onChange={(e) => setfirstname(e.target.value)}
               />
             </div>
-            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+            {/* <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
               <label htmlFor="dharamshalaname">Last Name</label>
               <input
                 type="text"
@@ -128,7 +125,7 @@ function Addform({ setOpen }) {
                 name="lastname"
                 onChange={(e) => setlastname(e.target.value)}
               />
-            </div>
+            </div> */}
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
               <label htmlFor="dharamshalaname">Gender</label>
               <select
@@ -190,6 +187,7 @@ function Addform({ setOpen }) {
                 onChange={(e) => setphoneno(e.target.value)}
               />
             </div>
+
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
               <label htmlFor="dharamshalaname">Address</label>
               <input
@@ -233,7 +231,7 @@ function Addform({ setOpen }) {
                     }}
                   />
                 ) : (
-                  "Submit Enquiry"
+                  "Submit  Enquiry"
                 )}
               </button>
               {/* <button

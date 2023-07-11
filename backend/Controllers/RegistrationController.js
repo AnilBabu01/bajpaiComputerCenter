@@ -37,6 +37,7 @@ const Createregistration = async (req, res) => {
       paymentstatus,
       rollno,
       date,
+      fathersname,
       branch,
     } = req.body;
 
@@ -58,7 +59,8 @@ const Createregistration = async (req, res) => {
       coursename != "" ||
       fee != "" ||
       paymentstatus != "" ||
-      rollno != ""
+      rollno != "" ||
+      fathersname != ""
     ) {
       try {
         let registration = await Registration.create({
@@ -75,6 +77,7 @@ const Createregistration = async (req, res) => {
           fee: fee,
           paymentstatus: paymentstatus,
           rollno: rollno,
+          fathersname: fathersname,
           passportsizephoto: `images/${req.files.passportsizephoto[0].originalname}`,
           aadharcard: `images/${req.files.aadharcard[0].originalname}`,
         });

@@ -27,18 +27,12 @@ const Enquiry = sequelize.define("enquiry", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  dateofbirth: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
+
   phoneno1: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  phoneno2: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
+
   coursename: {
     type: DataTypes.STRING,
     allowNull: false,

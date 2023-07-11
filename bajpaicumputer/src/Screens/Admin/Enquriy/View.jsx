@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-
-function View({ setOpen, updatedata }) {
+import Moment from "moment-js";
+// import moment from "moment";
+// moment(item?.time, 'HH:mm:ss').format('hh:mm:ss')
+function View({ updatedata }) {
   const [enquriydate, setenquriydate] = useState("");
   const [studentname, setstudentname] = useState("");
   const [course, setcourse] = useState("");
@@ -34,7 +36,7 @@ function View({ setOpen, updatedata }) {
                 type="textarea"
                 id="dharamshalaname"
                 className="forminput_add_user10"
-                value={enquriydate}
+                value={Moment(enquriydate).format("DD-MM-YYYY")}
               />
             </div>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
@@ -48,7 +50,7 @@ function View({ setOpen, updatedata }) {
                 value={studentname}
               />
             </div>
-            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+            {/* <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
               <label htmlFor="dharamshalaname">Date of birth</label>
               <input
                 disabled={true}
@@ -58,7 +60,7 @@ function View({ setOpen, updatedata }) {
                 className="forminput_add_user10"
                 value={dateofbirth}
               />
-            </div>
+            </div> */}
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
               <label htmlFor="dharamshalaname">Gender</label>
               <input
@@ -83,7 +85,7 @@ function View({ setOpen, updatedata }) {
               />
             </div>
 
-            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+            {/* <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
               <label htmlFor="dharamshalaname">Phone No 2</label>
               <input
                 disabled={true}
@@ -93,7 +95,7 @@ function View({ setOpen, updatedata }) {
                 className="forminput_add_user10"
                 value={phoneno2}
               />
-            </div>
+            </div> */}
 
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
               <label htmlFor="dharamshalaname">Course</label>
