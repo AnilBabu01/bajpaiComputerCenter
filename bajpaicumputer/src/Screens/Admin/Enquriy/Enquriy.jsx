@@ -98,7 +98,7 @@ export default function Enquriy({ setshowadmin }) {
     try {
       setshowloader(true);
       serverInstance("search", "post", {
-        date: date,
+        date: "2023-04-11",
         branch: branch,
       }).then((res) => {
         if (res?.status) {

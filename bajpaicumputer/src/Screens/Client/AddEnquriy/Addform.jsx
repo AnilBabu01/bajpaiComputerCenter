@@ -4,19 +4,18 @@ import { backendApiUrl } from "../../../config/config";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import { serverInstance } from "../../../API/ServerInstance";
-const formData = new FormData();
 
 const genders = [
   { id: 1, type: "Female" },
   { id: 2, type: "Mele" },
 ];
 function Addform({ setOpen }) {
+  const [firstname, setfirstname] = useState("");
+  const [lastname, setlastname] = useState("");
   const [branchname, setbranchname] = useState("");
   const [branch, setbranch] = useState("");
   const [courses, setcourses] = useState("");
   const [coursename, setcoursename] = useState("");
-  const [name, setname] = useState("");
-  const [rollno, setrollno] = useState("");
   const [address, setaddress] = useState("");
   const [fathersname, setfathersname] = useState("");
   const [gender, setgender] = useState("");
@@ -32,15 +31,17 @@ function Addform({ setOpen }) {
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
 
-      const res = await axios.post(`${backendApiUrl}student`, {
-        fullname: name,
+      const res = await axios.post(`${backendApiUrl}enquriy`, {
+        date: "2023-07-11",
+        firstname: firstname,
+        lastname: lastname,
         gender: gender,
         address: address,
+        dateofbirth: "2023-04-01T00:00:00.000Z",
         phoneno1: phoneno,
+        phoneno2: "9152833144",
         coursename: coursename,
-        rollno: rollno,
         branch: branch,
-        fathersname: fathersname,
       });
 
       if (res?.status) {
@@ -105,15 +106,27 @@ function Addform({ setOpen }) {
         <div className="cash-donation-container-innser">
           <form onSubmit={handlesubmit}>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-              <label htmlFor="dharamshalaname">FullName</label>
+              <label htmlFor="dharamshalaname">First Name</label>
               <input
                 type="text"
                 id="dharamshalaname"
                 placeholder="Enter the Student Name"
                 className="forminput_add_user10"
-                value={name}
-                name="name"
-                onChange={(e) => setname(e.target.value)}
+                value={firstname}
+                name="firstname"
+                onChange={(e) => setfirstname(e.target.value)}
+              />
+            </div>
+            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+              <label htmlFor="dharamshalaname">Last Name</label>
+              <input
+                type="text"
+                id="dharamshalaname"
+                placeholder="Enter the Student Name"
+                className="forminput_add_user10"
+                value={lastname}
+                name="lastname"
+                onChange={(e) => setlastname(e.target.value)}
               />
             </div>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
@@ -210,7 +223,7 @@ function Addform({ setOpen }) {
             </div>
 
             <div className="save-div-btn">
-              <button className="save-div-btn-btn">
+              <button className="save-div-btn-btn" style={{ width: "100%" }}>
                 {showloader ? (
                   <CircularProgress
                     style={{
@@ -220,15 +233,15 @@ function Addform({ setOpen }) {
                     }}
                   />
                 ) : (
-                  "Save"
+                  "Submit Enquiry"
                 )}
               </button>
-              <button
+              {/* <button
                 onClick={() => setOpen(false)}
                 className="save-div-btn-btn-cancel"
               >
                 Cancel
-              </button>
+              </button> */}
             </div>
           </form>
         </div>

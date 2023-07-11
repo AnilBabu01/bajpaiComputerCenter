@@ -40,8 +40,14 @@ function App() {
           <Box sx={style2}>
             <div>
               <div className="add-div-close-div10">
-                <h2 style={{ textAlign: "center", marginLeft: "24%" }}>
-                  Welcome
+                <h2
+                  style={{
+                    textAlign: "center",
+                    marginLeft: "24%",
+                    fontSize: "17px",
+                  }}
+                >
+                  Thanks for choose
                 </h2>
                 <CloseIcon
                   style={{ marginTop: "2%", marginLeft: "13%" }}

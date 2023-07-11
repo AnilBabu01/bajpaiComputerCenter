@@ -170,24 +170,30 @@ const Deleteenquiry = async (req, res) => {
 
 const Searchenquiry = async (req, res) => {
   try {
-    const { date, branch } = req.body;
+    const { date, rollno, branch } = req.body;
     let whereClause = {};
     let searchdate = new Date(date);
+
+    console.log(new Date(date));
     if (date) {
       whereClause.date = searchdate;
+    }
+
+    if (rollno) {
+      whereClause.rollno = rollno;
     }
     if (branch) {
       whereClause.branch = branch;
     }
-    let enquiry = await Enquiry.findAll({
+    let registration = await Enquiry.findAll({
       where: whereClause,
     });
 
-    console.log(enquiry);
-    if (enquiry.length != 0) {
+    console.log(registration);
+    if (registration.length != 0) {
       return respHandler.success(res, {
         status: true,
-        data: [enquiry],
+        data: [registration],
         msg: "Search Successfully!!",
       });
     } else {
