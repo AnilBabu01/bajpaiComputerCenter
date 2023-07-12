@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import camera from "../../../assets/camera.png";
 import Swal from "sweetalert2";
 import { backendApiUrl } from "../../../config/config";
 import axios from "axios";
@@ -27,14 +26,15 @@ function Addform({ setOpen }) {
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
 
       const res = await axios.post(`${backendApiUrl}certificate`, formData);
-
       if (res?.status) {
         setOpen(false);
         setshowloader(false);
         Swal.fire("Great!", res?.data?.msg, "success");
       }
     } catch (error) {
-      Swal.fire("Error!", error, "error");
+      setOpen(false);
+      setshowloader(false);
+      Swal.fire("Error!", error?.response?.data?.msg, "error");
     }
   };
 
@@ -77,8 +77,25 @@ function Addform({ setOpen }) {
                 onChange={(e) => setrollno(e.target.value)}
               />
             </div>
+            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+              <label htmlFor="dharamshalaname">Upload Certificate</label>
+              <input
+                style={{
+                  width: "100%",
+                  marginTop: "0.5rem",
+                  marginBottom: "0.5rem",
+                }}
+                className="forminput_add_user10"
+                type="file"
+                onChange={(e) => {
+                  setimg1(e.target.files[0]);
 
-            <div
+                  setpreviewprofile1(URL.createObjectURL(e.target.files[0]));
+                }}
+              />
+            </div>
+
+            {/* <div
               style={{
                 display: "flex",
                 justifyContent: "space-around",
@@ -111,7 +128,7 @@ function Addform({ setOpen }) {
                   }}
                 />
               </div>
-            </div>
+            </div> */}
 
             <div className="save-div-btn">
               <button className="save-div-btn-btn">

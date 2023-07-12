@@ -11,6 +11,12 @@ const Createregistration = async (req, res) => {
       rollno: req.body.rollno,
     },
   });
+  if (!student) {
+    return respHandler.error(res, {
+      status: false,
+      msg: "Please Check Roll No!!",
+    });
+  }
   if (student) {
     let isregistration = await Registration.findOne({
       where: {
@@ -20,7 +26,7 @@ const Createregistration = async (req, res) => {
     if (isregistration) {
       return respHandler.error(res, {
         status: false,
-        msg: "You Have Allready Registered for certificate!!",
+        msg: "You Have Already Registered!!",
       });
     }
 

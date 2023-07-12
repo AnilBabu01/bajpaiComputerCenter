@@ -19,7 +19,7 @@ const Certificate = sequelize.define("certificate", {
     type: DataTypes.STRING,
     defaultValue: true,
   },
-  certificateimg: {
+  certificateurl: {
     type: DataTypes.STRING,
     defaultValue: true,
   },

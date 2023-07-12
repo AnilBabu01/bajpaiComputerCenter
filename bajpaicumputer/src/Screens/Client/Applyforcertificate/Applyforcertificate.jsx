@@ -24,10 +24,8 @@ function Applyforcertificate() {
   const [phoneno2, setphoneno2] = useState("");
   const [courses, setcourses] = useState("");
   const [coursename, setcoursename] = useState("");
-  const [fee, setfee] = useState("");
   const [paymentstatus, setpaymentstatus] = useState("");
   const [transactionid, settransactionid] = useState("");
-  const [first, setfirst] = useState("");
   const [fathersname, setfathersname] = useState("");
   const [aadharcard, setaadharcard] = useState("");
   const [previewprofile1, setpreviewprofile1] = useState("");
@@ -35,47 +33,65 @@ function Applyforcertificate() {
   const [previewprofile2, setpreviewprofile2] = useState("");
   const [branch, setbranch] = useState("");
   const [branchname, setbranchname] = useState("");
+  const formData = new FormData();
+
   const handlesubmit = async (e) => {
     e.preventDefault();
-    try {
-      ////
-      setshowloader(true);
+    if (
+      firstName &&
+      lastname &&
+      branchname &&
+      gender &&
+      address &&
+      coursename &&
+      amount &&
+      rollno &&
+      passport &&
+      aadharcard &&
+      fathersname
+    ) {
+      try {
+        setshowloader(true);
 
-      axios.defaults.headers.post[
-        "Authorization"
-      ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
+        axios.defaults.headers.post[
+          "Authorization"
+        ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
+        formData.set("date", Moment(Date()).format("yyyy-MM-dd"));
+        formData.set("branch", branchname);
+        formData.set("firstname", firstName);
+        formData.set("lastname", lastname);
+        formData.set("gender", gender);
+        formData.set("address", address);
+        formData.set("dateofbirth", Moment(dateofbirth).format("yyyy-MM-dd"));
+        formData.set("phoneno1", phoneno1);
+        formData.set("phoneno2", phoneno2);
+        formData.set("coursename", coursename);
+        formData.set("phoneno2", phoneno2);
+        formData.set("fee", amount);
+        formData.set("paymentstatus", paymentstatus);
+        formData.set("transactionid", transactionid);
+        formData.set("rollno", rollno);
+        formData.set("aadharcard", aadharcard);
+        formData.set("fathersname", fathersname);
+        formData.set("passportsizephoto", passport);
+        const res = await axios.post(`${backendApiUrl}registration`, formData);
 
-      const res = await axios.post(`${backendApiUrl}registration`, {
-        date: Moment(Date()).format("yyyy-MM-dd"),
-        branch: branchname,
-        firstname: firstName,
-        lastname: lastname,
-        gender: gender,
-        address: address,
-        dateofbirth: Moment(dateofbirth).format("yyyy-MM-dd"),
-        phoneno1: phoneno1,
-        phoneno2: phoneno2,
-        coursename: coursename,
-        fee: amount,
-        paymentstatus: paymentstatus,
-        rollno: rollno,
-        passportsizephoto: passport,
-        aadharcard: aadharcard,
-      });
+        if (res?.status) {
+          setshowloader(false);
+          Swal.fire("Great!", res?.data?.msg, "success");
+        }
 
-      if (res?.status) {
+        console.log(res);
+        if (res?.status === false) {
+          setshowloader(false);
+          Swal.fire("Great!", res?.msg, "success");
+        }
+      } catch (error) {
         setshowloader(false);
-        Swal.fire("Great!", res?.data?.msg, "success");
+        Swal.fire("Error!", error?.response?.data?.msg, "error");
       }
-
-      console.log(res);
-      if (res?.status === false) {
-        setshowloader(false);
-        Swal.fire("Great!", res?.msg, "success");
-      }
-    } catch (error) {
-      setshowloader(false);
-      Swal.fire("Error!", "Something Went wrong!!", "error");
+    } else {
+      Swal.fire("Error!", "Please Fill All Details", "error");
     }
   };
   const getbranch = () => {
@@ -83,6 +99,18 @@ function Applyforcertificate() {
       serverInstance("branch", "get").then((res) => {
         if (res?.status) {
           setbranch(res?.data[0]);
+        }
+      });
+    } catch (error) {}
+  };
+
+  const getfee = () => {
+    try {
+      serverInstance("fee", "get").then((res) => {
+        if (res?.status) {
+          setamount(res?.data[0]?.[0]?.fee);
+
+          console.log(res?.data[0]);
         }
       });
     } catch (error) {}
@@ -100,16 +128,18 @@ function Applyforcertificate() {
   useEffect(() => {
     getbranch();
     getcouses();
+    getfee();
   }, []);
 
   return (
     <>
       <div className="Maincontainer">
         <div className="main_apply_div">
-          <h2>Certificate Form</h2>
+          <h2>Registration</h2>
           <form onSubmit={handlesubmit}>
             <div className="multi_input_main">
               <input
+                required
                 className="multi_input"
                 type="text"
                 placeholder="First Name"
@@ -119,15 +149,24 @@ function Applyforcertificate() {
               />
 
               <input
+                required
                 className="multi_input"
                 type="text"
                 placeholder="Last Name"
-                value={address}
-                name="address"
-                onChange={(e) => setaddress(e.target.value)}
+                value={lastname}
+                name="lastname"
+                onChange={(e) => setlastname(e.target.value)}
               />
             </div>
-
+            <input
+              required
+              className="multi_input_full"
+              type="text"
+              placeholder="Father's Name"
+              value={fathersname}
+              name="fathersname"
+              onChange={(e) => setfathersname(e.target.value)}
+            />
             <select
               className="multi_input_full"
               onChange={(e) => setgender(e.target.value)}
@@ -147,6 +186,7 @@ function Applyforcertificate() {
 
             <label className="label_pass">Date of Birth</label>
             <input
+              required
               className="multi_input_full"
               type="date"
               value={dateofbirth}
@@ -154,6 +194,7 @@ function Applyforcertificate() {
               onChange={(e) => setdateofbirth(e.target.value)}
             />
             <input
+              required
               className="multi_input_full"
               type="text"
               placeholder="Address"
@@ -164,6 +205,7 @@ function Applyforcertificate() {
 
             <div className="multi_input_main">
               <input
+                required
                 className="multi_input"
                 type="text"
                 placeholder="Contact No1"
@@ -173,6 +215,7 @@ function Applyforcertificate() {
               />
 
               <input
+                required
                 className="multi_input"
                 type="text"
                 placeholder="Contact No2"
@@ -198,6 +241,7 @@ function Applyforcertificate() {
                 })}
             </select>
             <input
+              required
               className="multi_input_full"
               type="text"
               placeholder="Roll No"
@@ -220,6 +264,8 @@ function Applyforcertificate() {
                 })}
             </select>
             <input
+              required
+              disabled={true}
               className="multi_input_full"
               type="text"
               placeholder="Amount"
@@ -227,13 +273,24 @@ function Applyforcertificate() {
               name="amount"
               onChange={(e) => setamount(e.target.value)}
             />
-            <label className="label_pass">Passport Size Photo</label>
+            <label className="label_pass">Passport Size Photo (120KB)</label>
             <input
               className="multi_input_full"
               type="file"
               onChange={(e) => {
-                setpassport(e.target.files[0]);
-                setpreviewprofile1(URL.createObjectURL(e.target.files[0]));
+                const file = e.target.files[0];
+                const maxFileSize = 1 * 1024 * 1024; // 5 MB in bytes
+
+                if (file && file.size > maxFileSize) {
+                  alert("File size exceeds the limit of 5 MB.");
+                  e.target.value = ""; // Clear the file input
+                  setpassport(e.target.files[0]);
+                  setpreviewprofile1(URL.createObjectURL(e.target.files[0]));
+                  return;
+                } else {
+                  setpassport(file);
+                  setpreviewprofile1(URL.createObjectURL(file));
+                }
               }}
             />
             <div className="multi_input_main">
@@ -242,13 +299,25 @@ function Applyforcertificate() {
               )}
             </div>
 
-            <label className="label_pass">Aadharcard</label>
+            <label className="label_pass">Aadharcard (1 MB)</label>
             <input
+              required
               className="multi_input_full"
               type="file"
               onChange={(e) => {
-                setaadharcard(e.target.files[0]);
-                setpreviewprofile2(URL.createObjectURL(e.target.files[0]));
+                const file = e.target.files[0];
+                const maxFileSize = 1 * 1024 * 1024; // 5 MB in bytes
+
+                if (file && file.size > maxFileSize) {
+                  alert("File size exceeds the limit of 5 MB.");
+                  e.target.value = ""; // Clear the file input
+                  setaadharcard(null);
+                  setpreviewprofile2(URL.createObjectURL(null));
+                  return;
+                } else {
+                  setaadharcard(file);
+                  setpreviewprofile2(URL.createObjectURL(file));
+                }
               }}
             />
 

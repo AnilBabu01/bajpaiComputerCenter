@@ -7,11 +7,19 @@ function CourceCard({ data }) {
   return (
     <>
       <div className="card_main">
-        <img src={`${backendUrl}${data?.courseimg} `} alt="djd" />
+        <img src={`${backendUrl}${data?.courseimg}`} alt="djd" />
         <div className="course_details">
           <h3>{data?.coursename}</h3>
           <p>{data?.courdescription}</p>
-          {/* <button onClick={() => navigate("/apply")}>Now Enquiry</button> */}
+
+          <a
+            href={`${backendUrl}public/upload/${data?.courseimg}`}
+            download="Example-PDF-document"
+            target="_blank"
+            rel="noreferrer"
+          >
+            link
+          </a>
         </div>
       </div>
     </>

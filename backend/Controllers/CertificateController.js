@@ -24,7 +24,7 @@ const Createcertificate = async (req, res) => {
           date: new Date(),
           fullname: fullname,
           rollno: rollno,
-          certificateimg: `images/${req.file.filename}`,
+          certificateurl: `images/${req.file.filename}`,
         });
 
         if (certificate) {
@@ -83,7 +83,7 @@ const updatecertificate = async (req, res) => {
         {
           fullname: fullname,
           rollno: rollno,
-          certificateimg: req.file ? `images/${req.file.filename}` : cerimg,
+          certificateurl: req.file ? `images/${req.file.filename}` : cerimg,
         },
         {
           where: {
@@ -118,7 +118,7 @@ const Deletecertificate = async (req, res) => {
   try {
     let certificate = await Certificate.findOne({ id: req.body.id });
     if (certificate) {
-      removefile(`public/upload/${certificate?.certificateimg.substring(7)}`);
+      removefile(`public/upload/${certificate?.certificateurl.substring(7)}`);
       await Certificate.destroy({
         where: {
           id: certificate.id,
@@ -146,9 +146,17 @@ const Deletecertificate = async (req, res) => {
   }
 };
 
+const DownloadPdf = async (req, res) => {
+  return respHandler.success(res, {
+    status: true,
+    data: [],
+    msg: "Download Pdf Successfully!!",
+  });
+};
 module.exports = {
   Createcertificate,
   Getcertificate,
   updatecertificate,
   Deletecertificate,
+  DownloadPdf,
 };
