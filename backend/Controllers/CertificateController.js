@@ -2,6 +2,8 @@ const { config } = require("dotenv");
 const Certificate = require("../Models/certificate.model");
 const removefile = require("../Middleware/removefile");
 const respHandler = require("../Handlers");
+var download = require("download-pdf");
+var path = require("path");
 config();
 
 const Createcertificate = async (req, res) => {
@@ -147,11 +149,32 @@ const Deletecertificate = async (req, res) => {
 };
 
 const DownloadPdf = async (req, res) => {
-  return respHandler.success(res, {
-    status: true,
-    data: [],
-    msg: "Download Pdf Successfully!!",
-  });
+  try {
+    let Certificates = await Certificate.findAll({
+      where: {
+        rollno: req.body.rollno,
+      },
+    });
+    if (Certificates.length != 0) {
+      return respHandler.success(res, {
+        status: true,
+        data: [Certificates],
+        msg: "All Certificates Fetch Successfully!!",
+      });
+    } else {
+      return respHandler.error(res, {
+        status: false,
+        msg: "Record Not Found!!",
+        error: ["not found"],
+      });
+    }
+  } catch (err) {
+    return respHandler.error(res, {
+      status: false,
+      msg: "Something Went Wrong!!",
+      error: [err.message],
+    });
+  }
 };
 module.exports = {
   Createcertificate,

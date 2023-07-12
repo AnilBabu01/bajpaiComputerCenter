@@ -5,11 +5,13 @@ import { serverInstance } from "../../../API/ServerInstance";
 function AvaialableCources() {
   const [isdata, setisdata] = useState("");
   const getcourses = () => {
-    serverInstance("course", "get").then((res) => {
-      if (res?.status) {
-        setisdata(res?.data[0]);
-      }
-    });
+    try {
+      serverInstance("course", "get").then((res) => {
+        if (res?.status) {
+          setisdata(res?.data[0]);
+        }
+      });
+    } catch (error) {}
   };
   useEffect(() => {
     getcourses();

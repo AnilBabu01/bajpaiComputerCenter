@@ -5,12 +5,15 @@ import { backendUrl } from "../../../config/config";
 import { serverInstance } from "../../../API/ServerInstance";
 function Slider() {
   const [isdata, setisdata] = useState("");
+
   const getslider = () => {
-    serverInstance("uploadslider", "get").then((res) => {
-      if (res?.status) {
-        setisdata(res?.data[0]);
-      }
-    });
+    try {
+      serverInstance("uploadslider", "get").then((res) => {
+        if (res?.status) {
+          setisdata(res?.data[0]);
+        }
+      });
+    } catch (error) {}
   };
   useEffect(() => {
     getslider();

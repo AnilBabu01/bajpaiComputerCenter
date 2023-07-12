@@ -1,32 +1,112 @@
-import React from "react";
+import React, { useState } from "react";
+import { serverInstance } from "../../../API/ServerInstance";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
+import { useNavigate } from "react-router-dom";
+import { backendUrl } from "../../../config/config";
+import Swal from "sweetalert2";
+import "./DownloadCertificate.css";
+const style2 = {
+  position: "absolute",
+  top: "30%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "auto",
+  bgcolor: "background.paper",
+  p: 2,
+  boxShadow: 24,
+  borderRadius: "5px",
+};
 function DownloadCertificate() {
+  const navigate = useNavigate();
+  const [certificate, setcertificate] = useState();
+  const [open, setOpen] = useState(false);
+  const [rollno, setrollno] = useState("");
+
+  const handleOpen = async () => {
+    setOpen(true);
+  };
+  const DownloadCertificate = (e) => {
+    try {
+      e.preventDefault();
+      serverInstance("download", "post", {
+        rollno: rollno,
+      }).then((res) => {
+        if (res?.status) {
+          setcertificate(res?.data[0]);
+          handleOpen();
+        }
+
+        if (res?.status === false) {
+          Swal.fire("Error!", res.msg, "error");
+        }
+      });
+    } catch (error) {
+      Swal.fire("Error!", error?.response?.data?.msg, "error");
+    }
+  };
+
+  const handleClose = React.useCallback(() => setOpen(false), []);
   return (
     <>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+      >
+        <Fade in={open}>
+          <Box sx={style2}>
+            <div>
+              <div className="add-div-close-div10">
+                <h2
+                  style={{
+                    textAlign: "center",
+                    marginLeft: "24%",
+                    fontSize: "17px",
+                  }}
+                >
+                  Download Certificate
+                </h2>
+                <p></p>
+              </div>
+              <div className="main_div_don">
+                <a
+                  className="main_diwnnnnn"
+                  href={`${backendUrl}public/upload/${certificate?.certificateurl}`}
+                  download="Example-PDF-document"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Download
+                </a>
+                <button onClick={() => navigate("/")} className="main_diwnnnnn">
+                  Close
+                </button>
+              </div>
+            </div>
+          </Box>
+        </Fade>
+      </Modal>
       <div className="Maincontainer">
         <div className="main_apply_div">
-          <h2>Details</h2>
-          <div>
-            <div className="multi_input_main">
+          <h2>Certificate Details</h2>
+          <form onSubmit={DownloadCertificate}>
+            <div>
               <input
-                className="multi_input"
+                className="multi_input_full"
                 type="text"
-                placeholder="First Name"
+                placeholder="Roll No"
+                value={rollno}
+                name="rollno"
+                onChange={(e) => setrollno(e.target.value)}
               />
 
-              <input
-                className="multi_input"
-                type="text"
-                placeholder="Last Name"
-              />
+              <button className="query_btn">Submit</button>
             </div>
-            <input
-              className="multi_input_full"
-              type="text"
-              placeholder="Name"
-            />
-
-            <button className="query_btn">Enquiry</button>
-          </div>
+          </form>
         </div>
       </div>
     </>

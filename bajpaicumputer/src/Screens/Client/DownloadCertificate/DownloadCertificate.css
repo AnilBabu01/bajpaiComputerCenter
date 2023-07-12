@@ -1,0 +1,21 @@
+.main_diwnnnnn{
+    background: rgb(28, 130, 173);
+    color: white;
+    border: none;
+    width: 30%;
+    height: 35px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    text-decoration: none;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem
+}
+
+.main_div_don{
+  display: flex;
+  justify-content: space-between;
+}

@@ -5,5 +5,5 @@ const verifyToken = require("../../Middleware/Auth");
 const upload = require("../../Middleware/upload");
 const { Validation } = require("../../Middleware/Validate");
 
-router.route("/download").get(CertificateController.DownloadPdf);
+router.route("/download").post(CertificateController.DownloadPdf);
 module.exports = router;
