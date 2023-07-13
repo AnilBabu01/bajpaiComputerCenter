@@ -22,6 +22,7 @@ import MasterTap from "../Screens/Admin/Masters/MasterTap";
 import Addword from "../Screens/Admin/Addword/Addword";
 import Galleryadmin from "../Screens/Admin/Gellery/Gellery";
 import Addstudent from "../Screens/Admin/AddStudent/Addstudent";
+import Receipt from "../Screens/Client/Applyforcertificate/Receipt";
 export default function MainRoutes({ showadmin, setshowadmin }) {
   return (
     <>
@@ -80,6 +81,11 @@ export default function MainRoutes({ showadmin, setshowadmin }) {
         <Route
           path="/admin/Addstudent"
           element={<Addstudent setshowadmin={setshowadmin} />}
+        />
+
+        <Route
+          path="/admin/Receipt"
+          element={<Receipt setshowadmin={setshowadmin} />}
         />
 
         {/* <Route path="/login" element={<Login setshowadmin={setshowadmin} />} /> */}

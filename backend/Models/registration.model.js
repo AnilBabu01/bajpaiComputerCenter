@@ -70,7 +70,7 @@ const Registration = sequelize.define("registration", {
   },
   paymentstatus: {
     type: DataTypes.BOOLEAN,
-    defaultValue: true,
+    defaultValue: false,
   },
   transactionid: {
     type: DataTypes.STRING,

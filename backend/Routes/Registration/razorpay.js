@@ -4,10 +4,12 @@ const path = require("path");
 const shortid = require("shortid");
 const Razorpay = require("razorpay");
 const httpStatus = require("http-status");
+// key_id	key_secret
+// rzp_test_D9zjF2V5Xy3LDQ	nEXpQuz39VoJjp3YTTQ1yAlK
 
 const razorpay = new Razorpay({
-  key_id: "rzp_test_vDtYuuL3iHbPDn",
-  key_secret: "EgUAkPNwpT5l398uKfYvC5a8",
+  key_id: "rzp_test_D9zjF2V5Xy3LDQ",
+  key_secret: "nEXpQuz39VoJjp3YTTQ1yAlK",
 });
 
 router.get("/logo.svg", (req, res) => {

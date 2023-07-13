@@ -1,8 +1,9 @@
 import { backendApiUrl } from "../config/config";
 
-const apikey = "rzp_test_vDtYuuL3iHbPDn";
+const apikey = "rzp_test_D9zjF2V5Xy3LDQ";
 const secereate = "Rd0Jc7RkBjGGNDcJG53gJ0GB";
-
+// key_id: "rzp_test_D9zjF2V5Xy3LDQ",
+// key_secret: "nEXpQuz39VoJjp3YTTQ1yAlK",
 let responsedata = {};
 function loadScript(src) {
   return new Promise((resolve) => {
@@ -38,7 +39,7 @@ export const displayRazorpay = async ({ ammount, userid }, callback) => {
     order_id: data.id,
     name: "Find My Next Subscribation",
     description: "Thank you for nothing. Please give us some money",
-    image: `https://content.jdmagicbox.com/comp/damoh/e2/9999p7812.7812.200629001645.j6e2/catalogue/kundalpur-digambar-jain-temple-damoh-jain-temples-5jhvdldtbb-250.jpg`,
+    image: `https://www.google.com/imgres?imgurl=https%3A%2F%2Fe7.pngegg.com%2Fpngimages%2F674%2F464%2Fpng-clipart-class-computer-software-computer-lab-school-computer-class-service.png&tbnid=iXFxyTFgobxpZM&vet=12ahUKEwjAwIvf_YqAAxXUoOkKHaKEBvIQMygHegUIARDTAQ..i&imgrefurl=https%3A%2F%2Fwww.pngegg.com%2Fen%2Fpng-tuvjl&docid=nFsW2Bdy_e5hHM&w=900&h=480&q=computer%20course%20photo%20png%20free%20hd&ved=2ahUKEwjAwIvf_YqAAxXUoOkKHaKEBvIQMygHegUIARDTAQ`,
     handler: function (response) {
       callback(response);
     },

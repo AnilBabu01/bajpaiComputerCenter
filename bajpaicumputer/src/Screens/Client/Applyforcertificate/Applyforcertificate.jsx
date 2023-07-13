@@ -6,8 +6,23 @@ import Swal from "sweetalert2";
 import Moment from "moment-js";
 import axios from "axios";
 import { displayRazorpay } from "../../../RazorPay/RazorPay";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
+import CloseIcon from "@mui/icons-material/Close";
+import PaymentSuccessfull from "./PaymentSuccessfull";
 import "./Applyforcertificate.css";
-
+const style2 = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "auto",
+  bgcolor: "background.paper",
+  p: 0,
+  boxShadow: 24,
+  borderRadius: "5px",
+};
 const genders = [
   { id: 1, type: "Female" },
   { id: 2, type: "Mele" },
@@ -25,8 +40,6 @@ function Applyforcertificate() {
   const [phoneno2, setphoneno2] = useState("");
   const [courses, setcourses] = useState("");
   const [coursename, setcoursename] = useState("");
-  const [paymentstatus, setpaymentstatus] = useState(false);
-  const [transactionid, settransactionid] = useState("");
   const [fathersname, setfathersname] = useState("");
   const [aadharcard, setaadharcard] = useState("");
   const [previewprofile1, setpreviewprofile1] = useState("");
@@ -35,7 +48,15 @@ function Applyforcertificate() {
   const [branch, setbranch] = useState("");
   const [branchname, setbranchname] = useState("");
   const formData = new FormData();
+  const [showadmin, setshowadmin] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [resDetails, setresDetails] = useState("");
+  const handleOpen = async (data) => {
+    setresDetails(data);
+    setOpen(true);
+  };
 
+  const handleClose = React.useCallback(() => setOpen(false), []);
   const handlesubmit = async (e) => {
     e.preventDefault();
 
@@ -65,7 +86,6 @@ function Applyforcertificate() {
               (data) => {
                 setshowloader(true);
                 savedatainDb(data.razorpay_order_id);
-                setpaymentstatus(true);
               }
             );
           }
@@ -96,7 +116,7 @@ function Applyforcertificate() {
     formData.set("coursename", coursename);
     formData.set("phoneno2", phoneno2);
     formData.set("fee", amount);
-    formData.set("paymentstatus", paymentstatus);
+    formData.set("paymentstatus", true);
     formData.set("transactionid", transactionid);
     formData.set("rollno", rollno);
     formData.set("aadharcard", aadharcard);
@@ -111,7 +131,10 @@ function Applyforcertificate() {
 
     if (res?.status) {
       setshowloader(false);
-      Swal.fire("Great!", res?.data?.msg, "success");
+      handleOpen(res?.data?.data);
+
+      console.log(res?.data?.data);
+      // Swal.fire("Great!", res?.data?.msg, "success");
     }
   };
   const getbranch = () => {
@@ -153,6 +176,21 @@ function Applyforcertificate() {
 
   return (
     <>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+      >
+        <Fade in={open}>
+          <Box sx={style2}>
+            <div>
+              <PaymentSuccessfull data={resDetails} setOpen={setOpen} />
+            </div>
+          </Box>
+        </Fade>
+      </Modal>
       <div className="Maincontainer">
         <div className="main_apply_div">
           <h2>Registration</h2>
