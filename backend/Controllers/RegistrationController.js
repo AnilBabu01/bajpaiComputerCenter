@@ -45,6 +45,7 @@ const Createregistration = async (req, res) => {
       date,
       fathersname,
       branch,
+      transactionid,
     } = req.body;
 
     if (!req.files.passportsizephoto || !req.files.aadharcard) {
@@ -84,6 +85,7 @@ const Createregistration = async (req, res) => {
           paymentstatus: paymentstatus,
           rollno: rollno,
           fathersname: fathersname,
+          transactionid: transactionid,
           passportsizephoto: `images/${req.files.passportsizephoto[0].originalname}`,
           aadharcard: `images/${req.files.aadharcard[0].originalname}`,
         });
@@ -212,9 +214,47 @@ const SearchRegistration = async (req, res) => {
   }
 };
 
+const Checkrollno = async (req, res) => {
+  console.log(req.body);
+  try {
+    let isregistration;
+    let student = await Student.findOne({
+      where: {
+        rollno: req.body.rollno,
+      },
+    });
+    if (!student) {
+      return respHandler.error(res, {
+        status: false,
+        msg: "Please Check Roll No!!",
+      });
+    }
+    if (student) {
+      isregistration = await Registration.findOne({
+        where: {
+          rollno: req.body.rollno,
+        },
+      });
+      if (isregistration) {
+        return respHandler.error(res, {
+          status: false,
+          msg: "You Have Already Registered!!",
+        });
+      } else {
+        return respHandler.success(res, {
+          status: true,
+          data: [student],
+          msg: "You Can Registration!!",
+        });
+      }
+    }
+  } catch (error) {}
+};
+
 module.exports = {
   Createregistration,
   Getregistration,
   Deleteregistration,
   SearchRegistration,
+  Checkrollno,
 };

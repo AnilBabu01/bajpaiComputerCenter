@@ -5,6 +5,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Swal from "sweetalert2";
 import Moment from "moment-js";
 import axios from "axios";
+import { displayRazorpay } from "../../../RazorPay/RazorPay";
 import "./Applyforcertificate.css";
 
 const genders = [
@@ -24,7 +25,7 @@ function Applyforcertificate() {
   const [phoneno2, setphoneno2] = useState("");
   const [courses, setcourses] = useState("");
   const [coursename, setcoursename] = useState("");
-  const [paymentstatus, setpaymentstatus] = useState("");
+  const [paymentstatus, setpaymentstatus] = useState(false);
   const [transactionid, settransactionid] = useState("");
   const [fathersname, setfathersname] = useState("");
   const [aadharcard, setaadharcard] = useState("");
@@ -37,6 +38,7 @@ function Applyforcertificate() {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
+
     if (
       firstName &&
       lastname &&
@@ -51,47 +53,65 @@ function Applyforcertificate() {
       fathersname
     ) {
       try {
-        setshowloader(true);
-
-        axios.defaults.headers.post[
-          "Authorization"
-        ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
-        formData.set("date", Moment(Date()).format("yyyy-MM-dd"));
-        formData.set("branch", branchname);
-        formData.set("firstname", firstName);
-        formData.set("lastname", lastname);
-        formData.set("gender", gender);
-        formData.set("address", address);
-        formData.set("dateofbirth", Moment(dateofbirth).format("yyyy-MM-dd"));
-        formData.set("phoneno1", phoneno1);
-        formData.set("phoneno2", phoneno2);
-        formData.set("coursename", coursename);
-        formData.set("phoneno2", phoneno2);
-        formData.set("fee", amount);
-        formData.set("paymentstatus", paymentstatus);
-        formData.set("transactionid", transactionid);
-        formData.set("rollno", rollno);
-        formData.set("aadharcard", aadharcard);
-        formData.set("fathersname", fathersname);
-        formData.set("passportsizephoto", passport);
-        const res = await axios.post(`${backendApiUrl}registration`, formData);
-
-        if (res?.status) {
-          setshowloader(false);
-          Swal.fire("Great!", res?.data?.msg, "success");
-        }
-
-        console.log(res);
-        if (res?.status === false) {
-          setshowloader(false);
-          Swal.fire("Great!", res?.msg, "success");
-        }
+        serverInstance("checkrollno", "POST", {
+          rollno: rollno,
+        }).then((res) => {
+          if (res.status) {
+            displayRazorpay(
+              {
+                ammount: amount,
+                userid: 1,
+              },
+              (data) => {
+                setshowloader(true);
+                savedatainDb(data.razorpay_order_id);
+                setpaymentstatus(true);
+              }
+            );
+          }
+          if (res.status === false) {
+            Swal.fire("Error!", res.msg, "error");
+          }
+        });
       } catch (error) {
         setshowloader(false);
         Swal.fire("Error!", error?.response?.data?.msg, "error");
+        console.log(error);
       }
     } else {
       Swal.fire("Error!", "Please Fill All Details", "error");
+    }
+  };
+
+  const savedatainDb = async (transactionid) => {
+    formData.set("date", Moment(Date()).format("yyyy-MM-dd"));
+    formData.set("branch", branchname);
+    formData.set("firstname", firstName);
+    formData.set("lastname", lastname);
+    formData.set("gender", gender);
+    formData.set("address", address);
+    formData.set("dateofbirth", Moment(dateofbirth).format("yyyy-MM-dd"));
+    formData.set("phoneno1", phoneno1);
+    formData.set("phoneno2", phoneno2);
+    formData.set("coursename", coursename);
+    formData.set("phoneno2", phoneno2);
+    formData.set("fee", amount);
+    formData.set("paymentstatus", paymentstatus);
+    formData.set("transactionid", transactionid);
+    formData.set("rollno", rollno);
+    formData.set("aadharcard", aadharcard);
+    formData.set("fathersname", fathersname);
+    formData.set("passportsizephoto", passport);
+
+    axios.defaults.headers.post[
+      "Authorization"
+    ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
+
+    const res = await axios.post(`${backendApiUrl}registration`, formData);
+
+    if (res?.status) {
+      setshowloader(false);
+      Swal.fire("Great!", res?.data?.msg, "success");
     }
   };
   const getbranch = () => {

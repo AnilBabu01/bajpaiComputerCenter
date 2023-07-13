@@ -49,7 +49,7 @@ app.use("/api", EnquiryFilter);
 app.use("/api", SearchRegistration);
 app.use("/api", SearchStudent);
 app.use("/api", Download);
-app.use("/api", Razorpay);
+app.use("/api/payment", Razorpay);
 app.use("*", (req, res) => {
   return res.status(404).json({
     status: false,

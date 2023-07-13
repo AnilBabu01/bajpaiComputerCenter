@@ -10,4 +10,6 @@ router
   .route("/searchregiatration")
   .post(RegistrationController.SearchRegistration);
 
+router.route("/checkrollno").post(RegistrationController.Checkrollno);
+
 module.exports = router;
