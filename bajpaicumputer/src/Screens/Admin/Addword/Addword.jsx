@@ -57,11 +57,15 @@ export default function Addword({ setshowadmin }) {
   const handleClose2 = React.useCallback(() => setOpen2(false), []);
 
   const getgame = () => {
-    serverInstance("work", "get").then((res) => {
-      if (res?.status) {
-        setisData(res?.data[0]);
-      }
-    });
+    try {
+      serverInstance("work", "get").then((res) => {
+        if (res?.status) {
+          setisData(res?.data[0]);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const [deleteId, setdeleteId] = useState("");

@@ -57,11 +57,15 @@ export default function AddCourse({ setshowadmin }) {
   const handleClose2 = React.useCallback(() => setOpen2(false), []);
 
   const getgame = () => {
-    serverInstance("course", "get").then((res) => {
-      if (res?.status) {
-        setisData(res?.data[0]);
-      }
-    });
+    try {
+      serverInstance("course", "get").then((res) => {
+        if (res?.status) {
+          setisData(res?.data[0]);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const [deleteId, setdeleteId] = useState("");

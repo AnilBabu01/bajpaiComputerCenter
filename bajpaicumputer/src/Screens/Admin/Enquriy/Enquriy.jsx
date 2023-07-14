@@ -108,10 +108,11 @@ export default function Enquriy({ setshowadmin }) {
         }
         if (res?.status === false) {
           setshowloader(false);
+          Swal.fire("Error!", res?.msg, "error");
         }
       });
     } catch (error) {
-      setshowadmin(false);
+      setshowloader(true);
     }
   };
 

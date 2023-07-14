@@ -29,11 +29,15 @@ export default function Addslider({ setshowadmin }) {
   const handleClose = React.useCallback(() => setOpen(false), []);
 
   const getslider = () => {
-    serverInstance("uploadslider", "get").then((res) => {
-      if (res?.status) {
-        setisData(res?.data[0]);
-      }
-    });
+    try {
+      serverInstance("uploadslider", "get").then((res) => {
+        if (res?.status) {
+          setisData(res?.data[0]);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

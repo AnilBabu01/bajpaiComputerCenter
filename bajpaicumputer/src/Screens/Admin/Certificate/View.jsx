@@ -39,7 +39,7 @@ function View({ setOpen, updatedata }) {
                 value={rollno}
               />
             </div>
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 justifyContent: "space-around",
@@ -64,7 +64,7 @@ function View({ setOpen, updatedata }) {
                   </div>
                 </>
               )}
-            </div>
+            </div> */}
           </form>
         </div>
       </div>

@@ -11,6 +11,7 @@ function UpdateCertificate({ setOpen, updatedata }) {
   const [img1, setimg1] = useState("");
   const [previewprofile1, setpreviewprofile1] = useState("");
   const [showloader, setshowloader] = useState(false);
+  const [dateofbirth, setdateofbirth] = useState("");
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
@@ -19,6 +20,7 @@ function UpdateCertificate({ setOpen, updatedata }) {
       formData.set("fullname", fullname);
       formData.set("rollno", rollno);
       formData.set("cerimg", img1 ? img1 : updatedata?.certificateimg);
+      formData.set("dateofbirth", dateofbirth);
       axios.defaults.headers.post[
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
@@ -81,8 +83,44 @@ function UpdateCertificate({ setOpen, updatedata }) {
                 onChange={(e) => setrollno(e.target.value)}
               />
             </div>
+            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+              <label htmlFor="dharamshalaname">Date Of Birth</label>
+              <input
+                style={{
+                  width: "100%",
+                  marginTop: "0.5rem",
+                  marginBottom: "0.5rem",
+                }}
+                type="date"
+                id="dharamshalaname"
+                className="forminput_add_user10"
+                value={dateofbirth}
+                name="dateofbirth"
+                onChange={(e) => {
+                  setdateofbirth(e.target.value);
 
-            <div
+                  console.log(e.target.value);
+                }}
+              />
+            </div>
+            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+              <label htmlFor="dharamshalaname">Change Certificate</label>
+              <input
+                style={{
+                  width: "100%",
+                  marginTop: "0.5rem",
+                  marginBottom: "0.5rem",
+                }}
+                className="forminput_add_user10"
+                type="file"
+                onChange={(e) => {
+                  setimg1(e.target.files[0]);
+
+                  setpreviewprofile1(URL.createObjectURL(e.target.files[0]));
+                }}
+              />
+            </div>
+            {/* <div
               style={{
                 display: "flex",
                 justifyContent: "space-around",
@@ -118,7 +156,7 @@ function UpdateCertificate({ setOpen, updatedata }) {
                   }}
                 />
               </div>
-            </div>
+            </div> */}
 
             <div className="save-div-btn">
               <button className="save-div-btn-btn">

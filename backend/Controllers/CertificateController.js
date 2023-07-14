@@ -7,8 +7,8 @@ var path = require("path");
 config();
 
 const Createcertificate = async (req, res) => {
-  let { rollno, fullname } = req.body;
-  if (req.file != "" || fullname != "" || rollno != "") {
+  let { rollno, fullname, dateofbirth } = req.body;
+  if (req.file != "" || fullname != "" || rollno != "" || dateofbirth != "") {
     try {
       let iscer = await Certificate.findOne({
         where: {
@@ -26,6 +26,7 @@ const Createcertificate = async (req, res) => {
           date: new Date(),
           fullname: fullname,
           rollno: rollno,
+          dateofbirth: dateofbirth,
           certificateurl: `images/${req.file.filename}`,
         });
 
@@ -38,6 +39,7 @@ const Createcertificate = async (req, res) => {
         }
       }
     } catch (err) {
+      removefile(`images/${req.file.filename}`);
       return respHandler.error(res, {
         status: false,
         msg: "Something Went Wrong!!",
@@ -45,6 +47,7 @@ const Createcertificate = async (req, res) => {
       });
     }
   } else {
+    removefile(`images/${req.file.filename}`);
     return respHandler.error(res, {
       status: false,
       msg: "All field are required!!",
@@ -70,7 +73,7 @@ const Getcertificate = async (req, res) => {
 };
 
 const updatecertificate = async (req, res) => {
-  let { id, rollno, fullname, cerimg } = req.body;
+  let { id, rollno, fullname, cerimg, dateofbirth } = req.body;
 
   try {
     let certificate = await Certificate.findOne({
@@ -85,6 +88,7 @@ const updatecertificate = async (req, res) => {
         {
           fullname: fullname,
           rollno: rollno,
+          dateofbirth: dateofbirth,
           certificateurl: req.file ? `images/${req.file.filename}` : cerimg,
         },
         {
@@ -108,6 +112,7 @@ const updatecertificate = async (req, res) => {
       }
     }
   } catch (err) {
+    removefile(`images/${req.file.filename}`);
     return respHandler.error(res, {
       status: false,
       msg: "Something Went Wrong!!",
@@ -153,6 +158,7 @@ const DownloadPdf = async (req, res) => {
     let Certificates = await Certificate.findAll({
       where: {
         rollno: req.body.rollno,
+        dateofbirth: req.body.dateofbirth,
       },
     });
     if (Certificates.length != 0) {

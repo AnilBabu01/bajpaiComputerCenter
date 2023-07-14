@@ -235,7 +235,7 @@ export default function Addstudent({ setshowadmin }) {
 
       <div className="main_slider">
         <div className="main_add_btnn_div_enquriy">
-          <h2 style={{ marginLeft: "3rem" }}>Registrations</h2>
+          <h2 style={{ marginLeft: "3rem" }}>Students</h2>
           <div className="Export_data_div10">
             <select onChange={(e) => setbranch(e.target.value)}>
               <option>branch</option>
@@ -263,6 +263,7 @@ export default function Addstudent({ setshowadmin }) {
             />
             <button onClick={() => filter()}>Search</button>
             <button onClick={() => getgame()}>Reset</button>
+            <button onClick={() => handleOpen()}>Add</button>
             <div className="Export_data_divimg_icon">
               <img className="Export_data_divimg" src={ExportExcel} alt="hdf" />
               <img src={ExportPdf} alt="hdf" />

@@ -28,6 +28,7 @@ const Creatework = async (req, res) => {
         });
       }
     } catch (err) {
+      removefile(`images/${req.file.filename}`);
       return respHandler.error(res, {
         status: false,
         msg: "Something Went Wrong!!",
@@ -35,6 +36,7 @@ const Creatework = async (req, res) => {
       });
     }
   } else {
+    removefile(`images/${req.file.filename}`);
     return respHandler.error(res, {
       status: false,
       msg: "All field are required!!",
@@ -97,6 +99,7 @@ const updatework = async (req, res) => {
       }
     }
   } catch (err) {
+    removefile(`images/${req.file.filename}`);
     return respHandler.error(res, {
       status: false,
       msg: "Something Went Wrong!!",

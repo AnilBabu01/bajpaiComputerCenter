@@ -10,6 +10,7 @@ function Addform({ setOpen }) {
   const [fullname, setfullname] = useState("");
   const [rollno, setrollno] = useState("");
   const [img1, setimg1] = useState("");
+  const [dateofbirth, setdateofbirth] = useState("");
   const [previewprofile1, setpreviewprofile1] = useState("");
   const [showloader, setshowloader] = useState(false);
   const handlesubmit = async (e) => {
@@ -20,7 +21,7 @@ function Addform({ setOpen }) {
       formData.set("fullname", fullname);
       formData.set("rollno", rollno);
       formData.set("cerimg", img1);
-
+      formData.set("dateofbirth", dateofbirth);
       axios.defaults.headers.post[
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("tokengame")}`;
@@ -75,6 +76,26 @@ function Addform({ setOpen }) {
                 value={rollno}
                 name="rollno"
                 onChange={(e) => setrollno(e.target.value)}
+              />
+            </div>
+            <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>
+              <label htmlFor="dharamshalaname">Date Of Birth</label>
+              <input
+                style={{
+                  width: "100%",
+                  marginTop: "0.5rem",
+                  marginBottom: "0.5rem",
+                }}
+                type="date"
+                id="dharamshalaname"
+                className="forminput_add_user10"
+                value={dateofbirth}
+                name="dateofbirth"
+                onChange={(e) => {
+                  setdateofbirth(e.target.value);
+
+                  console.log(e.target.value);
+                }}
               />
             </div>
             <div style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}>

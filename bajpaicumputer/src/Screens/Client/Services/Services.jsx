@@ -14,8 +14,8 @@ function Services() {
       <h1>Solutions We Provide</h1>
       <div className="flex_div_courses">
         <ServiceCard title={"Web Design"} img={s4} />
-        <ServiceCard title={"Android Develpoment"} img={s2} />
-        <ServiceCard title={"IOS Develpoment"} img={s1} />
+        <ServiceCard title={"Android Development"} img={s2} />
+        <ServiceCard title={"IOS Development"} img={s1} />
         <ServiceCard title={"Bulk Sms Services"} img={s3} />
         <ServiceCard title={"Consulting Services"} img={s5} />
         <ServiceCard title={"Web Hosting"} img={s6} />

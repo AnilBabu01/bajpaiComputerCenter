@@ -11,6 +11,7 @@ const Works = require("../Models/work.model");
 const Registration = require("../Models/registration.model");
 const Student = require("../Models/student.model");
 const Gallery = require("../Models/gallery.model");
+const Projectenquiry = require("../Models/projectenquiry.model");
 sequelize
   .sync({ alter: true })
   .then(() => {

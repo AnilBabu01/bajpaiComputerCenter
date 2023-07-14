@@ -1,32 +1,37 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../Helper/Connect");
 
-const Certificate = sequelize.define("certificate", {
+const Projectenquiry = sequelize.define("projectenquriy", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  date: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
   fullname: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  rollno: {
+  email: {
     type: DataTypes.STRING,
-    defaultValue: true,
+    allowNull: false,
   },
-  certificateurl: {
+  address: {
     type: DataTypes.STRING,
-    defaultValue: true,
+    allowNull: false,
   },
-  dateofbirth: {
+  phoneno1: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+
+  projecttype: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  bussiness: {
     type: DataTypes.STRING,
     allowNull: false,
   },
 });
 
-module.exports = Certificate;
+module.exports = Projectenquiry;
