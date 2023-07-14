@@ -25,7 +25,7 @@ export default function Login({ setshowadmin }) {
         setshowloader(false);
         localStorage.setItem("tokengame", res?.data?.data[0]?.token);
         Swal.fire("Great!", res?.data?.msg, "success");
-        navigate("/admin");
+        navigate("/dashboard");
       }
     } catch (error) {
       Swal.fire("Error!", error, "error");
@@ -43,7 +43,8 @@ export default function Login({ setshowadmin }) {
                   <label htmlFor="dharamshalaname">Email</label>
                   <input
                     style={{ width: "100%", marginTop: "0.2rem" }}
-                    type="textarea"
+                    type="email"
+                    required
                     id="dharamshalaname"
                     placeholder="Enter the email"
                     className="forminput_add_user10"
@@ -56,7 +57,8 @@ export default function Login({ setshowadmin }) {
                   <label htmlFor="dharamshalaname">Password</label>
                   <input
                     style={{ width: "100%", marginTop: "0.2rem" }}
-                    type="textarea"
+                    type="password"
+                    required
                     id="dharamshalaname"
                     placeholder="Enter the password"
                     className="forminput_add_user10"

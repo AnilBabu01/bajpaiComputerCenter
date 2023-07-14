@@ -3,38 +3,25 @@ const Projectenquiry = require("../Models/projectenquiry.model");
 const respHandler = require("../Handlers");
 config();
 
-const Createstudent = async (req, res) => {
-  let {
-    fullname,
-    gender,
-    address,
-    phoneno1,
-    rollno,
-    coursename,
-    branch,
-    fathersname,
-  } = req.body;
+const CreatesProjectenquiry = async (req, res) => {
+  let { email, address, phoneno1, projecttype, bussiness, fullname } = req.body;
 
   if (
-    gender != "" ||
+    email != "" ||
     address != "" ||
     phoneno1 != "" ||
-    coursename != "" ||
+    projecttype != "" ||
     fullname != "" ||
-    rollno != "" ||
-    fathersname != "" ||
-    branch != ""
+    bussiness != ""
   ) {
     try {
       let projectenquiry = await Projectenquiry.create({
         fullname: fullname,
-        gender: gender,
+        email: email,
         address: address,
         phoneno1: phoneno1,
-        rollno: rollno,
-        coursename: coursename,
-        fathersname: fathersname,
-        branch: branch,
+        projecttype: projecttype,
+        bussiness: bussiness,
       });
 
       if (projectenquiry) {
@@ -59,12 +46,12 @@ const Createstudent = async (req, res) => {
   }
 };
 
-const Getstudents = async (req, res) => {
+const GetProjectenquirs = async (req, res) => {
   try {
     let Projectenquirys = await Projectenquiry.findAll();
     return respHandler.success(res, {
       status: true,
-      data: [],
+      data: [Projectenquirys],
       msg: "All Project Enquiry Fetch Successfully!!",
     });
   } catch (err) {
@@ -76,30 +63,19 @@ const Getstudents = async (req, res) => {
   }
 };
 
-const updatestudent = async (req, res) => {
-  let {
-    id,
-    fullname,
-    gender,
-    address,
-    phoneno1,
-    rollno,
-    coursename,
-    branch,
-    fathersname,
-  } = req.body;
+const updateProjectenquiry = async (req, res) => {
+  let { id, email, address, phoneno1, projecttype, bussiness, fullname } =
+    req.body;
 
   try {
-    let status = await Student.update(
+    let status = await Projectenquiry.update(
       {
         fullname: fullname,
-        gender: gender,
+        email: email,
         address: address,
         phoneno1: phoneno1,
-        rollno: rollno,
-        coursename: coursename,
-        branch: branch,
-        fathersname: fathersname,
+        projecttype: projecttype,
+        bussiness: bussiness,
       },
 
       {
@@ -110,14 +86,14 @@ const updatestudent = async (req, res) => {
     );
 
     if (status) {
-      let student = await Student.findOne({
+      let projectenquiry = await Projectenquiry.findOne({
         where: {
           id: id,
         },
       });
       return respHandler.success(res, {
         status: true,
-        data: [student],
+        data: [projectenquiry],
         msg: "Project Enquiry Updated Successfully!!",
       });
     }
@@ -130,13 +106,13 @@ const updatestudent = async (req, res) => {
   }
 };
 
-const Deletestudent = async (req, res) => {
+const DeleteProjectenquiry = async (req, res) => {
   try {
-    let student = await Student.findOne({ id: req.body.id });
-    if (student) {
-      await Student.destroy({
+    let projectenquiry = await Projectenquiry.findOne({ id: req.body.id });
+    if (projectenquiry) {
+      await Projectenquiry.destroy({
         where: {
-          id: student?.id,
+          id: projectenquiry?.id,
         },
       });
 
@@ -161,29 +137,25 @@ const Deletestudent = async (req, res) => {
   }
 };
 
-const SearchStudent = async (req, res) => {
+const SearchProjectenquiry = async (req, res) => {
   try {
-    const { date, rollno, branch } = req.body;
+    const { projecttype, bussiness } = req.body;
     let whereClause = {};
-    let searchdate = new Date(date);
-    if (date) {
-      whereClause.date = searchdate;
-    }
 
-    if (rollno) {
-      whereClause.rollno = rollno;
+    if (projecttype) {
+      whereClause.projecttype = projecttype;
     }
-    if (branch) {
-      whereClause.branch = branch;
+    if (bussiness) {
+      whereClause.bussiness = bussiness;
     }
-    let students = await Student.findAll({
+    let projectenquiry = await Projectenquiry.findAll({
       where: whereClause,
     });
 
-    if (students.length != 0) {
+    if (projectenquiry.length != 0) {
       return respHandler.success(res, {
         status: true,
-        data: [students],
+        data: [projectenquiry],
         msg: "Search Successfully!!",
       });
     } else {
@@ -201,9 +173,9 @@ const SearchStudent = async (req, res) => {
   }
 };
 module.exports = {
-  Createstudent,
-  updatestudent,
-  Getstudents,
-  Deletestudent,
-  SearchStudent,
+  CreatesProjectenquiry,
+  GetProjectenquirs,
+  updateProjectenquiry,
+  DeleteProjectenquiry,
+  SearchProjectenquiry,
 };

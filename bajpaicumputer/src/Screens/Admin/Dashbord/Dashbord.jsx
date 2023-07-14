@@ -1,8 +1,14 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Dashbord.css";
 function Dashbord({ setshowadmin }) {
+  const navigate = useNavigate();
   useEffect(() => {
     setshowadmin(true);
+    let token = localStorage.getItem("tokengame");
+    if (!token) {
+      navigate("/adminlogin");
+    }
   }, []);
 
   return (

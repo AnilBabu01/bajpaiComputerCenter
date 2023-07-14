@@ -23,6 +23,7 @@ import Addword from "../Screens/Admin/Addword/Addword";
 import Galleryadmin from "../Screens/Admin/Gellery/Gellery";
 import Addstudent from "../Screens/Admin/AddStudent/Addstudent";
 import Receipt from "../Screens/Client/Applyforcertificate/Receipt";
+import AdminLogin from "../Screens/Admin/Auth/Login";
 export default function MainRoutes({ showadmin, setshowadmin }) {
   return (
     <>
@@ -89,6 +90,11 @@ export default function MainRoutes({ showadmin, setshowadmin }) {
         />
 
         {/* <Route path="/login" element={<Login setshowadmin={setshowadmin} />} /> */}
+
+        <Route
+          path="/adminlogin"
+          element={<AdminLogin setshowadmin={setshowadmin} />}
+        />
       </Routes>
       {showadmin ? "" : <Footer />}
     </>

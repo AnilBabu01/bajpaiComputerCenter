@@ -20,6 +20,7 @@ const SearchRegistration = require("./Routes/Registration/datafilter");
 const SearchStudent = require("./Routes/student/searchstudent");
 const Download = require("./Routes/Certificate/Download");
 const Razorpay = require("./Routes/Registration/razorpay");
+const Projectenquiry = require("./Routes/ProjectEnquiry");
 // to run migrations run command - --------  npm run migrate ---------------------
 
 app.use(cors());
@@ -50,6 +51,7 @@ app.use("/api", SearchRegistration);
 app.use("/api", SearchStudent);
 app.use("/api", Download);
 app.use("/api/payment", Razorpay);
+app.use("/api", Projectenquiry);
 app.use("*", (req, res) => {
   return res.status(404).json({
     status: false,
