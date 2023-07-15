@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+// import LineChart from "./LineChart";
+// import Barchart from "./Barchart";
+// import PieChart from "./PieChart";
 import "./Dashbord.css";
 function Dashbord({ setshowadmin }) {
   const navigate = useNavigate();
@@ -26,6 +29,12 @@ function Dashbord({ setshowadmin }) {
           <p>Total Certificate</p>
           <p>0</p>
         </div>
+      </div>
+      <div className="chartmain_div">
+        {/* <PieChart />
+        <LineChart />
+
+        <LineChart /> */}
       </div>
     </>
   );

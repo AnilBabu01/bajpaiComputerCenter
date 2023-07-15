@@ -28,7 +28,8 @@ export default function Login({ setshowadmin }) {
         navigate("/dashboard");
       }
     } catch (error) {
-      Swal.fire("Error!", error, "error");
+      Swal.fire("Error!", error?.response?.data?.msg, "error");
+      console.log(error?.response?.data?.msg);
     }
   };
   return (

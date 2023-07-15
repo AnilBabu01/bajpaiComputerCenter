@@ -37,6 +37,21 @@
     border-radius: 13px;
     margin-top: 1rem;
 }
+
+.chartmain_div{
+    /* display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap; */
+}
+
+.chartinear_div{
+    padding: 7rem;
+    border-radius: 13px;
+    margin-top: 1rem;
+    width: 100%;
+    background-color: yellow;
+}
 @media screen and (max-width: 780px) {
     .main_info_card3{
         width: 98%;

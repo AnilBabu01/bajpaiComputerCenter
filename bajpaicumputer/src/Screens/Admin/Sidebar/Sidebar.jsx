@@ -5,8 +5,11 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import CallMadeIcon from "@mui/icons-material/CallMade";
 import Alert from "@mui/material/Alert";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./Sidebar.css";
 function Sidebar() {
+  const navigate = useNavigate();
   const [click, setclick] = useState(false);
   const ref = useRef(null);
   const [logout, setlogout] = useState(false);
@@ -22,6 +25,11 @@ function Sidebar() {
   // };
   const handclick = () => setclick(!click);
 
+  const logoutt = () => {
+    localStorage.removeItem("tokengame");
+    navigate("/adminlogin");
+    Swal.fire("Great!", "Logout Successfully", "success");
+  };
   return (
     <>
       <nav className="navbar">
@@ -29,7 +37,7 @@ function Sidebar() {
           <MenuIcon onClick={handclick} ref={ref} />
         </div>
 
-        <div className="profilediv">
+        <div onClick={() => logoutt()} className="profilediv">
           <p>Logout</p>
         </div>
         <div className={click ? "open1 " : "menu-div"}>

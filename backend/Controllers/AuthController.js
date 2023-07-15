@@ -17,7 +17,7 @@ const Register = async (req, res) => {
       if (user != null) {
         return respHandler.error(res, {
           status: false,
-          msg: "Email or Mobile Number already exist",
+          msg: "Email   already exist",
         });
       }
       let newUser = {
@@ -62,7 +62,7 @@ const Loging = async (req, res) => {
       if (!user) {
         return respHandler.error(res, {
           status: false,
-          msg: "Email or Mobile Number Is Incorrect",
+          msg: "Email or Password  Is Incorrect",
         });
       }
       const working = await bcrypt.compare(password, user.password);
@@ -82,7 +82,7 @@ const Loging = async (req, res) => {
       } else {
         return respHandler.error(res, {
           status: false,
-          msg: "Email or Mobile Number Is Incorrect",
+          msg: "Email or Password  Is Incorrect",
         });
       }
     } catch (err) {
