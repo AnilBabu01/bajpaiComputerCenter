@@ -1,10 +1,12 @@
 .Maincontainer{
     padding-top: 4.5%;
+    padding-bottom: 4.5%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding-left: 3rem;
     padding-right: 3rem;
+    margin-top: 3rem;
 }
 .home_main{
     width: 100%;
@@ -29,10 +31,12 @@
     }
     .Maincontainer{
         padding-top: 4.5%;
+        padding-bottom: 4.5%;
         display: flex;
         justify-content: center;
         align-items: center;
         padding-left: 0rem;
         padding-right: 0rem;
+        margin-top: 0rem;
     }
  }

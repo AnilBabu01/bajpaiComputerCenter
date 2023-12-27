@@ -19,7 +19,7 @@ function AvaialableCources() {
   return (
     <>
       <div className="main_courses_div">
-        <h1>Courses We Provide</h1>
+        <h1>--- Courses We Provide ---</h1>
         <div className="flex_div_courses">
           {isdata &&
             isdata?.map((item, index) => {
