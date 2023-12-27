@@ -28,7 +28,7 @@ function ApplyForm() {
                 <option>Female</option>
                 <option>Other</option>
               </select>
-
+              
               <input className="multi_input" type="date" />
             </div>
             <input

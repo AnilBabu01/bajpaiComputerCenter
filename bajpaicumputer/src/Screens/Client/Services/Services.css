@@ -2,32 +2,46 @@
     width: 30%;
     margin: 0.5rem;
     border-radius: 5px;
-    padding: 0.5rem;
+    padding: 4rem;
     margin-bottom: 1rem;
     background-color: #e6e2ed;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .main_card_service:hover{
     width: 30%;
     margin: 0.5rem;
     border-radius: 5px;
-    padding: 0.5rem;
+    padding: 4rem;
     margin-bottom: 1rem;
     background-color: rgb(28, 130, 173);
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    transition: 0.3s;
+    transition: 0.5s;
+    /* -ms-transform: scale(1.1); 
+    -webkit-transform: scale(1.1); 
+    transform: scale(1.1); */
+}
+
+.main_card_service:hover .innear_service_card img{
+    transition: 0.5s;
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(1.5);
+    width: 8rem;
+    height: 8rem;
 }
 
 .innear_service_card img{
-    width: 12rem;
-    height: 12rem;
+    width: 8rem;
+    height: 8rem;
     border-radius: 6px;
+    margin-bottom: 1rem;
 }
 .innear_service_card p{
     text-align: center;
@@ -47,14 +61,19 @@
     width: 100%;
     margin: 0.5rem;
     border-radius: 5px;
-    padding: 0.5rem;
+    padding: 4rem;
     margin-bottom: 1rem;
     background-color: rgb(28, 130, 173);
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    transition: 0.3s;
+    transition: 0.5s;
 }
-   
+.main_card_service:hover .innear_service_card img{
+    transition: 0.5s;
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(1.5);
+}
 }

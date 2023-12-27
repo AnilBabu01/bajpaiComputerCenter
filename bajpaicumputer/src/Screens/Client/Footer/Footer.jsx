@@ -11,26 +11,33 @@ const Footer = () => {
       <div className="mainfooter">
         <div className="footercontent">
           <div className="phonecon">
-            <Typography variant="h6" style={{ fontWeight: "400" }}>
-              About
+            <Typography variant="h6" style={{ fontWeight: "400", marginBottom: "1rem", color: "#FFFF33" }}>
+              Important Link
             </Typography>
             <div className="mardivcontentlink">
-              <Link target="_blank" to="httpsss://www.amazon.in">
-                Contact us
+              <Link to="/about">
+              Abount Us
               </Link>
-              <Link target="_blank" to="httssps://www.flipkart.com">
-                Abount Us
+              <Link to="/contact">
+                Contact Us
+              </Link>
+              <Link to="download/certificate">
+              Certificate
+              </Link>
+              <Link to="/gallery">
+              Gallery
               </Link>
             </div>
           </div>
 
           <div className="phonecon">
-            <Typography variant="h6" style={{ fontWeight: "400" }}>
+            <Typography variant="h6" style={{ fontWeight: "400", color: "#FFFF33", marginBottom: "1rem" }}>
               Explore
             </Typography>
             <div className="mardivcontentlink">
               <Link to="/">Home</Link>
-              <Link to="/register">Register</Link>
+              <Link to="/Apply">Enquiry</Link>
+              <Link to="/apply/certificate">Register</Link>
               <Link to="/login">Login</Link>
             </div>
           </div>

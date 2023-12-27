@@ -1,5 +1,5 @@
 .label_pass{
-    color: rgb(28, 130, 173);
+    color: rgb(2, 3, 3);
     
 }
 
@@ -13,3 +13,9 @@
     height:100%;
     margin-bottom: 1rem;
 }
+/* .main_apply_div h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+} */

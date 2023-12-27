@@ -67,7 +67,8 @@ const Navbar = () => {
                   isActive ? style.active : style.about
                 }
               >
-                Apply for Certificate/Diploma
+                Apply 
+                {/* for Certificate/Diploma */}
               </NavLink>
             </li>
 
@@ -78,7 +79,9 @@ const Navbar = () => {
                   isActive ? style.active : style.about
                 }
               >
-                Download Certificate/Diploma
+                {/* Download  */}
+                Certificate
+                {/* /Diploma */}
               </NavLink>
             </li>
 
